@@ -1,0 +1,31 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RIval"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com" x:Class="RIval.WaitWindow"
+        mc:Ignorable="d"
+        Title="WaitWindow" Height="331.513" Width="474.79" WindowStyle="None" WindowStartupLocation="CenterScreen" Cursor="Wait">
+    <Grid>
+        <Image Source="/Resources/Wait/bg.jpg" HorizontalAlignment="Left" Height="324" VerticalAlignment="Top" Width="467" Stretch="Fill"/>
+        <TextBlock HorizontalAlignment="Left" Margin="16,15,0,0" TextWrapping="Wrap" Text="ПОДГОТОВКА" VerticalAlignment="Top" FontSize="36" Width="408">
+            <TextBlock.Effect>
+                <DropShadowEffect Color="#FF151515"/>
+            </TextBlock.Effect>
+        </TextBlock>
+        <TextBlock x:Name="StatusText" HorizontalAlignment="Left" Margin="53,103,0,0" TextWrapping="Wrap" Text="Проверка обновлений" VerticalAlignment="Top" FontSize="20" Width="390"/>
+        <Separator HorizontalAlignment="Left" Height="19" Margin="25,79,0,0" VerticalAlignment="Top" Width="418"/>
+        <GroupBox Header="Примечание:" HorizontalAlignment="Left" Height="154" Margin="10,151,0,0" VerticalAlignment="Top" Width="447" Foreground="#FFA8A8A8" BorderBrush="#FF1A5399">
+            <TextBlock HorizontalAlignment="Left" Margin="10,10,-2,0" TextWrapping="Wrap" Text="Подготовка может занимать некоторое время. В этот момент могут синхронизироваться важные данные или выполняться проверка целостности для того, чтобы у вас не возникало проблем в использовании приложения Sierra." VerticalAlignment="Top" Height="114" Width="427" Foreground="#FFB8B8B8"/>
+        </GroupBox>
+        <Image x:Name="CloseButton" HorizontalAlignment="Left" Height="25" Margin="432,10,0,0" VerticalAlignment="Top" Width="25" Source="Resources/Icons/Window/window_close.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" MouseDown="Image_MouseDown">
+            <Image.ToolTip>
+                <ToolTip Content="Выйти из программы"/>
+            </Image.ToolTip>
+        </Image>
+
+        <Image x:Name="Preloader" gif:ImageBehavior.AnimatedSource="Resources/Loaders/loader.gif" HorizontalAlignment="Left" Height="21" Margin="26,107,0,0" VerticalAlignment="Top" Width="19" Stretch="Fill"/>
+
+    </Grid>
+</Window>

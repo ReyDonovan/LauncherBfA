@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CF787192-5871-4FDD-A93A-3A481FA51C63}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>RIval</RootNamespace>
+    <AssemblyName>BFACore</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>111111.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BlurryControls">
+      <HintPath>..\..\..\..\Downloads\BlurryControls-master\BlurryControls-master\BlurryControls\bin\Debug\BlurryControls.dll</HintPath>
+    </Reference>
+    <Reference Include="BlurryControls.resources">
+      <HintPath>..\..\..\..\Downloads\BlurryControls-master\BlurryControls-master\BlurryControls\bin\Debug\de\BlurryControls.resources.dll</HintPath>
+    </Reference>
+    <Reference Include="IX.Spider">
+      <HintPath>..\..\IX.Manager\IX.Manager\bin\Debug\IX.Spider.dll</HintPath>
+    </Reference>
+    <Reference Include="IX.System">
+      <HintPath>..\..\IX.Manager\IX.Manager\bin\Debug\IX.System.dll</HintPath>
+    </Reference>
+    <Reference Include="MHRebeller">
+      <HintPath>..\..\IX.Manager\IX.Manager\bin\Debug\MHRebeller.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WpfAnimatedGif">
+      <HintPath>..\..\..\..\Desktop\WpfAnimatedGif-master\WpfAnimatedGif\bin\Debug\WpfAnimatedGif.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Core\Components\FileSystem\FileMgr.cs" />
+    <Compile Include="Core\Components\FileSystem\Types\FileObj.cs" />
+    <Compile Include="Core\Components\FileSystem\Types\FileObjectsCollection.cs" />
+    <Compile Include="Core\Components\Update\UpdateApiHandler.cs" />
+    <Compile Include="Core\Components\Update\UpdateFacade.cs" />
+    <Compile Include="Core\Components\Update\UpdateParser.cs" />
+    <Compile Include="WaitWindow.xaml.cs">
+      <DependentUpon>WaitWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Design\Controls\GameComponent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Design\Controls\NewsComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\Components\Api\ApiBuilder.cs" />
+    <Compile Include="Core\Components\Api\ApiFacade.cs" />
+    <Compile Include="Core\Components\Api\ApiUriTable.cs" />
+    <Compile Include="Core\Components\Log\Logger.cs" />
+    <Compile Include="Core\Components\News\NewsApiHandler.cs" />
+    <Compile Include="Core\Components\News\NewsCache.cs" />
+    <Compile Include="Core\Components\News\NewsFacade.cs" />
+    <Compile Include="Core\Extensions\ExceptionEx.cs" />
+    <Compile Include="Core\Language\Dictionaries.cs" />
+    <Compile Include="Core\Language\LanguageFileMgr.cs" />
+    <Compile Include="Core\Language\LanguageMgr.cs" />
+    <Compile Include="Core\Language\LanguagePhrases.cs" />
+    <Compile Include="Core\Language\Phrase.cs" />
+    <Compile Include="Core\Network\Contracts\INetworkAccessor.cs" />
+    <Compile Include="Core\Network\NetworkAccessor.cs" />
+    <Compile Include="Core\Network\NetworkMgr.cs" />
+    <Compile Include="Core\Repositories\BaseRepository.cs" />
+    <Compile Include="Core\Repositories\NewsRepository.cs" />
+    <Compile Include="Core\Repositories\UserRepository.cs" />
+    <Compile Include="Core\Settings\Accessors\BaseAcessor.cs" />
+    <Compile Include="Core\Settings\Accessors\IniAccessor.cs" />
+    <Compile Include="Core\Settings\Accessors\JsonAccessor.cs" />
+    <Compile Include="Core\Settings\Contracts\ISettingsAccessor.cs" />
+    <Compile Include="Core\Settings\Option.cs" />
+    <Compile Include="Core\Settings\SettingsContainer.cs" />
+    <Compile Include="Core\Settings\SettingsMgr.cs" />
+    <Compile Include="Core\Settings\SettingsProvider.cs" />
+    <Compile Include="Core\Windows\Contracts\IWindowDispatcher.cs" />
+    <Compile Include="Core\Windows\ApplicationEnv.cs" />
+    <Compile Include="Core\Singleton\Singleton.cs" />
+    <Compile Include="Core\Windows\WindowMgr.cs" />
+    <Compile Include="Design\Controls\GameComponent.xaml.cs">
+      <DependentUpon>GameComponent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\NewsComponent.xaml.cs">
+      <DependentUpon>NewsComponent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\NewsControl.xaml.cs">
+      <DependentUpon>NewsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\News\ImageElement.xaml.cs">
+      <DependentUpon>ImageElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\News\NewsWindow.xaml.cs">
+      <DependentUpon>NewsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\News\VideoElement.xaml.cs">
+      <DependentUpon>VideoElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\ProductControl.xaml.cs">
+      <DependentUpon>ProductControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\ProductsComponent.xaml.cs">
+      <DependentUpon>ProductsComponent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Graphics\EffectManager.cs" />
+    <Page Include="Design\Controls\NewsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Design\Controls\News\ImageElement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\News\NewsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\News\VideoElement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\ProductControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\ProductsComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WaitWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Design\Graphics\Snapshot.cs" />
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\loader_title.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\opa.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\notify-icon.png" />
+    <Resource Include="Resources\Icons\settings-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\pubg_product.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\logo_new.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\discord-icon.png" />
+    <Resource Include="Resources\Icons\vk-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\close-icon.png" />
+    <Resource Include="Resources\Icons\minimise-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\logo_basic.png" />
+    <Resource Include="Resources\Images\logo_basic_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\logo_new_bg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\logo_mini.png" />
+    <Resource Include="Resources\Images\logo_mini_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\login_bg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Contextmenu\feedback-icon.png" />
+    <Resource Include="Resources\Icons\Contextmenu\manage-icon.png" />
+    <Resource Include="Resources\Icons\Contextmenu\new-icon.png" />
+    <Resource Include="Resources\Icons\Contextmenu\quit-icon.png" />
+    <Resource Include="Resources\Icons\Contextmenu\settings-icon.png" />
+    <Resource Include="Resources\Icons\Contextmenu\support-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\lang-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Languages\english-icon.png" />
+    <Resource Include="Resources\Icons\Languages\russian-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\sierralogo_main.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\sierra_logo_mini.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Window\window_close.png" />
+    <Resource Include="Resources\Icons\Window\window_mns.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\user_main.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\HeaderMenu\Eternal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Loaders\loader.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\HeaderMenu\forum.png" />
+    <Resource Include="Resources\Icons\HeaderMenu\site.png" />
+    <Resource Include="Resources\Icons\HeaderMenu\support.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Wait\bg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="111111.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Minis\bug_min.png" />
+    <Resource Include="Resources\Images\Minis\discord_min.png" />
+    <Resource Include="Resources\Images\Minis\forum_min.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Minis\wow_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Minis\legion_min.png" />
+    <Resource Include="Resources\Images\Minis\bfa_min.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Minis\gavno_dva.jpg" />
+    <Resource Include="Resources\Images\Minis\logo_gavno.png" />
+    <Resource Include="Resources\Images\Bg\bfa.jpeg" />
+    <Content Include="Resources\Images\Bg\bfa_bg.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

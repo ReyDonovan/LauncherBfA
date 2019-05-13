@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="RIval.Design.Controls.GameComponent"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:gif="http://wpfanimatedgif.codeplex.com"
+      xmlns:controls="clr-namespace:BlurryControls.Controls;assembly=BlurryControls"
+             xmlns:controls1="clr-namespace:RIval.Design.Controls"
+             mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800" Width="745" Height="532">
+
+    <Grid x:Name="NewsGrid">
+        <Border BorderThickness="0,1,0,0" HorizontalAlignment="Left" Height="100" Margin="0,432,0,0" VerticalAlignment="Top" Width="745" Background="#FF191919" Opacity="0.65" BorderBrush="#FFB2AFAF"/>
+        <TextBlock x:Name="Server" HorizontalAlignment="Left" Margin="19,45,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="43" Width="554" FontSize="24" FontWeight="Bold">
+            <TextBlock.Effect>
+                <DropShadowEffect/>
+            </TextBlock.Effect>
+        </TextBlock>
+        <Button x:Name="PlayButton" Content="ИГРАТЬ" HorizontalAlignment="Left" Margin="575,452,0,0" VerticalAlignment="Top" Width="151" Height="43" FontSize="18" Cursor="Hand" FontFamily="Segoe UI Light" BorderThickness="1" BorderBrush="White" Click="PlayButton_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF5690D6" Offset="0"/>
+                    <GradientStop Color="#FF396AA6" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="CheckButton" Content="ПРОВЕРИТЬ" HorizontalAlignment="Left" Margin="420,452,0,0" VerticalAlignment="Top" Width="148" Height="43" FontSize="18" Cursor="Hand" HorizontalContentAlignment="Left" BorderBrush="White" Background="#33C5C5C5" Click="CheckButton_Click"/>
+        <ProgressBar x:Name="ProgressBar" Height="10" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="#FF4B4B4B" Value="27" Margin="18,500,19,0">
+            <ProgressBar.Foreground>
+                <LinearGradientBrush EndPoint="0,1" MappingMode="RelativeToBoundingBox" StartPoint="1,3">
+                    <GradientStop Color="#FF396AA6" Offset="1"/>
+                    <GradientStop Color="#FF5690D6"/>
+                </LinearGradientBrush>
+            </ProgressBar.Foreground>
+        </ProgressBar>
+        <ScrollViewer x:Name="ScrollNews" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" CanContentScroll="True" PreviewMouseWheel="ScrollNews_PreviewMouseWheel" Margin="0,1,0,105">
+            <Grid x:Name="NewsScrollGrid">
+                <TextBlock x:Name="EmptyNews_Text" HorizontalAlignment="Left" Margin="97,171,0,0" TextWrapping="Wrap" Text="ОЖИДАЙТЕ НОВЫХ НОВОСТЕЙ" VerticalAlignment="Top" Height="57" Width="557" FontSize="36">
+                    <TextBlock.Effect>
+                        <DropShadowEffect/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Image x:Name="Preloader" gif:ImageBehavior.AnimatedSource="/Resources/Loaders/loader.gif" HorizontalAlignment="Left" Height="35" Margin="362,181,0,0" VerticalAlignment="Top" Width="35" Stretch="Fill"/>
+            </Grid>
+        </ScrollViewer>
+        <TextBlock x:Name="StatusTextDesc" HorizontalAlignment="Left" Margin="26,475,0,0" TextWrapping="Wrap" Text="../Wtf/Config.wtf (243 KB/s) 14 %" VerticalAlignment="Top" FontSize="14">
+            <TextBlock.Foreground>
+                <SolidColorBrush Color="#FFFFF5F5"/>
+            </TextBlock.Foreground>
+        </TextBlock>
+        <TextBlock x:Name="StatusText" HorizontalAlignment="Left" Margin="25,451,0,0" TextWrapping="Wrap" Text="Загрузка: " VerticalAlignment="Top" FontSize="14" Foreground="#FFFFF5F5" FontWeight="Bold"/>
+        <TextBlock x:Name="PercentStatus" HorizontalAlignment="Left" Margin="382,475,0,0" TextWrapping="Wrap" Text="14%" VerticalAlignment="Top" FontSize="14" Foreground="#FFFFF5F5"/>
+        <ProgressBar x:Name="AllPercentage" Height="10" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="#FF4B4B4B" Value="27" Margin="18,514,19,0">
+            <ProgressBar.Foreground>
+                <LinearGradientBrush EndPoint="0,1" MappingMode="RelativeToBoundingBox" StartPoint="1,3">
+                    <GradientStop Color="#FF396AA6" Offset="1"/>
+                    <GradientStop Color="#FF5690D6"/>
+                </LinearGradientBrush>
+            </ProgressBar.Foreground>
+        </ProgressBar>
+        <!--the BlurryUserControl must not be child of the defined BlurContainer!-->
+    </Grid>
+</UserControl>

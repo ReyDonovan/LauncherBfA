@@ -1,0 +1,135 @@
+﻿<Window xmlns:Controls="clr-namespace:RIval.Design.Controls"  x:Class="RIval.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RIval"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        xmlns:controls="clr-namespace:BlurryControls.Controls;assembly=BlurryControls"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="605.368" Width="991.891" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown">
+    <Grid>
+        <Grid x:Name="OuterBlurContainer" Margin="-10,0,0,0">
+            <Grid x:Name="InnerBlurContainer" Margin="10,21,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0*"/>
+                    <ColumnDefinition Width="0*"/>
+                    <ColumnDefinition Width="103*"/>
+                    <ColumnDefinition Width="97*"/>
+                </Grid.ColumnDefinitions>
+                <Image x:Name="PartiallyBluredDoge"
+                       Stretch="UniformToFill"
+                       Source="/Resources/Images/Bg/bfa.jpeg" Height="620" VerticalAlignment="Bottom" Grid.ColumnSpan="4" Margin="0,-36,0,0" />
+                <controls:BlurryUserControl VerticalAlignment="Top"
+                    HorizontalAlignment="Stretch"
+                    Height="530"
+                    BlurContainer="{Binding ElementName=InnerBlurContainer}"
+                    Magnification="0.75" Background="#FF191919" BlurRadius="20" Margin="0,54,267,0" BorderBrush="#FFB2AFAF" BorderThickness="0,0,1,0" Grid.ColumnSpan="3" Opacity="0.65"/>
+                <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="10,66,0,0" TextWrapping="Wrap" Text="СЕРВЕРА" VerticalAlignment="Top">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                    </TextBlock.Foreground>
+                </TextBlock>
+                <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="10,326,0,0" TextWrapping="Wrap" Text="ДОПОЛНИТЕЛЬНО" VerticalAlignment="Top">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                    </TextBlock.Foreground>
+                </TextBlock>
+                <Button x:Name="SettingsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="16" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,352,0,0" Grid.ColumnSpan="3" Click="Button_Click_2">
+                    <Grid>
+                        <TextBlock Text="НАСТРОЙКИ" Margin="-25,8,-20,9" TextAlignment="Center" FontSize="20"/>
+                    </Grid>
+                </Button>
+                <Button x:Name="Ataldazar_Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="16" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,92,0,0" Grid.ColumnSpan="3" Click="Ataldazar_Button_Click">
+                    <Grid>
+                        <Image Source="Resources/Images/Minis/bfa_min.png" Margin="-81,1,83,2"/>
+                        <TextBlock Text="ATAL'DAZAR" Margin="6,14,-51,11" TextAlignment="Center" FontSize="20"/>
+                    </Grid>
+                </Button>
+                <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="3,568,0,0" TextWrapping="Wrap" Text="crux.l.v. 1477 1052019" VerticalAlignment="Top" FontSize="10">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                    </TextBlock.Foreground>
+                </TextBlock>
+                <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="10,445,0,0" TextWrapping="Wrap" Text="ССЫЛКИ" VerticalAlignment="Top">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                    </TextBlock.Foreground>
+                </TextBlock>
+                <Button x:Name="SettingsButton_Copy" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="16" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,471,0,0" Grid.ColumnSpan="3" Click="Button_Click_2">
+                    <Grid>
+                        <TextBlock Text="СООБЩИТЬ О БАГЕ" Margin="-25,8,-20,9" TextAlignment="Center" FontSize="20"/>
+                    </Grid>
+                </Button>
+                <Button x:Name="Motherlode_Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="16" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,151,0,0" Grid.ColumnSpan="3" Click="Motherlode_Button_Click">
+                    <Grid>
+                        <Image Source="Resources/Images/Minis/bfa_min.png" Margin="-81,1,83,2"/>
+                        <TextBlock Text="MOTHERLODE" Margin="6,14,-51,11" TextAlignment="Center" FontSize="20"/>
+                    </Grid>
+                </Button>
+            </Grid>
+
+            <controls:BlurryUserControl VerticalAlignment="Top"
+                    HorizontalAlignment="Stretch"
+                    Height="74"
+                    BlurContainer="{Binding ElementName=InnerBlurContainer}"
+                    Magnification="0.75" Background="{x:Null}" BlurRadius="12" Margin="10,0,-1,0" BorderBrush="#FFB2AFAF" BorderThickness="0,0,0,1">
+                <Grid Margin="0,0,0,-2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="113*"/>
+                        <ColumnDefinition Width="22*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                            x:Name="ProductsButton"
+                            Margin="184,19,500,22"
+                            TextAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="МАГАЗИН"
+                            FontSize="25" Height="34" MouseEnter="TextBlock_MouseEnter" MouseLeave="TextBlock_MouseLeave" MouseDown="ProductsButton_MouseDown" >
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                    <TextBlock
+                            x:Name="MagazineButton"
+                            Margin="336,19,252,22"
+                            TextAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="ЛИЧНЫЙ КАБИНЕТ"
+                            FontSize="25" Height="34" MouseEnter="TextBlock_MouseEnter" MouseLeave="TextBlock_MouseLeave" MouseDown="MagazineButton_MouseDown" >
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                    <Image x:Name="CloseButton" HorizontalAlignment="Left" Height="25" Margin="130,8,0,0" VerticalAlignment="Top" Width="25" Source="/BFACore;component/Resources/Icons/Window/window_close.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Grid.Column="1" MouseDown="Image_MouseDown">
+                        <Image.ToolTip>
+                            <ToolTip Content="Выйти из программы"/>
+                        </Image.ToolTip>
+                    </Image>
+                    <Image x:Name="MinimizeButton" HorizontalAlignment="Left" Height="20" Margin="105,10,0,0" VerticalAlignment="Top" Width="20" Source="/BFACore;component/Resources/Icons/Window/window_mns.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Grid.Column="1" MouseDown="MinimizeButton_MouseDown">
+                        <Image.ToolTip>
+                            <ToolTip Content="Свернуть окно"/>
+                        </Image.ToolTip>
+                    </Image>
+                    <Image Source="Resources/Images/Minis/logo_gavno.png" Margin="4,4,645,6"/>
+                    <TextBlock
+            x:Name="ForumButton"
+            Margin="584,19,133,22"
+            TextAlignment="Center"
+            VerticalAlignment="Center"
+            Text="ФОРУМ"
+            FontSize="25" Height="34" MouseEnter="TextBlock_MouseEnter" MouseLeave="TextBlock_MouseLeave" MouseDown="ForumButton_MouseDown" >
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                </Grid>
+            </controls:BlurryUserControl>
+        </Grid>
+
+        <Grid x:Name="Page" Margin="242,73,0,0">
+
+        </Grid>
+        <!--the BlurryUserControl must not be child of the defined BlurContainer!-->
+    </Grid>
+</Window>

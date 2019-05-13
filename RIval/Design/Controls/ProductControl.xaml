@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="RIval.Design.Controls.ProductControl"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:controls="clr-namespace:BlurryControls.Controls;assembly=BlurryControls"
+             mc:Ignorable="d" Height="263.025" Width="365.966">
+    <Grid>
+        <Grid x:Name="OuterBlurContainer" Opacity="0.8">
+            <Grid x:Name="InnerBlurContainer">
+                <Image x:Name="PartiallyBluredDoge"
+                       Stretch="UniformToFill"
+                       Source="/Resources/Images/loader_title.jpg" Height="263" VerticalAlignment="Bottom" Opacity="0.8" />
+            </Grid>
+
+            <!--the BlurryUserControl must not be child of the defined BlurContainer!-->
+        </Grid>
+        <controls:BlurryUserControl
+                                    BorderBrush="#FFCF640B"
+                                    Background="Transparent"
+                                    BorderThickness="1"
+                                    DragMoveEnabled="True"
+                                    Panel.ZIndex="100"
+                                    BlurContainer="{Binding ElementName=InnerBlurContainer}"
+                                    BlurRadius="100"
+                                    Magnification="0.25" Opacity="0.9">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="113" />
+                    <RowDefinition Height="39" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0"
+                           Margin="12,8,0,0"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Left"
+                           FontSize="22"
+                           Text="PUBG INTELLI X"
+                           TextWrapping="Wrap" FontWeight="Bold" Height="29" Width="342" Foreground="#FFF0F0F0" />
+
+                <StackPanel Grid.Row="1"
+                            Orientation="Vertical"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Stretch" Height="0" Margin="0,0,0,3">
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="2"
+                            Orientation="Vertical"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Stretch" Height="0">
+                </StackPanel>
+                <TextBlock Grid.Row="0"
+                        Margin="12,37,0,0"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        FontSize="14"
+                        Text="v 1.09.227"
+                        TextWrapping="Wrap" FontWeight="Bold" Height="19" Width="342" Foreground="#FFF0F0F0" />
+                <Button Content="КУПИТЬ" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Width="182" Height="36" FontSize="16" FontWeight="Bold" Cursor="Hand" Foreground="White" Margin="0,3,0,0">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFCFCFCF" Offset="0"/>
+                            <GradientStop Color="#FF474747" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button Content="ИГРАТЬ" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Width="182" Height="36" Margin="182,3,0,0" FontSize="16" FontWeight="Bold" Cursor="Hand">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFCF640B" Offset="0"/>
+                            <GradientStop Color="#FF5F3411" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <TextBlock
+                        Margin="12,0,0,0"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        FontSize="22"
+                        Text="Покупка: 23.03.2019"
+                        TextWrapping="Wrap" Height="29" Width="337" Foreground="#FFF0F0F0" Grid.Row="1" />
+                <TextBlock Grid.Row="1"
+                        Margin="12,29,0,0"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        FontSize="22"
+                        Text="Окончание: 27.03.2019"
+                        TextWrapping="Wrap" Height="29" Width="337" Foreground="#FFF0F0F0" />
+                <TextBlock Grid.Row="1"
+                    Margin="12,61,0,0"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    FontSize="22"
+                    Text="Статус: undetected"
+                    TextWrapping="Wrap" Height="29" Width="337" Foreground="#FFF0F0F0" />
+            </Grid>
+        </controls:BlurryUserControl>
+    </Grid>
+</UserControl>

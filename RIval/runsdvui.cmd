@@ -1,0 +1,2 @@
+cd /d "C:\Users\Алексей\source\repos\SierraRP\RIval" &msbuild "RIval.csproj" /t:sdvViewer /p:configuration="Debug" /p:platform="Any CPU" /p:SolutionDir="C:\Users\Алексей\source\repos\SierraRP" 
+exit %errorlevel% 
