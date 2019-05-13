@@ -328,6 +328,7 @@
     <Resource Include="Resources\Images\Minis\bfa_min.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Images\Minis\logo_wowv2.png" />
     <Resource Include="Resources\Images\Minis\gavno_dva.jpg" />
     <Resource Include="Resources\Images\Minis\logo_gavno.png" />
     <Resource Include="Resources\Images\Bg\bfa.jpeg" />
