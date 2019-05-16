@@ -56,7 +56,7 @@
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
                     </TextBlock.Foreground>
                 </TextBlock>
-                <Button x:Name="SettingsButton_Copy" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="16" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,471,0,0" Grid.ColumnSpan="3" Click="Button_Click_2">
+                <Button x:Name="Bugreport_Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="16" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,471,0,0" Grid.ColumnSpan="3" Click="Bugreport_Button_Click">
                     <Grid>
                         <TextBlock Text="СООБЩИТЬ О БАГЕ" Margin="-25,8,-20,9" TextAlignment="Center" FontSize="20"/>
                     </Grid>
@@ -101,12 +101,12 @@
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
                         </TextBlock.Foreground>
                     </TextBlock>
-                    <Image x:Name="CloseButton" HorizontalAlignment="Left" Height="25" Margin="130,8,0,0" VerticalAlignment="Top" Width="25" Source="/BFACore;component/Resources/Icons/Window/window_close.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Grid.Column="1" MouseDown="Image_MouseDown">
+                    <Image x:Name="CloseButton" HorizontalAlignment="Left" Height="25" Margin="130,8,0,0" VerticalAlignment="Top" Width="25" Source="/Ignite;component/Resources/Icons/Window/window_close.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Grid.Column="1" MouseDown="Image_MouseDown">
                         <Image.ToolTip>
                             <ToolTip Content="Выйти из программы"/>
                         </Image.ToolTip>
                     </Image>
-                    <Image x:Name="MinimizeButton" HorizontalAlignment="Left" Height="20" Margin="105,10,0,0" VerticalAlignment="Top" Width="20" Source="/BFACore;component/Resources/Icons/Window/window_mns.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Grid.Column="1" MouseDown="MinimizeButton_MouseDown">
+                    <Image x:Name="MinimizeButton" HorizontalAlignment="Left" Height="20" Margin="105,10,0,0" VerticalAlignment="Top" Width="20" Source="/Ignite;component/Resources/Icons/Window/window_mns.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Grid.Column="1" MouseDown="MinimizeButton_MouseDown">
                         <Image.ToolTip>
                             <ToolTip Content="Свернуть окно"/>
                         </Image.ToolTip>

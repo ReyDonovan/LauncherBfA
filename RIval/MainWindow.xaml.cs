@@ -1,5 +1,6 @@
 ﻿using RIval.Core;
 using RIval.Core.Components;
+using RIval.Core.Components.Api;
 using RIval.Design.Controls;
 using RIval.Design.Graphics;
 using System;
@@ -75,11 +76,12 @@ namespace RIval
             SetActive((FrameworkElement)sender);
 
             Page.Children.Clear();
-            var component = WindowMgr.Instance.GetCachedGameComponent(2);
+
+            var component = WindowMgr.Instance.GetCachedGameComponent(1);
             if (component == null)
             {
                 component = new GameComponent("ATAL'DAZAR", 1);
-                WindowMgr.Instance.CacheGameComponent(component, 2);
+                WindowMgr.Instance.CacheGameComponent(component, 1);
             }
 
             Page.Children.Add(component);
@@ -249,11 +251,13 @@ namespace RIval
             {
                 Ataldazar_Button.IsEnabled = true;
                 Motherlode_Button.IsEnabled = true;
+                SettingsButton.IsEnabled = true;
             }
             else
             {
                 Ataldazar_Button.IsEnabled = false;
                 Motherlode_Button.IsEnabled = false;
+                SettingsButton.IsEnabled = false;
             }
         }
 
@@ -281,6 +285,11 @@ namespace RIval
             }
 
             Page.Children.Add(component);
+        }
+
+        private void Bugreport_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(ApiFacade.Instance.GetUri("bug-report-link"));
         }
     }
 }

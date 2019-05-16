@@ -20,7 +20,8 @@ namespace RIval.Core.Components.Api
             ["api-get-clientfiles-full"] = "/api/client/full/list",
             ["shop-link"] = "/shop",
             ["acp-link"] = "/acp",
-            ["forum-link"] = "/community"
+            ["forum-link"] = "/community",
+            ["bug-report-link"] = "/community/bugs/report"
         };
 
         public string GetUri(string key)

@@ -269,6 +269,14 @@ namespace RIval.Design.Controls
                 ProgressBar.Value = percentage;
                 AllPercentage.Visibility = Visibility.Visible;
                 AllPercentage.Value = currentFilePercantage;
+
+                CheckButton.IsEnabled = false;
+                PlayButton.IsEnabled = false;
+
+                WindowMgr.Instance.Run<MainWindow>((window) =>
+                {
+                    window.SwitchMenuButtons(false);
+                });
             });
         }
 
