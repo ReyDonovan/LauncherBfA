@@ -1,18 +1,20 @@
 ﻿using IX.Composer.Architecture;
 using RIval.Core.Components;
+using RIval.Design.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Forms;
+using System.Windows.Controls;
 
 namespace RIval.Core
 {
     public class WindowMgr : Singleton<WindowMgr>
     {
-        public static List<IWindowDispatcher> HostedWindows { get; private set; } = new List<IWindowDispatcher>();
+        public static List<IWindowDispatcher> HostedWindows  { get; private set; } = new List<IWindowDispatcher>();
+        public static List<GameComponent>     HostedControls { get; private set; } = new List<GameComponent>();
 
         public void AddHosted(IWindowDispatcher window)
         {
@@ -35,6 +37,31 @@ namespace RIval.Core
 
             return obj;
         }
+
+        public GameComponent GetCachedGameComponent(int id)
+        {
+            GameComponent obj = null;
+            for(int i = 0; i < HostedControls.Count; i++)
+            {
+                if(id == HostedControls[i].ServerId)
+                {
+                    obj = HostedControls[i];
+
+                    break;
+                }
+            }
+
+            return obj;
+        }
+
+        public void CacheGameComponent(GameComponent comp, int id)
+        {
+            if(!HostedControls.Any((element) => element.ServerId == id))
+            {
+                HostedControls.Add(comp);
+            }
+        }
+
         public void Dispatch(ApplicationStatus status)
         {
             switch (status)

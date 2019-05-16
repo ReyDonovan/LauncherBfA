@@ -75,14 +75,29 @@ namespace RIval
             SetActive((FrameworkElement)sender);
 
             Page.Children.Clear();
-            Page.Children.Add(new GameComponent("ATAL'DAZAR", 1));
+            var component = WindowMgr.Instance.GetCachedGameComponent(2);
+            if (component == null)
+            {
+                component = new GameComponent("ATAL'DAZAR", 1);
+                WindowMgr.Instance.CacheGameComponent(component, 2);
+            }
+
+            Page.Children.Add(component);
         }
         private void Motherlode_Button_Click(object sender, RoutedEventArgs e)
         {
             SetActive((FrameworkElement)sender);
 
             Page.Children.Clear();
-            Page.Children.Add(new GameComponent("MOTHERLODE", 2));
+
+            var component = WindowMgr.Instance.GetCachedGameComponent(2);
+            if (component == null)
+            {
+                component = new GameComponent("MOTHERLODE", 2);
+                WindowMgr.Instance.CacheGameComponent(component, 2);
+            }
+
+            Page.Children.Add(component);
         }
 
         private void SetActive(FrameworkElement element)
@@ -228,6 +243,20 @@ namespace RIval
             
         }
 
+        public void SwitchMenuButtons(bool enable)
+        {
+            if(enable)
+            {
+                Ataldazar_Button.IsEnabled = true;
+                Motherlode_Button.IsEnabled = true;
+            }
+            else
+            {
+                Ataldazar_Button.IsEnabled = false;
+                Motherlode_Button.IsEnabled = false;
+            }
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Process.Start("https://sierra-rp.ru/forum");
@@ -243,7 +272,15 @@ namespace RIval
             SetActive((FrameworkElement)sender);
 
             Page.Children.Clear();
-            Page.Children.Add(new GameComponent("BATTLE FOR AZEROTH", 2));
+
+            var component = WindowMgr.Instance.GetCachedGameComponent(2);
+            if(component == null)
+            {
+                component = new GameComponent("BATTLE FOR AZEROTH", 2);
+                WindowMgr.Instance.CacheGameComponent(component, 2);
+            }
+
+            Page.Children.Add(component);
         }
     }
 }

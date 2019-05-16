@@ -31,7 +31,7 @@ namespace RIval.Design.Controls
     /// </summary>
     public partial class GameComponent : System.Windows.Controls.UserControl
     {
-        private int ServerId = -1;
+        public int ServerId = -1;
         private string ServerName = "%server%";
         private List<NewsRepository> News = new List<NewsRepository>();
 
@@ -164,6 +164,8 @@ namespace RIval.Design.Controls
             ProgressBar.Value = 0;
             AllPercentage.Visibility = Visibility.Hidden;
             AllPercentage.Value = 0;
+
+            StatusText.Text = "";
         }
 
         private void ScrollNews_PreviewMouseWheel(object sender, MouseWheelEventArgs e)

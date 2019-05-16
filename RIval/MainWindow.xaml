@@ -111,7 +111,7 @@
                             <ToolTip Content="Свернуть окно"/>
                         </Image.ToolTip>
                     </Image>
-                    <Image Source="Resources/Images/Minis/logo_wowv2.png" Margin="-12,-7,621,-1"/>
+                    <Image Source="Resources/Images/Minis/logo_wowv2.png" Margin="-6,-11,628,-3"/>
                     <TextBlock
             x:Name="ForumButton"
             Margin="584,19,133,22"
