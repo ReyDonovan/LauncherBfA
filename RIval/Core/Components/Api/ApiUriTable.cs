@@ -21,7 +21,9 @@ namespace RIval.Core.Components.Api
             ["shop-link"] = "/shop",
             ["acp-link"] = "/acp",
             ["forum-link"] = "/community",
-            ["bug-report-link"] = "/community/bugs/report"
+            ["bug-report-link"] = "/community/bugs/report",
+            ["api-user-login"] = "/api/user/login",
+            ["api-user-register"] = "/api/user/register",
         };
 
         public string GetUri(string key)

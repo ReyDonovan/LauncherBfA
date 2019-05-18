@@ -84,6 +84,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Core\Components\Auth\AuthFacade.cs" />
+    <Compile Include="Core\Components\Auth\Types\AuthResult.cs" />
     <Compile Include="Core\Components\FileSystem\FileMgr.cs" />
     <Compile Include="Core\Components\FileSystem\Types\FileObj.cs" />
     <Compile Include="Core\Components\FileSystem\Types\FileObjectsCollection.cs" />
