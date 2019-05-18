@@ -13,6 +13,8 @@ namespace RIval.Core.Components.FileSystem.Types
         public string FileName { get; set; }
         public string RemotePath { get; set; }
 
+        public string Hash { get; set; }
+
         public FileObj() { }
     }
 }

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,6 +32,7 @@ namespace RIval.Core.Components
 
         private int CurrentDownloadedFile = 0;
         private string CurrentDownloading = "";
+        private bool IsWrongFiles = false;
 
         public bool IsWowDirectory(string path)
         {
@@ -51,13 +54,20 @@ namespace RIval.Core.Components
 
                         if (!File.Exists(item.FileName))
                         {
-                            OnCheckStopped(item.NiceFileName, false);
+                            IsWrongFiles = true;
+                        }
+                        else
+                        {
+                            if(!CompareHash(item.FileName, item.Hash))
+                            {
+                                IsWrongFiles = true;
 
-                            break;
+                                File.Delete(item.FileName);
+                            }
                         }
                     }
 
-                    OnCheckStopped(current, true);
+                    OnCheckStopped(current, !IsWrongFiles);
                 }
                 catch(Exception ex)
                 {
@@ -107,6 +117,7 @@ namespace RIval.Core.Components
                         }
                     }
 
+                    IsWrongFiles = false;
                     OnStoppedProcesses(true);
                 }
                 catch(Exception ex)
@@ -169,6 +180,36 @@ namespace RIval.Core.Components
                     return false;
                 }
             });
+        }
+
+        public bool CompareHash(string h1, string h2)
+        {
+            return h1.ToLower() == h2.ToLower();
+        }
+
+        public bool CompareHashRaw(string fullpath, string hash)
+        {
+            using (var stream = File.OpenRead(fullpath))
+            {
+                return CompareHash(GetHash<MD5>(stream), hash);
+            }
+        }
+
+        private string GetHash<T>(Stream stream) where T : HashAlgorithm
+        {
+            StringBuilder sb = new StringBuilder();
+
+            MethodInfo create = typeof(T).GetMethod("Create", new Type[] { });
+            using (T crypt = (T)create.Invoke(null, null))
+            {
+                byte[] hashBytes = crypt.ComputeHash(stream);
+                foreach (byte bt in hashBytes)
+                {
+                    sb.Append(bt.ToString("x2"));
+                }
+            }
+
+            return sb.ToString();
         }
 
         private string FormatByte(long bytes)

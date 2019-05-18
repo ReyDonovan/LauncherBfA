@@ -220,7 +220,7 @@ namespace RIval.Design.Controls
             {
                 if (!result)
                 {
-                    StatusText.Text = "Файл поврежден: ";
+                    StatusText.Text = "Файлы повреждены: ";
                     StatusTextDesc.Text = $"../{fn}";
 
                     FileMgr.Instance.OnDownloadStarted -= FileMgrDownloadStart;
@@ -437,17 +437,17 @@ namespace RIval.Design.Controls
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             if(dialog.ShowDialog() == DialogResult.OK)
             {
-                if (File.Exists(dialog.SelectedPath + "\\Wow.exe") || File.Exists(dialog.SelectedPath + "\\Wow-64.exe"))
+                if (FileMgr.Instance.IsWowDirectory(dialog.SelectedPath))
                 {
-                    SettingsMgr.Instance.WriteOption(new Option(ServerId + ".path", dialog.SelectedPath));
-                    SettingsMgr.Instance.Save();
-
                     PlayButton.Content = "ИГРАТЬ";
 
                     PlayButton.IsEnabled = false;
                     CheckButton.IsEnabled = false;
 
                 }
+
+                SettingsMgr.Instance.WriteOption(new Option(ServerId + ".path", dialog.SelectedPath));
+                SettingsMgr.Instance.Save();
 
                 CheckButton_Click(CheckButton, null);
             }
