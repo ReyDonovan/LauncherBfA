@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace RIval.Core.Components.Auth
 {
-    public class AuthFacade : Singleton<AuthFacade>
+    public class RegisterFacade : Singleton<RegisterFacade>
     {
-        public Types.AuthResult Attempt(string user, string password)
+        public Types.AuthResult Attempt(string user, string password, string secret)
         {
             return default;
         }
