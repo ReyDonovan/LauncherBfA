@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RIval.Core.Components.Api;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace RIval.Core.Components.Auth
     {
         public Types.AuthResult Attempt(string user, string password, string secret)
         {
-            return default;
+            return ApiFacade.Instance.Builder<Types.AuthResult>().CreateRequest(ApiFacade.Instance.BuildUri("api-user-register", password, user, secret)).GetResponse().First();
         }
     }
 }

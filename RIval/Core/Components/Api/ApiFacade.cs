@@ -15,6 +15,17 @@ namespace RIval.Core.Components.Api
             return Uri.GetUri(key);
         }
 
+        public string BuildUri(string keyFromLib, params string[] pathes)
+        {
+            string uri = Uri.GetUri(keyFromLib);
+            foreach(var item in pathes)
+            {
+                uri += $"/{item}";
+            }
+
+            return uri;
+        }
+
         public ApiBuilder<T> Builder<T>()
         {
             return new ApiBuilder<T>();
