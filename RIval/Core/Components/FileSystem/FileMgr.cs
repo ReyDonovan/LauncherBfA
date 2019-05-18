@@ -58,7 +58,7 @@ namespace RIval.Core.Components
                         }
                         else
                         {
-                            if(!CompareHash(item.FileName, item.Hash))
+                            if(!CompareHashRaw(item.FileName, item.Hash))
                             {
                                 IsWrongFiles = true;
 
