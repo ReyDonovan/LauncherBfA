@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RIval", "RIval\RIval.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientHasher", "ClientHasher\ClientHasher.csproj", "{1912C448-3977-486D-B8FC-62B5742D60A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IgniteUpdater", "IgniteUpdater\IgniteUpdater.csproj", "{4967B9A6-4C01-466E-880E-54BC453BDCF5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1912C448-3977-486D-B8FC-62B5742D60A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1912C448-3977-486D-B8FC-62B5742D60A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1912C448-3977-486D-B8FC-62B5742D60A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4967B9A6-4C01-466E-880E-54BC453BDCF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4967B9A6-4C01-466E-880E-54BC453BDCF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4967B9A6-4C01-466E-880E-54BC453BDCF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4967B9A6-4C01-466E-880E-54BC453BDCF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -31,20 +31,10 @@ namespace RIval.Design.Controls
             NewsBg.Visibility = Visibility.Hidden;
             Content.Visibility = Visibility.Hidden;
             Title.Visibility = Visibility.Hidden;
-
-            var ani = new ThicknessAnimation();
-            ani.By = new Thickness(0, 100, 0, 0);
-            ani.Duration = new Duration(TimeSpan.FromSeconds(0.1));
-            NewsBg.BeginAnimation(MarginProperty, ani);
         }
 
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)
         {
-            var ani = new ThicknessAnimation();
-            ani.By = new Thickness(0, -100, 0, 0);
-            ani.Duration = new Duration(TimeSpan.FromSeconds(0.1));
-            NewsBg.BeginAnimation(MarginProperty, ani);
-
             NewsBg.Visibility = Visibility.Visible;
             Content.Visibility = Visibility.Visible;
             Title.Visibility = Visibility.Visible;
@@ -56,10 +46,12 @@ namespace RIval.Design.Controls
             Content.Visibility = Visibility.Hidden;
             Title.Visibility = Visibility.Hidden;
 
+            /*
             var ani = new ThicknessAnimation();
             ani.By = new Thickness(0, 100, 0, 0);
             ani.Duration = new Duration(TimeSpan.FromSeconds(0.1));
             NewsBg.BeginAnimation(MarginProperty, ani);
+            */
         }
 
         private void UserControl_MouseDown(object sender, MouseButtonEventArgs e)

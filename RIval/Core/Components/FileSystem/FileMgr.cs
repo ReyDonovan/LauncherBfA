@@ -77,7 +77,6 @@ namespace RIval.Core.Components
                 }
             });
         }
-
         public void StartUpdate()
         {
             Task.Run(() =>
@@ -210,6 +209,14 @@ namespace RIval.Core.Components
             }
 
             return sb.ToString();
+        }
+
+        public void CreateDirectory(string path)
+        {
+            if(Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
         }
 
         private string FormatByte(long bytes)

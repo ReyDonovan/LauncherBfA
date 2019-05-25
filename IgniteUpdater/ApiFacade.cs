@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RIval.Core.Components.Api
+namespace IgniteUpdater
 {
-    public class ApiFacade : Singleton<ApiFacade>
+    public class ApiFacade
     {
         private ApiUriTable Uri = new ApiUriTable();
 
