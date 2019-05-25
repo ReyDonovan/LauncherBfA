@@ -6,9 +6,10 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using Newtonsoft.Json;
 
-namespace RIval.Core.Components.Api
+namespace IgniteUpdater
 {
     public class ApiBuilder<T>
     {
@@ -36,8 +37,6 @@ namespace RIval.Core.Components.Api
         {
             if (uri == "")
             {
-                Logger.Instance.WriteLine("Incorrect URI for run API request.", LogLevel.Error);
-
                 return this;
             }
 
@@ -55,14 +54,7 @@ namespace RIval.Core.Components.Api
             }
             catch (Exception ex)
             {
-                ex.ToLog(LogLevel.Error);
-
-                MessageBox.Show("Не удалось установить соединение с сервером. Это может привести к проблемам проверки " +
-                    "игрового клиента, а так же вы больше не будете вкурсе всех свежих новостей о проекте Ignite.\n\n" +
-                    "Рекомендуем вам как можно скорее связаться с Администрацией, для решения ваших проблем, если у вас нет " +
-                    "проблем с соединением на стороне вашего провайдера.\n\nС Уважением Ignite Dev Team", "Ошибка соединения", 
-                    MessageBoxButton.OK, 
-                    MessageBoxImage.Error);
+                MessageBox.Show(ex.ToString());
             }
 
             return this;
@@ -72,8 +64,6 @@ namespace RIval.Core.Components.Api
         {
             try
             {
-                FileMgr.Instance.CreateDirectory(fullpath.Replace(fullpath.Split('\\').Last(), ""));
-
                 WebClient client = new WebClient();
 
                 Task t = new Task(() =>
@@ -91,7 +81,7 @@ namespace RIval.Core.Components.Api
             }
             catch(Exception ex)
             {
-                ex.ToLog(LogLevel.Error);
+                MessageBox.Show(ex.ToString());
             }
 
             return this;

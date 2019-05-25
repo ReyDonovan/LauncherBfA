@@ -30,11 +30,6 @@ namespace RIval.Design.Controls
         {
             ApplicationEnv.Instance.ApplyStatus(ApplicationStatus.Loading);
 
-            Task.Run(() =>
-            {
-
-            }).GetAwaiter();
-
             InitializeComponent();
 
             ApplicationEnv.Instance.ApplyStatus(ApplicationStatus.Normal);

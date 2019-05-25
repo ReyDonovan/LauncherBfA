@@ -1,6 +1,7 @@
 ﻿using RIval.Core;
 using RIval.Core.Components;
 using RIval.Core.Components.Api;
+using RIval.Core.Components.Update;
 using RIval.Design.Controls;
 using RIval.Design.Graphics;
 using System;
@@ -32,9 +33,19 @@ namespace RIval
             Logger.Instance.WriteLine($"Application booted in: {DateTime.Now.ToFileTimeUtc()}", LogLevel.Info);
 
             WindowMgr.Instance.AddHosted(this);
+
             SettingsMgr.Instance.Start(Core.Settings.SettingsDriver.File);
+            var temp = ApplicationEnv.Instance.AppVersion;
+            SettingsMgr.Instance.WriteOption(new Core.Settings.Option("version", $"{temp.Major}.{temp.Minor}.{temp.Resolution}.{temp.Prefix}"));
+            SettingsMgr.Instance.Save();
+            if (UpdateFacade.Instance.IsUpdateNeeded())
+            {
+                UpdateFacade.Instance.StartUpdate();
+            }
+
             ApplicationEnv.Instance.SetLocale(LanguageMgr.Instance.FromConfig());
             LanguageMgr.Instance.Boot(LanguageMgr.Instance.FromConfig());
+
 
             Ataldazar_Button_Click(Ataldazar_Button, null);
         }

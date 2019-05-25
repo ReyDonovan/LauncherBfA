@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using IX.Composer.Architecture;
+using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using Version = IX.Composer.Architecture.Version;
 
 namespace RIval.Core.Components.Update
 {
@@ -16,30 +13,34 @@ namespace RIval.Core.Components.Update
 
         public bool IsUpdateNeeded()
         {
-            var result = UpdateParser.Parse(ApiHandle.GetRemoteVersionStr());
-            if(result.ToString() != "0.0.0.A")
+            var response = ApiHandle.GetRemoteVersionStr();
+            if (Version.TryParse(response, out var ver))
             {
-                if(UpdateParser.Compare(result, ApplicationEnv.Instance.AppVersion) == CompareResult.Higher)
+                if (ApplicationEnv.Instance.AppVersion.ToString() == ver.ToString())
+                {
+                    return false;
+                }
+                else
                 {
                     return true;
                 }
             }
-
-            return false;
+            else
+                return true;
         }
 
         public void StartUpdate()
         {
-            if(!File.Exists("SierraUpdater.exe"))
+            if(!File.Exists("IgniteUpdater.exe"))
             {
                 WebClient client = new WebClient();
                 client.DownloadFileCompleted += OnDownloadCompleted;
-                client.DownloadFileAsync(new Uri(ApiHandle.GetUpdaterUri()), "SierraUpdater.exe");
+
+                client.DownloadFileAsync(new Uri(ApiHandle.GetUpdaterUri()), "IgniteUpdater.exe");
             }
             else
             {
-                Process.Start("SierraUpdater.exe");
-
+                Process.Start("IgniteUpdater.exe");
                 Environment.Exit(0);
             }
         }
@@ -48,11 +49,12 @@ namespace RIval.Core.Components.Update
         {
             if(e.Error == null)
             {
-                Process.Start("SierraUpdater.exe");
+                Process.Start("IgniteUpdater.exe");
+                Environment.Exit(0);
             }
             else
             {
-                MessageBox.Show("Во время выполнения системы обновления было выброшено исключение\nПовторите попытку позже, если проблема не решилась самостоятельно, то обратитесь к Администратору.", "Ошибка обновления", MessageBoxButton.OK, MessageBoxImage.Error);
+                e.Error.ToLog(LogLevel.Error);
             }
         }
     }
