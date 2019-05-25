@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RIval.Core
+namespace Ignite.Core
 {
     interface INetworkAccessor
     {

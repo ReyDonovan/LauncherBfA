@@ -1,6 +1,6 @@
 ﻿using IX.Composer.Architecture;
-using RIval.Core.Components;
-using RIval.Design.Controls;
+using Ignite.Core.Components;
+using Ignite.Design.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 
-namespace RIval.Core
+namespace Ignite.Core
 {
     public class WindowMgr : Singleton<WindowMgr>
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RIval.Core.Components.FileSystem
+namespace Ignite.Core.Components.FileSystem
 {
     public class FileCrashBuilder
     {

@@ -1,9 +1,9 @@
-﻿using RIval.Core;
-using RIval.Core.Components;
-using RIval.Core.Components.Api;
-using RIval.Core.Components.Update;
-using RIval.Design.Controls;
-using RIval.Design.Graphics;
+﻿using Ignite.Core;
+using Ignite.Core.Components;
+using Ignite.Core.Components.Api;
+using Ignite.Core.Components.Update;
+using Ignite.Design.Controls;
+using Ignite.Design.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,7 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace RIval
+namespace Ignite
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RIval.Core
+namespace Ignite.Core
 {
     public class Singleton<T> where T : new()
     {

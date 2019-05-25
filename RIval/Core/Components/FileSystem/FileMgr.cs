@@ -1,5 +1,5 @@
-﻿using RIval.Core.Components.FileSystem;
-using RIval.Core.Components.FileSystem.Types;
+﻿using Ignite.Core.Components.FileSystem;
+using Ignite.Core.Components.FileSystem.Types;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,13 +12,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace RIval.Core.Components
+namespace Ignite.Core.Components
 {
     public class FileMgr : Singleton<FileMgr>
     {
         private FileObjectsCollection Collection = new FileObjectsCollection();
 
-        public delegate void FileCheckStarted(string fn);
+        public delegate void FileCheckStarted(string fn, int percent);
         public delegate void FileCheckStopped(string fn, bool result);
         public delegate void FileDownloadStarted(string fn);
         public delegate void FileDownloadStopped(string fn, bool result);
@@ -33,8 +33,10 @@ namespace RIval.Core.Components
         public event AllDownloadsStopped OnStoppedProcesses;
 
         private int CurrentDownloadedFile = 0;
+        private int CurrentFileChecked = 0;
         private string CurrentDownloading = "";
         private bool IsWrongFiles = true;
+        private Stopwatch Sw = new Stopwatch();
 
         public bool IsWowDirectory(string path)
         {
@@ -51,13 +53,14 @@ namespace RIval.Core.Components
             Task.Run(() =>
             {
                 string current = "";
+                CurrentFileChecked = 0;
 
                 try
                 {
                     foreach (var item in Collection)
                     {
                         current = item.NiceFileName;
-                        OnCheckStarted(item.NiceFileName);
+                        OnCheckStarted(item.NiceFileName, ((CurrentFileChecked * 100) / Collection.Count));
 
                         if (!File.Exists(item.FileName))
                         {
@@ -72,6 +75,8 @@ namespace RIval.Core.Components
                                 File.Delete(item.FileName);
                             }
                         }
+
+                        CurrentFileChecked++;
                     }
 
                     OnCheckStopped(current, !IsWrongFiles);
@@ -127,7 +132,10 @@ namespace RIval.Core.Components
                                 Directory.CreateDirectory(item.FileName.Replace(item.FileName.Split('\\').Last(), ""));
                             }
 
+                            Sw.Start();
                             handler.DownloadFileTaskAsync(item.RemotePath, item.FileName).Wait();
+                            Sw.Stop();
+
                             CurrentDownloadedFile++;
 
                             Task.Delay(1500);
@@ -163,6 +171,7 @@ namespace RIval.Core.Components
             {
                 info = info.Remove(25) + "...";
             }
+            info += $" ({GetSpeed(e.BytesReceived)})";
 
             OnDownloadProcess(info, ((CurrentDownloadedFile * 100) / Collection.Count), e.ProgressPercentage);
         }
@@ -247,6 +256,19 @@ namespace RIval.Core.Components
             }
 
             return String.Format("{0:0.##} {1}", dblSByte, Suffix[i]);
+        }
+        private string GetSpeed(long bytes)
+        {
+            string[] suffix = { "байт/с", "КБ/с", "МБ/с", "ГБ/с", "ТБ/с" };
+            int i;
+            double dblSbyte = bytes;
+
+            for (i = 0; i < suffix.Length && bytes >= 1024; i++, bytes /= 1024)
+            {
+                dblSbyte = bytes / 1024.0;
+            }
+
+            return $"{(dblSbyte / Sw.Elapsed.TotalSeconds).ToString("0.00")} {suffix[i]}";
         }
     }
 }

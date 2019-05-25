@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RIval"
-        xmlns:gif="http://wpfanimatedgif.codeplex.com" x:Class="RIval.WaitWindow"
+        xmlns:local="clr-namespace:Ignite"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com" x:Class="Ignite.WaitWindow"
         mc:Ignorable="d"
         Title="WaitWindow" Height="331.513" Width="474.79" WindowStyle="None" WindowStartupLocation="CenterScreen" Cursor="Wait">
     <Grid>

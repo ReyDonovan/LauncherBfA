@@ -1,12 +1,12 @@
-﻿using RIval.Core.Components;
-using RIval.Core.Settings;
+﻿using Ignite.Core.Components;
+using Ignite.Core.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RIval.Core
+namespace Ignite.Core
 {
     public class SettingsMgr : Singleton<SettingsMgr>
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RIval.Core.Components.Api
+namespace Ignite.Core.Components.Api
 {
     public class ApiUriTable
     {

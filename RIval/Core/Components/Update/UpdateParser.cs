@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Version = IX.Composer.Architecture.Version;
 
-namespace RIval.Core.Components.Update
+namespace Ignite.Core.Components.Update
 {
     public enum CompareResult
     {

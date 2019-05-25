@@ -1,9 +1,9 @@
-﻿using RIval.Core.Components;
+﻿using Ignite.Core.Components;
 using System;
 using System.Collections;
 using System.IO;
 
-namespace RIval.Core
+namespace Ignite.Core
 {
     public static class ExceptionEx
     {

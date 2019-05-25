@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Newtonsoft.Json;
 
-namespace RIval.Core.Components.Api
+namespace Ignite.Core.Components.Api
 {
     public class ApiBuilder<T>
     {

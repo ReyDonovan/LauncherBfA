@@ -1,4 +1,4 @@
-﻿using RIval.Design.Graphics;
+﻿using Ignite.Design.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace RIval
+namespace Ignite
 {
     /// <summary>
     /// Логика взаимодействия для WaitWindow.xaml

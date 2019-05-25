@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RIval.Core.Repositories
+namespace Ignite.Core.Repositories
 {
     public class UserRepository : BaseRepository
     {

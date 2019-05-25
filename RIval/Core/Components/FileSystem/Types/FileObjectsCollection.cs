@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RIval.Core.Components.FileSystem.Types
+namespace Ignite.Core.Components.FileSystem.Types
 {
     internal class FileObjectsCollection : List<FileObj>
     {

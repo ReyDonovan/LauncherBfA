@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace RIval.Core.Settings
+namespace Ignite.Core.Settings
 {
     public class SettingsContainer
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RIval.Core.Extensions
+namespace Ignite.Core.Extensions
 {
     public static class ByteArrayEx
     {

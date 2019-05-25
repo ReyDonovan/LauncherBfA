@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RIval.Design.Controls.News
+namespace Ignite.Design.Controls.News
 {
     /// <summary>
     /// Логика взаимодействия для ImageElement.xaml

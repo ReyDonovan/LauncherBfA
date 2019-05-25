@@ -5,7 +5,7 @@ using System.IO;
 using System.Net;
 using Version = IX.Composer.Architecture.Version;
 
-namespace RIval.Core.Components.Update
+namespace Ignite.Core.Components.Update
 {
     public class UpdateFacade : Singleton<UpdateFacade>
     {

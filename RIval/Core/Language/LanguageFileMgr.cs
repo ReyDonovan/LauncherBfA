@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace RIval.Core.Language
+namespace Ignite.Core.Language
 {
     public class LanguageFileMgr
     {

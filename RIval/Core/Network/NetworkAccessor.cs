@@ -1,5 +1,5 @@
 ﻿using IX.Spider;
-using RIval.Core.Network;
+using Ignite.Core.Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RIval.Core
+namespace Ignite.Core
 {
     public enum DisconnectedReasons
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RIval.Core.Components.Update.Types
+namespace Ignite.Core.Components.Update.Types
 {
     public class UpdateAnnotation
     {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Version = IX.Composer.Architecture.Version;
 
-namespace RIval.Core
+namespace Ignite.Core
 {
     public enum ApplicationStatus
     {
@@ -28,7 +28,7 @@ namespace RIval.Core
 
         public ApplicationEnv()
         {
-            AppVersion = new Version("1.0.22.187");
+            AppVersion = new Version("1.1.12.276");
             CurrentHardware = GetCoreComponent<Hardware>();
             Status = ApplicationStatus.Loading;
         }
