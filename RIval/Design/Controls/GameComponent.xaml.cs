@@ -410,7 +410,7 @@ namespace RIval.Design.Controls
                 }
             }
 
-            var prc = Process.Start(SettingsMgr.Instance.GetValue(ServerId + ".path") + "\\Wow-64.exe");
+            var prc = Process.Start(SettingsMgr.Instance.GetValue(ServerId + ".path") + "\\WoW.exe");
 
             PlayButton.IsEnabled = false;
             CheckButton.IsEnabled = false;

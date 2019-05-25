@@ -46,7 +46,7 @@
                         <TextBlock Text="ATAL'DAZAR" Margin="6,14,-51,11" TextAlignment="Center" FontSize="20"/>
                     </Grid>
                 </Button>
-                <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="3,568,0,0" TextWrapping="Wrap" Text="crux.l.v. 1477 1052019" VerticalAlignment="Top" FontSize="10">
+                <TextBlock x:Name="VersionLabel" Grid.Column="2" HorizontalAlignment="Left" Margin="3,568,0,0" TextWrapping="Wrap" Text="crux.l.v. 1477 1052019" VerticalAlignment="Top" FontSize="10">
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
                     </TextBlock.Foreground>
