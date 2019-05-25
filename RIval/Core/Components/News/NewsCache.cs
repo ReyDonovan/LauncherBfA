@@ -1,4 +1,4 @@
-﻿using RIval.Core.Repositories;
+﻿using Ignite.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RIval.Core.Components.News
+namespace Ignite.Core.Components.News
 {
     public class NewsCache
     {

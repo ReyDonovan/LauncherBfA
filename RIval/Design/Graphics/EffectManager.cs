@@ -1,4 +1,4 @@
-﻿using RIval.Core;
+﻿using Ignite.Core;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -6,7 +6,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 
-namespace RIval.Design.Graphics
+namespace Ignite.Design.Graphics
 {
     public class EffectManager : Singleton<EffectManager>
     {

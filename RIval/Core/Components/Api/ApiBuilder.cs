@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Newtonsoft.Json;
 
-namespace RIval.Core.Components.Api
+namespace Ignite.Core.Components.Api
 {
     public class ApiBuilder<T>
     {
@@ -53,15 +54,16 @@ namespace RIval.Core.Components.Api
                     Response.Add(item);
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
+                ex.Report("UNKNOWN WEB ERROR");
                 ex.ToLog(LogLevel.Error);
 
                 MessageBox.Show("Не удалось установить соединение с сервером. Это может привести к проблемам проверки " +
                     "игрового клиента, а так же вы больше не будете вкурсе всех свежих новостей о проекте Ignite.\n\n" +
                     "Рекомендуем вам как можно скорее связаться с Администрацией, для решения ваших проблем, если у вас нет " +
-                    "проблем с соединением на стороне вашего провайдера.\n\nС Уважением Ignite Dev Team", "Ошибка соединения", 
-                    MessageBoxButton.OK, 
+                    "проблем с соединением на стороне вашего провайдера.\n\nС Уважением Ignite Dev Team", "Ошибка соединения",
+                    MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }
 

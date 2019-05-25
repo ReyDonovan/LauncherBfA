@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RIval.Core.Settings.Accessors
+namespace Ignite.Core.Settings.Accessors
 {
     public class IniAccessor : BaseAcessor
     {

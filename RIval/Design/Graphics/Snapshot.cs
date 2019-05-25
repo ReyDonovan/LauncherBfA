@@ -1,5 +1,5 @@
-﻿using RIval.Core;
-using RIval.Design.Controls;
+﻿using Ignite.Core;
+using Ignite.Design.Controls;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,7 +11,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace RIval.Design.Graphics
+namespace Ignite.Design.Graphics
 {
     class Snapshot : Singleton<Snapshot>
     {

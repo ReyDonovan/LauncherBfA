@@ -1,8 +1,8 @@
-﻿using RIval.Core.Components;
-using RIval.Core.Language;
+﻿using Ignite.Core.Components;
+using Ignite.Core.Language;
 using System;
 
-namespace RIval.Core
+namespace Ignite.Core
 {
     public enum Languages
     {

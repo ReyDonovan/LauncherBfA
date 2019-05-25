@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RIval.Core.Settings
+namespace Ignite.Core.Settings
 {
     public class Option
     {

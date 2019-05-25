@@ -1,9 +1,9 @@
-﻿using RIval.Core.Settings.Contracts;
+﻿using Ignite.Core.Settings.Contracts;
 using System;
 using System.IO;
 using System.Text;
 
-namespace RIval.Core.Settings.Accessors
+namespace Ignite.Core.Settings.Accessors
 {
     public class BaseAcessor : ISettingsAccessor
     {

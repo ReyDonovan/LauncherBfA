@@ -1,5 +1,5 @@
-﻿using RIval.Core.Components.Api;
-using RIval.Core.Repositories;
+﻿using Ignite.Core.Components.Api;
+using Ignite.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace RIval.Core.Components.News
+namespace Ignite.Core.Components.News
 {
     public class NewsApiHandler
     {

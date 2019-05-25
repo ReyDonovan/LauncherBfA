@@ -1,9 +1,9 @@
-﻿using RIval.Core;
-using RIval.Core.Components;
-using RIval.Core.Components.News;
-using RIval.Core.Repositories;
-using RIval.Core.Settings;
-using RIval.Design.Graphics;
+﻿using Ignite.Core;
+using Ignite.Core.Components;
+using Ignite.Core.Components.News;
+using Ignite.Core.Repositories;
+using Ignite.Core.Settings;
+using Ignite.Design.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,7 +24,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RIval.Design.Controls
+namespace Ignite.Design.Controls
 {
     /// <summary>
     /// Логика взаимодействия для NewsComponent.xaml
@@ -359,12 +359,15 @@ namespace RIval.Design.Controls
             });
         }
 
-        private void FileMgrCheckStart(string fn)
+        private void FileMgrCheckStart(string fn, int percent)
         {
             System.Windows.Application.Current.Dispatcher.BeginInvoke((Action)delegate
             {
                 StatusText.Text = "Проверка целостности: ";
                 StatusTextDesc.Text = $"../{fn}";
+
+                ProgressBar.Visibility = Visibility.Visible;
+                ProgressBar.Value = percent;
             });
         }
 

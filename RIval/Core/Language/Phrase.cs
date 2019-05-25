@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RIval.Core.Language
+namespace Ignite.Core.Language
 {
     public class Phrase
     {

@@ -7,13 +7,13 @@ using System.Windows;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("Sierra")]
-[assembly: AssemblyDescription("Sierra RP SAMP Launcher")]
+[assembly: AssemblyTitle("Ignite")]
+[assembly: AssemblyDescription("Ignite Project Launcher")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Sierra Team Dev")]
-[assembly: AssemblyProduct("Sierra")]
-[assembly: AssemblyCopyright("Copyright ©  2019 Sierra TD")]
-[assembly: AssemblyTrademark("Sierra TD. All rights reserved")]
+[assembly: AssemblyCompany("Ignite Dev Team")]
+[assembly: AssemblyProduct("Ignite")]
+[assembly: AssemblyCopyright("Copyright ©  2019 Ignite DT")]
+[assembly: AssemblyTrademark("Ignite. All rights reserved")]
 [assembly: AssemblyCulture("")]
 
 // Установка значения False для параметра ComVisible делает типы в этой сборке невидимыми

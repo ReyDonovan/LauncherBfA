@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RIval.Design.Controls
+namespace Ignite.Design.Controls
 {
     /// <summary>
     /// Логика взаимодействия для ProductsComponent.xaml

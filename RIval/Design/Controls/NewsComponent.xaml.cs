@@ -1,6 +1,6 @@
-﻿using RIval.Core;
-using RIval.Core.Repositories;
-using RIval.Design.Graphics;
+﻿using Ignite.Core;
+using Ignite.Core.Repositories;
+using Ignite.Design.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RIval.Design.Controls
+namespace Ignite.Design.Controls
 {
     /// <summary>
     /// Логика взаимодействия для NewsComponent.xaml
