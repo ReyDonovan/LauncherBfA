@@ -48,6 +48,7 @@ namespace RIval
 
 
             Ataldazar_Button_Click(Ataldazar_Button, null);
+            VersionLabel.Text = $"ignite.l.v {ApplicationEnv.Instance.AppVersion}";
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

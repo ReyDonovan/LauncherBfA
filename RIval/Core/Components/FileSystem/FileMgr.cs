@@ -77,10 +77,21 @@ namespace RIval.Core.Components
                 }
             });
         }
-        public void StartUpdate()
+        public void StartUpdate(int server = 1)
         {
             Task.Run(() =>
             {
+                DriveInfo drive = DriveInfo.GetDrives().First((dr) => dr.Name.Contains(SettingsMgr.Instance.GetValue($"{server}.path").Split(':').First()));
+                if(drive != null)
+                {
+                    if(drive.AvailableFreeSpace <= 64424509440)
+                    {
+                        MessageBox.Show($"Не достаточно своободного места на диске: {drive.Name}\nСвободное место: {FormatByte(drive.AvailableFreeSpace)}\nТребуется свободного места: {FormatByte(64424509440)}\n\nВыделение свободного места не возможно", "Ошибка выделения места", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                        return;
+                    }
+                }
+
                 var handler = new WebClient();
 
                 try
@@ -121,7 +132,6 @@ namespace RIval.Core.Components
                 }
                 catch(Exception ex)
                 {
-                    MessageBox.Show(ex.ToString(), "Error: " + CurrentDownloading);
                     ex.ToLog(LogLevel.Error);
 
                     OnStoppedProcesses(false);

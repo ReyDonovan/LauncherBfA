@@ -62,6 +62,7 @@ namespace ClientHasher
             using (FileStream io = new FileStream($"{prefix}_patch.rem", FileMode.OpenOrCreate))
             {
                 var files = Directory.GetFiles(Environment.CurrentDirectory, "*.*", SearchOption.AllDirectories);
+                Shuffle(files);
 
                 foreach(var file in files)
                 {
@@ -116,6 +117,19 @@ namespace ClientHasher
             ElapsedTime += watcher.Elapsed;
 
             return sb.ToString();
+        }
+
+        public static void Shuffle(string[] array)
+        {
+            if (array.Length < 1) return;
+            var random = new Random();
+            for (var i = 0; i < array.Length; i++)
+            {
+                var key = array[i];
+                var rnd = random.Next(i, array.Length);
+                array[i] = array[rnd];
+                array[rnd] = key;
+            }
         }
     }
 }
