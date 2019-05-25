@@ -1,6 +1,8 @@
-﻿using RIval.Core.Components.FileSystem.Types;
+﻿using RIval.Core.Components.FileSystem;
+using RIval.Core.Components.FileSystem.Types;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -32,11 +34,16 @@ namespace RIval.Core.Components
 
         private int CurrentDownloadedFile = 0;
         private string CurrentDownloading = "";
-        private bool IsWrongFiles = false;
+        private bool IsWrongFiles = true;
 
         public bool IsWowDirectory(string path)
         {
             return File.Exists(path + "\\Wow.exe") || File.Exists(path + "\\Wow-64.exe");
+        }
+
+        public FileCrashBuilder CreateCrash()
+        {
+            return new FileCrashBuilder();
         }
 
         public void StartCheck()
@@ -132,7 +139,7 @@ namespace RIval.Core.Components
                 }
                 catch(Exception ex)
                 {
-                    ex.ToLog(LogLevel.Error);
+                    Logger.Instance.WriteLine(ex.ToString() + $" File: {CurrentDownloading}", LogLevel.Error);
 
                     OnStoppedProcesses(false);
                 }

@@ -28,7 +28,7 @@ namespace RIval.Core
 
         public ApplicationEnv()
         {
-            AppVersion = new Version("1.0.17.229");
+            AppVersion = new Version("1.0.22.187");
             CurrentHardware = GetCoreComponent<Hardware>();
             Status = ApplicationStatus.Loading;
         }
