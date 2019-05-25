@@ -134,7 +134,6 @@ namespace Ignite.Core.Components
 
                             Sw.Start();
                             handler.DownloadFileTaskAsync(item.RemotePath, item.FileName).Wait();
-                            Sw.Stop();
 
                             CurrentDownloadedFile++;
 
@@ -162,6 +161,8 @@ namespace Ignite.Core.Components
 
                 OnStoppedProcesses(false);
             }
+
+            Sw.Stop();
         }
 
         private void Handler_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
