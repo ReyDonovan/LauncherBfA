@@ -39,6 +39,11 @@ namespace Ignite.Core
             return obj;
         }
 
+        public void AppendLanguages()
+        {
+            HostedWindows.ForEach((element) => element.AppendLocale(LanguageMgr.Instance));
+        }
+
         public GameComponent GetCachedGameComponent(int id)
         {
             GameComponent obj = null;
@@ -143,13 +148,13 @@ namespace Ignite.Core
                 }
                 catch (Exception internalEx)
                 {
-                    internalEx.ToLog(Components.LogLevel.Error);
+                    internalEx.ToLog(LogLevel.Error);
                 }
 
                 return;
             }
 
-            Exception ex = new Exception($"Window '{typeof(T).FullName}' not founded in hosted windows.");
+            Exception ex = new Exception($"Window '{nameof(T)}' not founded in hosted windows.");
             ex.ToLog(Components.LogLevel.Error);
 
             throw ex;

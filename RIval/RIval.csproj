@@ -87,6 +87,10 @@
     <Compile Include="Core\Components\Auth\AuthFacade.cs" />
     <Compile Include="Core\Components\Auth\RegisterFacade.cs" />
     <Compile Include="Core\Components\Auth\Types\AuthResult.cs" />
+    <Compile Include="Core\Components\Configuration\CfgMgr.cs" />
+    <Compile Include="Core\Components\Configuration\ConfigurationProvider.cs" />
+    <Compile Include="Core\Components\Configuration\Providers\IConfiguration.cs" />
+    <Compile Include="Core\Components\Configuration\Providers\JsonConfiguration.cs" />
     <Compile Include="Core\Components\FileSystem\FileCrashBuilder.cs" />
     <Compile Include="Core\Components\FileSystem\FileMgr.cs" />
     <Compile Include="Core\Components\FileSystem\Types\FileObj.cs" />
@@ -97,6 +101,7 @@
     <Compile Include="Core\Components\Update\UpdateParser.cs" />
     <Compile Include="Core\Extensions\ByteArrayEx.cs" />
     <Compile Include="Core\Extensions\StringEx.cs" />
+    <Compile Include="Core\Language\LangCfg.cs" />
     <Compile Include="WaitWindow.xaml.cs">
       <DependentUpon>WaitWindow.xaml</DependentUpon>
     </Compile>
@@ -340,6 +345,10 @@
     <Resource Include="Resources\Images\Minis\logo_gavno.png" />
     <Resource Include="Resources\Images\Bg\bfa.jpeg" />
     <Content Include="Resources\Images\Bg\bfa_bg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\Components\Configuration\Exceptions\" />
+    <Folder Include="Core\Language\Langs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

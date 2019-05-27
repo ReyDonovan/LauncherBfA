@@ -135,5 +135,10 @@ namespace Ignite
         {
             throw new NotImplementedException();
         }
+
+        public void AppendLocale(LanguageMgr langMgr)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

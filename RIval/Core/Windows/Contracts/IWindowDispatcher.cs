@@ -45,6 +45,8 @@ namespace Ignite.Core
         /// </summary>
         void Normal();
 
+        void AppendLocale(LanguageMgr langMgr);
+
         /// <summary>
         /// Реализация интерпритации к объекту текущего компонента
         /// <see cref="IWindowDispatcher"/>

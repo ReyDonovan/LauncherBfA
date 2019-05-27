@@ -6,35 +6,56 @@ namespace Ignite.Core
 {
     public enum Languages
     {
-        Russian,
-        English
+        Russian = 1,
+        English = 2
     }
 
     public class LanguageMgr : Singleton<LanguageMgr>
     {
         private LanguagePhrases Phrases;
         private LanguageFileMgr FileMgr;
+        private LangCfg Settings;
 
-        public void Boot(Languages lang)
+        public LanguageMgr()
         {
             FileMgr = new LanguageFileMgr();
-            Phrases = FileMgr.ReadFile(lang);
+            Phrases = FileMgr.ReadFile(FromConfig());
 
-            Logger.Instance.WriteLine($"Language Mgr booted in: {DateTime.Now.ToFileTimeUtc()} lang: {lang.ToString()}", LogLevel.Info);
+            Logger.Instance.WriteLine($"Language Mgr booted in: {DateTime.Now.ToFileTimeUtc()} lang: {FromConfig().ToString()}", LogLevel.Info);
+        }
+
+        public Languages GetCurrentLang()
+        {
+            return (Languages)Settings.LangKey;
         }
         public Languages FromConfig()
         {
-            Languages lang = Languages.English;
-
-            foreach(var item in Enum.GetNames(typeof(Languages)))
+            Settings = CfgMgr.Instance.GetProvider().Read<LangCfg>(def: false);
+            if(Settings == null)
             {
-                if(item.ToLower() == SettingsMgr.Instance.GetValue("user-language"))
+                Settings = CfgMgr.Instance.GetProvider().Read<LangCfg>(def: true);
+
+                if(Settings == null)
                 {
-                    lang = (Languages)Enum.Parse(typeof(Languages), item);
+                    CfgMgr.Instance.GetProvider()
+                        .Add(
+                        new LangCfg()
+                        {
+                            LangShort = "ru-ru",
+                            LangKey = (int)Languages.Russian
+                        }, 
+                        new LangCfg()
+                        {
+                            LangShort = "ru-ru",
+                            LangKey = (int)Languages.Russian
+                        })
+                        .Build();
+
+                    return FromConfig();
                 }
             }
 
-            return lang;
+            return (Languages)Settings.LangKey;
         }
         public string ValueOf(string key)
         {

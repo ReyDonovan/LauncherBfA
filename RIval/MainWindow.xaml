@@ -80,7 +80,7 @@
                         <ColumnDefinition Width="22*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock
-                            x:Name="ProductsButton"
+                            x:Name="MagazineButtonHeader"
                             Margin="184,19,500,22"
                             TextAlignment="Center"
                             VerticalAlignment="Center"
@@ -91,7 +91,7 @@
                         </TextBlock.Foreground>
                     </TextBlock>
                     <TextBlock
-                            x:Name="MagazineButton"
+                            x:Name="ACPButtonHeader"
                             Margin="336,19,252,22"
                             TextAlignment="Center"
                             VerticalAlignment="Center"
@@ -103,17 +103,17 @@
                     </TextBlock>
                     <Image x:Name="CloseButton" HorizontalAlignment="Left" Height="25" Margin="130,8,0,0" VerticalAlignment="Top" Width="25" Source="/Ignite;component/Resources/Icons/Window/window_close.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Grid.Column="1" MouseDown="Image_MouseDown">
                         <Image.ToolTip>
-                            <ToolTip Content="Выйти из программы"/>
+                            <ToolTip x:Name="CloseTooltip" Content="Выйти из программы"/>
                         </Image.ToolTip>
                     </Image>
                     <Image x:Name="MinimizeButton" HorizontalAlignment="Left" Height="20" Margin="105,10,0,0" VerticalAlignment="Top" Width="20" Source="/Ignite;component/Resources/Icons/Window/window_mns.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Grid.Column="1" MouseDown="MinimizeButton_MouseDown">
                         <Image.ToolTip>
-                            <ToolTip Content="Свернуть окно"/>
+                            <ToolTip x:Name="MinimizeTooltip" Content="Свернуть окно"/>
                         </Image.ToolTip>
                     </Image>
                     <Image Source="Resources/Images/Minis/logo_wowv2.png" Margin="-6,-11,628,-3"/>
                     <TextBlock
-            x:Name="ForumButton"
+            x:Name="ForumButtonHeader"
             Margin="584,19,133,22"
             TextAlignment="Center"
             VerticalAlignment="Center"

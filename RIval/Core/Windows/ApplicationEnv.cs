@@ -44,6 +44,8 @@ namespace Ignite.Core
         public void SetLocale(Languages lang)
         {
             Language = lang;
+
+            WindowMgr.Instance.AppendLanguages();
         }
         public void Restart()
         {

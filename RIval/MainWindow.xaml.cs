@@ -5,19 +5,12 @@ using Ignite.Core.Components.Update;
 using Ignite.Design.Controls;
 using Ignite.Design.Graphics;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Ignite
 {
@@ -43,9 +36,7 @@ namespace Ignite
                 UpdateFacade.Instance.StartUpdate();
             }
 
-            ApplicationEnv.Instance.SetLocale(LanguageMgr.Instance.FromConfig());
-            LanguageMgr.Instance.Boot(LanguageMgr.Instance.FromConfig());
-
+            ApplicationEnv.Instance.SetLocale(LanguageMgr.Instance.GetCurrentLang());
 
             Ataldazar_Button_Click(Ataldazar_Button, null);
             VersionLabel.Text = $"ignite.l.v {ApplicationEnv.Instance.AppVersion}";
@@ -134,39 +125,46 @@ namespace Ignite
             Ataldazar_Button.Effect = null;
             Motherlode_Button.Effect = null;
 
-            ProductsButton.Effect = null;
-            ProductsButton.MouseEnter -= TextBlock_MouseEnter;
-            ProductsButton.MouseLeave -= TextBlock_MouseLeave;
-            ProductsButton.MouseEnter += TextBlock_MouseEnter;
-            ProductsButton.MouseLeave += TextBlock_MouseLeave;
-            ProductsButton.Foreground = new SolidColorBrush(Colors.Gray);
+            MagazineButtonHeader.Effect = null;
+            MagazineButtonHeader.MouseEnter -= TextBlock_MouseEnter;
+            MagazineButtonHeader.MouseLeave -= TextBlock_MouseLeave;
+            MagazineButtonHeader.MouseEnter += TextBlock_MouseEnter;
+            MagazineButtonHeader.MouseLeave += TextBlock_MouseLeave;
+            MagazineButtonHeader.Foreground = new SolidColorBrush(Colors.Gray);
 
-            MagazineButton.Effect = null;
-            MagazineButton.MouseEnter -= TextBlock_MouseEnter;
-            MagazineButton.MouseLeave -= TextBlock_MouseLeave;
-            MagazineButton.MouseEnter += TextBlock_MouseEnter;
-            MagazineButton.MouseLeave += TextBlock_MouseLeave;
-            MagazineButton.Foreground = new SolidColorBrush(Colors.Gray);
+            ACPButtonHeader.Effect = null;
+            ACPButtonHeader.MouseEnter -= TextBlock_MouseEnter;
+            ACPButtonHeader.MouseLeave -= TextBlock_MouseLeave;
+            ACPButtonHeader.MouseEnter += TextBlock_MouseEnter;
+            ACPButtonHeader.MouseLeave += TextBlock_MouseLeave;
+            ACPButtonHeader.Foreground = new SolidColorBrush(Colors.Gray);
+
+            ForumButtonHeader.Effect = null;
+            ForumButtonHeader.MouseEnter -= TextBlock_MouseEnter;
+            ForumButtonHeader.MouseLeave -= TextBlock_MouseLeave;
+            ForumButtonHeader.MouseEnter += TextBlock_MouseEnter;
+            ForumButtonHeader.MouseLeave += TextBlock_MouseLeave;
+            ForumButtonHeader.Foreground = new SolidColorBrush(Colors.Gray);
         }
 
         private void ProductsButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
             SetActive((FrameworkElement)sender);
 
-            Process.Start(Core.Components.Api.ApiFacade.Instance.GetUri("shop-link"));
+            Process.Start(ApiFacade.Instance.GetUri("shop-link"));
         }
         private void MagazineButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
             SetActive((FrameworkElement)sender);
 
-            Process.Start(Core.Components.Api.ApiFacade.Instance.GetUri("acp-link"));
+            Process.Start(ApiFacade.Instance.GetUri("acp-link"));
         }
 
         private void ForumButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
             SetActive((FrameworkElement)sender);
 
-            Process.Start(Core.Components.Api.ApiFacade.Instance.GetUri("forum-link"));
+            Process.Start(ApiFacade.Instance.GetUri("forum-link"));
         }
 
         public void Loading()
@@ -227,36 +225,6 @@ namespace Ignite
             }
         }
 
-        private void ContextMenu_AccountManageDown(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void ContextMenu_SupportServiceDown(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void ContextMenu_SettingsDown(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void ContextMenu_AboutUpdateDown(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void ContextMenu_SendFeedbackDown(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void ContextMenu_ExitFromAccountDown(object sender, MouseEventArgs e)
-        {
-            
-        }
-
         public void SwitchMenuButtons(bool enable)
         {
             if(enable)
@@ -271,16 +239,6 @@ namespace Ignite
                 Motherlode_Button.IsEnabled = false;
                 SettingsButton.IsEnabled = false;
             }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Process.Start("https://sierra-rp.ru/forum");
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            Process.Start("https://sierra-rp.ru");
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -302,6 +260,14 @@ namespace Ignite
         private void Bugreport_Button_Click(object sender, RoutedEventArgs e)
         {
             Process.Start(ApiFacade.Instance.GetUri("bug-report-link"));
+        }
+
+        public void AppendLocale(LanguageMgr langMgr)
+        {
+            //Language setting here
+            MagazineButtonHeader.Text = langMgr.ValueOf(MagazineButtonHeader.Name);
+            ACPButtonHeader.Text      = langMgr.ValueOf(ACPButtonHeader.Name);
+            ForumButtonHeader.Text    = langMgr.ValueOf(ForumButtonHeader.Name);
         }
     }
 }
