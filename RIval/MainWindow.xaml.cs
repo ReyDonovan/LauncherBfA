@@ -268,6 +268,11 @@ namespace Ignite
             MagazineButtonHeader.Text = langMgr.ValueOf(MagazineButtonHeader.Name);
             ACPButtonHeader.Text      = langMgr.ValueOf(ACPButtonHeader.Name);
             ForumButtonHeader.Text    = langMgr.ValueOf(ForumButtonHeader.Name);
+            ServersLabel.Text         = langMgr.ValueOf(ServersLabel.Name);
+            MiscLabel.Text = langMgr.ValueOf(MiscLabel.Name);
+            LinksLabel.Text = langMgr.ValueOf(LinksLabel.Name);
+            SettingsButton.Content = langMgr.ValueOf(SettingsButton.Name);
+            Bugreport_Button.Content = langMgr.ValueOf(Bugreport_Button.Name);
         }
     }
 }

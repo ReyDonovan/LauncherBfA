@@ -25,20 +25,17 @@
                     Height="530"
                     BlurContainer="{Binding ElementName=InnerBlurContainer}"
                     Magnification="0.75" Background="#FF191919" BlurRadius="20" Margin="0,54,267,0" BorderBrush="#FFB2AFAF" BorderThickness="0,0,1,0" Grid.ColumnSpan="3" Opacity="0.65"/>
-                <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="10,66,0,0" TextWrapping="Wrap" Text="СЕРВЕРА" VerticalAlignment="Top">
+                <TextBlock x:Name="ServersLabel" Grid.Column="2" HorizontalAlignment="Left" Margin="10,66,0,0" TextWrapping="Wrap" Text="СЕРВЕРА" VerticalAlignment="Top">
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
                     </TextBlock.Foreground>
                 </TextBlock>
-                <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="10,326,0,0" TextWrapping="Wrap" Text="ДОПОЛНИТЕЛЬНО" VerticalAlignment="Top">
+                <TextBlock x:Name="MiscLabel" Grid.Column="2" HorizontalAlignment="Left" Margin="10,326,0,0" TextWrapping="Wrap" Text="ДОПОЛНИТЕЛЬНО" VerticalAlignment="Top">
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
                     </TextBlock.Foreground>
                 </TextBlock>
-                <Button x:Name="SettingsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="16" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,352,0,0" Grid.ColumnSpan="3" Click="Button_Click_2" IsEnabled="False">
-                    <Grid>
-                        <TextBlock Text="НАСТРОЙКИ" Margin="-25,8,-20,9" TextAlignment="Center" FontSize="20"/>
-                    </Grid>
+                <Button x:Name="SettingsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="20" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,352,0,0" Grid.ColumnSpan="3" Click="Button_Click_2" IsEnabled="False" Content="НАСТРОЙКИ">
                 </Button>
                 <Button x:Name="Ataldazar_Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="16" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,92,0,0" Grid.ColumnSpan="3" Click="Ataldazar_Button_Click">
                     <Grid>
@@ -51,15 +48,12 @@
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
                     </TextBlock.Foreground>
                 </TextBlock>
-                <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="10,445,0,0" TextWrapping="Wrap" Text="ССЫЛКИ" VerticalAlignment="Top">
+                <TextBlock x:Name="LinksLabel" Grid.Column="2" HorizontalAlignment="Left" Margin="10,445,0,0" TextWrapping="Wrap" Text="ССЫЛКИ" VerticalAlignment="Top">
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
                     </TextBlock.Foreground>
                 </TextBlock>
-                <Button x:Name="Bugreport_Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="16" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,471,0,0" Grid.ColumnSpan="3" Click="Bugreport_Button_Click">
-                    <Grid>
-                        <TextBlock Text="СООБЩИТЬ О БАГЕ" Margin="-25,8,-20,9" TextAlignment="Center" FontSize="20"/>
-                    </Grid>
+                <Button x:Name="Bugreport_Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="20" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,471,0,0" Grid.ColumnSpan="3" Click="Bugreport_Button_Click" Content="БАГТРЕКЕР">
                 </Button>
                 <Button x:Name="Motherlode_Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="16" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,151,0,0" Grid.ColumnSpan="3" Click="Motherlode_Button_Click">
                     <Grid>
