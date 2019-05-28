@@ -98,7 +98,14 @@ namespace Ignite.Core.Components
                 {
                     if(drive.AvailableFreeSpace <= 64424509440)
                     {
-                        MessageBox.Show($"Не достаточно своободного места на диске: {drive.Name}\nСвободное место: {FormatByte(drive.AvailableFreeSpace)}\nТребуется свободного места: {FormatByte(64424509440)}\n\nВыделение свободного места не возможно", "Ошибка выделения места", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show(
+                            string.Format("Not enough free disk space: {0}\nFree space: {1}\nNeeded: {2}\n\nIt is not possible to continue with the installation.", 
+                                drive.Name, 
+                                FormatByte(drive.AvailableFreeSpace), 
+                                FormatByte(ApplicationEnv.Instance.NeededGameBytes)), 
+                            LanguageMgr.Instance.ValueOf("Error_FreeSpaceUnavailable_Title"), 
+                            MessageBoxButton.OK, 
+                            MessageBoxImage.Error);
 
                         return;
                     }
@@ -248,28 +255,36 @@ namespace Ignite.Core.Components
 
         private string FormatByte(long bytes)
         {
-            string[] Suffix = { "Байт", "КБ", "МБ", "ГБ", "ТБ" };
             int i;
             double dblSByte = bytes;
-            for (i = 0; i < Suffix.Length && bytes >= 1024; i++, bytes /= 1024)
+            for (i = 0; i < 5 && bytes >= 1024; i++, bytes /= 1024)
             {
                 dblSByte = bytes / 1024.0;
             }
 
-            return String.Format("{0:0.##} {1}", dblSByte, Suffix[i]);
+            return String.Format("{0:0.##} {1}", dblSByte, GetSuffix(i));
         }
         private string GetSpeed(long bytes)
         {
-            string[] suffix = { "байт/с", "КБ/с", "МБ/с", "ГБ/с", "ТБ/с" };
             int i;
             double dblSbyte = bytes;
 
-            for (i = 0; i < suffix.Length && bytes >= 1024; i++, bytes /= 1024)
+            for (i = 0; i < 5 && bytes >= 1024; i++, bytes /= 1024)
             {
                 dblSbyte = bytes / 1024.0;
             }
 
-            return $"{(dblSbyte / Sw.Elapsed.TotalSeconds).ToString("0.00")} {suffix[i]}";
+            return $"{(dblSbyte / Sw.Elapsed.TotalSeconds).ToString("0.00")} {GetSuffix(i)}/{LanguageMgr.Instance.ValueOf("Seconds_Short")}";
+        }
+
+        private string GetSuffix(int index)
+        {
+            string[] suffix =
+            {
+                "Bytes", "Kb", "Mb", "Gb", "Tb"
+            };
+
+            return LanguageMgr.Instance.ValueOf(suffix[index]);
         }
     }
 }

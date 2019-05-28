@@ -47,7 +47,11 @@ namespace Ignite.Design.Controls
                 System.Windows.Application.Current.Dispatcher.BeginInvoke((Action)delegate
                 {
                     StatusTextDesc.Visibility = Visibility.Hidden;
-                    StatusText.Text = "Подготовка ...";
+
+                    StatusText.Text = LanguageMgr.Instance.ValueOf("StatusText_Init");
+                    PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
+                    CheckButton.Content = LanguageMgr.Instance.ValueOf("CheckButton");
+
                     PercentStatus.Visibility = Visibility.Hidden;
 
                     OnLoading();
@@ -63,7 +67,7 @@ namespace Ignite.Design.Controls
                 {
                     OnReady();
 
-                    Server.Text = ServerName + ": свежие новости";
+                    Server.Text = string.Format(LanguageMgr.Instance.ValueOf("GameComponentTitle"), ServerName);
                 });
 
                 var opt = SettingsMgr.Instance.GetOption(id + ".path");
@@ -75,9 +79,9 @@ namespace Ignite.Design.Controls
                         {
                             StatusText.Visibility = Visibility.Hidden;
                             StatusTextDesc.Visibility = Visibility.Visible;
-                            StatusTextDesc.Text = "Готов к запуску";
+                            StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_Ready");
 
-                            PlayButton.Content = "ИГРАТЬ";
+                            PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
 
                             PlayButton.IsEnabled = true;
                             CheckButton.IsEnabled = true;
@@ -90,9 +94,9 @@ namespace Ignite.Design.Controls
                     {
                         StatusText.Visibility = Visibility.Hidden;
                         StatusTextDesc.Visibility = Visibility.Visible;
-                        StatusTextDesc.Text = "Необходимо указать папку с игрой";
+                        StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_ChooseGame");
 
-                        PlayButton.Content = "НАСТРОИТЬ";
+                        PlayButton.Content = LanguageMgr.Instance.ValueOf("ButtonChooseGame");
                         PlayButton.Click -= PlayButton_Click;
                         PlayButton.Click += PlayButton_Click_SetPath;
 
@@ -181,9 +185,9 @@ namespace Ignite.Design.Controls
 
         private void CheckButton_Click(object sender, RoutedEventArgs e)
         {
-            StatusText.Text = "Подготовка ...";
+            StatusText.Text = LanguageMgr.Instance.ValueOf("StatusText_Init");
             StatusText.Visibility = Visibility.Visible;
-            StatusTextDesc.Text = "Инициализация списка файлов";
+            StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("DescText_Init");
 
             ProgressBar.Visibility = Visibility.Visible;
 
@@ -207,7 +211,7 @@ namespace Ignite.Design.Controls
                 }
                 else
                 {
-                    StatusText.Text = "Ошибка обновления";
+                    StatusText.Text = LanguageMgr.Instance.ValueOf("StatusText_UpdateError");
                     StatusText.Visibility = Visibility.Visible;
                     StatusTextDesc.Text = "";
                 }
@@ -220,7 +224,7 @@ namespace Ignite.Design.Controls
             {
                 if (!result)
                 {
-                    StatusText.Text = "Файлы повреждены: ";
+                    StatusText.Text = LanguageMgr.Instance.ValueOf("StatusText_FilesDamaged");
                     StatusTextDesc.Text = $"../{fn}";
 
                     FileMgr.Instance.OnDownloadStarted -= FileMgrDownloadStart;
@@ -239,10 +243,10 @@ namespace Ignite.Design.Controls
                 {
                     StatusText.Visibility = Visibility.Hidden;
                     StatusTextDesc.Visibility = Visibility.Visible;
-                    StatusTextDesc.Text = "Готов к запуску";
+                    StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_Ready");
                     StatusText.Text = "";
 
-                    PlayButton.Content = "ИГРАТЬ";
+                    PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
 
                     PlayButton.IsEnabled = true;
                     CheckButton.IsEnabled = true;
@@ -259,7 +263,7 @@ namespace Ignite.Design.Controls
             System.Windows.Application.Current.Dispatcher.BeginInvoke((Action)delegate
             {
                 StatusText.Visibility = Visibility.Visible;
-                StatusText.Text = "Загрузка: ";
+                StatusText.Text = LanguageMgr.Instance.ValueOf("StatusText_Download");
 
                 StatusTextDesc.Text = info;
                 PercentStatus.Text = $"{percentage}%";
@@ -294,9 +298,9 @@ namespace Ignite.Design.Controls
                 {
                     StatusText.Visibility = Visibility.Hidden;
                     StatusTextDesc.Visibility = Visibility.Visible;
-                    StatusTextDesc.Text = "Готов к запуску";
+                    StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_Ready");
 
-                    PlayButton.Content = "ИГРАТЬ";
+                    PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
 
                     PlayButton.IsEnabled = true;
                     CheckButton.IsEnabled = true;
@@ -305,9 +309,9 @@ namespace Ignite.Design.Controls
                 {
                     StatusText.Visibility = Visibility.Hidden;
                     StatusTextDesc.Visibility = Visibility.Visible;
-                    StatusTextDesc.Text = "Ошибка обновления";
+                    StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_UpdateError");
 
-                    PlayButton.Content = "ИГРАТЬ";
+                    PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
 
                     PlayButton.IsEnabled = false;
                     CheckButton.IsEnabled = true;
@@ -329,20 +333,20 @@ namespace Ignite.Design.Controls
                 {
                     StatusText.Visibility = Visibility.Hidden;
                     StatusTextDesc.Visibility = Visibility.Visible;
-                    StatusTextDesc.Text = "Готов к запуску";
+                    StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_Ready");
 
-                    PlayButton.Content = "ИГРАТЬ";
+                    PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
 
                     PlayButton.IsEnabled = true;
                     CheckButton.IsEnabled = true;
                 }
                 else
                 {
-                    StatusText.Text = "Ошибка загрузки файла: ";
+                    StatusText.Text = LanguageMgr.Instance.ValueOf("StatusText_FilesDamaged_One");
                     StatusTextDesc.Visibility = Visibility.Visible;
                     StatusTextDesc.Text = $"{fn}";
 
-                    PlayButton.Content = "ИГРАТЬ";
+                    PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
 
                     PlayButton.IsEnabled = false;
                     CheckButton.IsEnabled = true;
@@ -363,7 +367,7 @@ namespace Ignite.Design.Controls
         {
             System.Windows.Application.Current.Dispatcher.BeginInvoke((Action)delegate
             {
-                StatusText.Text = "Проверка целостности: ";
+                StatusText.Text = LanguageMgr.Instance.ValueOf("StatusText_CheckFileBuilds");
                 StatusTextDesc.Text = $"../{fn}";
 
                 ProgressBar.Visibility = Visibility.Visible;
@@ -384,7 +388,7 @@ namespace Ignite.Design.Controls
                 {
                     if(data[i].Contains("SET portal"))
                     {
-                        data[i] = "SET portal \"77.82.86.211\"";
+                        data[i] = $"SET portal \"{ApplicationEnv.Instance.GetPortal(ServerId)}\"";
                     }
                 }
             }
@@ -392,7 +396,7 @@ namespace Ignite.Design.Controls
             {
                 data = new string[]
                 {
-                    "SET portal \"77.82.86.211\""
+                    $"SET portal \"{ApplicationEnv.Instance.GetPortal(ServerId)}\""
                 };
             }
 
@@ -418,7 +422,7 @@ namespace Ignite.Design.Controls
             PlayButton.IsEnabled = false;
             CheckButton.IsEnabled = false;
             
-            StatusTextDesc.Text = "Игра запущена";
+            StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_GameStarted");
 
             prc.EnableRaisingEvents = true;
             prc.Exited += Prc_Exited;
@@ -431,7 +435,7 @@ namespace Ignite.Design.Controls
                 PlayButton.IsEnabled = true;
                 CheckButton.IsEnabled = true;
 
-                StatusTextDesc.Text = "Готов к запуcку";
+                StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_Ready");
             });
         }
 
@@ -442,7 +446,7 @@ namespace Ignite.Design.Controls
             {
                 if (FileMgr.Instance.IsWowDirectory(dialog.SelectedPath))
                 {
-                    PlayButton.Content = "ИГРАТЬ";
+                    PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
 
                     PlayButton.IsEnabled = false;
                     CheckButton.IsEnabled = false;
