@@ -50,6 +50,7 @@ namespace Ignite.Core.Language
                 new Phrase("Bytes", "Bytes"),
                 new Phrase("Seconds_Short", "s"),
                 new Phrase("Error_FreeSpaceUnavailable_Title", "Installation error"),
+                new Phrase("LangButton", "LANGUAGE"),
             });
 
             lng.SetLanguage(Languages.English);
@@ -92,6 +93,7 @@ namespace Ignite.Core.Language
                 new Phrase("Bytes", "Байт"),
                 new Phrase("Seconds_Short", "с"),
                 new Phrase("Error_FreeSpaceUnavailable_Title", "Ошибка инсталляции"),
+                new Phrase("LangButton", "ЯЗЫК"),
             });
 
             lng.SetLanguage(Languages.Russian);

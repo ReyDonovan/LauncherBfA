@@ -10,6 +10,8 @@ namespace Ignite.Core.Components.News
 {
     public class NewsCache
     {
+        private NewsCfg Settings;
+
         private const string CACHE_STORAGE_PATH = "cache/news/";
 
         public List<NewsRepository> ActualNews { get; private set; } = new List<NewsRepository>();
@@ -23,9 +25,26 @@ namespace Ignite.Core.Components.News
 
             Clear();
 
+            BootSettings();
+
             if (!Directory.Exists(CACHE_STORAGE_PATH))
             {
                 Directory.CreateDirectory(CACHE_STORAGE_PATH);
+            }
+        }
+
+        private void BootSettings()
+        {
+            Settings = CfgMgr.Instance.GetProvider().Read<NewsCfg>(false);
+            if (Settings == null)
+            {
+                Settings = CfgMgr.Instance.GetProvider().Read<NewsCfg>(true);
+                if (Settings == null)
+                {
+                    CfgMgr.Instance.GetProvider().Add(new NewsCfg() { CacheFolder = "cache/news/" }, new NewsCfg() { CacheFolder = "cache/news/" }).Build();
+
+                    BootSettings();
+                }
             }
         }
 

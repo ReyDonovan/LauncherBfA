@@ -32,7 +32,7 @@ namespace Ignite.Core
 
         public ApplicationEnv()
         {
-            AppVersion = new Version("1.2.187.214");
+            AppVersion = new Version("1.2.251.189");
             CurrentHardware = GetCoreComponent<Hardware>();
             Status = ApplicationStatus.Loading;
 

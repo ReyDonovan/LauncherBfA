@@ -30,12 +30,12 @@
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
                     </TextBlock.Foreground>
                 </TextBlock>
-                <TextBlock x:Name="MiscLabel" Grid.Column="2" HorizontalAlignment="Left" Margin="10,326,0,0" TextWrapping="Wrap" Text="ДОПОЛНИТЕЛЬНО" VerticalAlignment="Top">
+                <TextBlock x:Name="MiscLabel" Grid.Column="2" HorizontalAlignment="Left" Margin="10,268,0,0" TextWrapping="Wrap" Text="ДОПОЛНИТЕЛЬНО" VerticalAlignment="Top">
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
                     </TextBlock.Foreground>
                 </TextBlock>
-                <Button x:Name="SettingsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="20" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,352,0,0" Grid.ColumnSpan="3" Click="Button_Click_2" IsEnabled="False" Content="НАСТРОЙКИ">
+                <Button x:Name="SettingsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="20" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,294,0,0" Grid.ColumnSpan="3" Click="Button_Click_2" IsEnabled="False" Content="НАСТРОЙКИ">
                 </Button>
                 <Button x:Name="Ataldazar_Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="16" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,92,0,0" Grid.ColumnSpan="3" Click="Ataldazar_Button_Click">
                     <Grid>
@@ -60,6 +60,22 @@
                         <Image Source="Resources/Images/Minis/bfa_min.png" Margin="-81,1,83,2"/>
                         <TextBlock Text="MOTHERLODE" Margin="6,14,-51,11" TextAlignment="Center" FontSize="20"/>
                     </Grid>
+                </Button>
+                <Button x:Name="LangButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="20" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,353,0,0" Grid.ColumnSpan="3" Content="ЯЗЫК">
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem x:Name="MenuItem_LangSwitch_English" Header="English" MouseDown="MenuItem_LangSwitch_English_MouseDown" Click="MenuItem_LangSwitch_English_Click">
+                                <MenuItem.Icon>
+                                    <Image Height="17" Width="17" Source="/Ignite;component/Resources/Icons/Languages/english-icon.png"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem x:Name="MenuItem_LangSwitch_Russian" Header="Russian" MouseDown="MenuItem_LangSwitch_Russian_MouseDown" Click="MenuItem_LangSwitch_Russian_Click">
+                                <MenuItem.Icon>
+                                    <Image Height="17" Width="17" Source="/Ignite;component/Resources/Icons/Languages/russian-icon.png"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </Button.ContextMenu>
                 </Button>
             </Grid>
 

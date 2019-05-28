@@ -46,7 +46,7 @@ namespace Ignite.Core.Components.Configuration.Providers
         {
             Write(data, @default);
 
-            OnChanged(data);
+            OnChanged?.Invoke(data);
         }
 
         public T Read<T>(bool @default)

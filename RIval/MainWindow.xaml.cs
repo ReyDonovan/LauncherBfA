@@ -269,10 +269,31 @@ namespace Ignite
             ACPButtonHeader.Text      = langMgr.ValueOf(ACPButtonHeader.Name);
             ForumButtonHeader.Text    = langMgr.ValueOf(ForumButtonHeader.Name);
             ServersLabel.Text         = langMgr.ValueOf(ServersLabel.Name);
-            MiscLabel.Text = langMgr.ValueOf(MiscLabel.Name);
-            LinksLabel.Text = langMgr.ValueOf(LinksLabel.Name);
-            SettingsButton.Content = langMgr.ValueOf(SettingsButton.Name);
-            Bugreport_Button.Content = langMgr.ValueOf(Bugreport_Button.Name);
+            MiscLabel.Text            = langMgr.ValueOf(MiscLabel.Name);
+            LinksLabel.Text           = langMgr.ValueOf(LinksLabel.Name);
+            SettingsButton.Content    = langMgr.ValueOf(SettingsButton.Name);
+            Bugreport_Button.Content  = langMgr.ValueOf(Bugreport_Button.Name);
+            LangButton.Content        = langMgr.ValueOf(LangButton.Name);
+        }
+
+        private void MenuItem_LangSwitch_English_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            LanguageMgr.Instance.SetLang(Languages.English);
+        }
+
+        private void MenuItem_LangSwitch_Russian_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            LanguageMgr.Instance.SetLang(Languages.Russian);
+        }
+
+        private void MenuItem_LangSwitch_English_Click(object sender, RoutedEventArgs e)
+        {
+            LanguageMgr.Instance.SetLang(Languages.English);
+        }
+
+        private void MenuItem_LangSwitch_Russian_Click(object sender, RoutedEventArgs e)
+        {
+            LanguageMgr.Instance.SetLang(Languages.Russian);
         }
     }
 }

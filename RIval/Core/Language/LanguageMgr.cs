@@ -57,6 +57,29 @@ namespace Ignite.Core
 
             return (Languages)Settings.LangKey;
         }
+        public void SetLang(Languages lang)
+        {
+            if(lang == Languages.English)
+            {
+                CfgMgr.Instance.GetProvider().Write<LangCfg>((cfg) =>
+                {
+                    cfg.LangKey = (int)lang;
+                    cfg.LangShort = "en-gb";
+                }, 
+                false);
+            }
+            else
+            {
+                CfgMgr.Instance.GetProvider().Write<LangCfg>((cfg) =>
+                {
+                    cfg.LangKey = (int)lang;
+                    cfg.LangShort = "ru-ru";
+                },
+                false);
+            }
+
+            ApplicationEnv.Instance.Restart();
+        }
         public string ValueOf(string key)
         {
             return Phrases.KeyOf(key);

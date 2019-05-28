@@ -13,16 +13,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Ignite.Core.Components.Game;
 
 namespace Ignite.Design.Controls
 {
@@ -34,10 +28,13 @@ namespace Ignite.Design.Controls
         public int ServerId = -1;
         private string ServerName = "%server%";
         private List<NewsRepository> News = new List<NewsRepository>();
+        private GameCfg GameSettings;
 
         public GameComponent(string server, int id)
         {
             Logger.Instance.WriteLine($"Initialize the game component with parent: {server}. In: {DateTime.Now.ToFileTimeUtc()}", LogLevel.Debug);
+
+            BootSettings();
 
             ServerName = server;
             ServerId = id;
@@ -70,10 +67,11 @@ namespace Ignite.Design.Controls
                     Server.Text = string.Format(LanguageMgr.Instance.ValueOf("GameComponentTitle"), ServerName);
                 });
 
-                var opt = SettingsMgr.Instance.GetOption(id + ".path");
-                if(opt.Key != SettingsContainer.INCORRECT_OPTION)
+
+                var opt = GameSettings.GetFolder(id);
+                if(opt != null)
                 {
-                    if (File.Exists(opt.Value + "\\Wow.exe") || File.Exists(opt.Value + "\\Wow-64.exe"))
+                    if (FileMgr.Instance.IsWowDirectory(opt))
                     {
                         System.Windows.Application.Current.Dispatcher.BeginInvoke((Action)delegate
                         {
@@ -109,6 +107,21 @@ namespace Ignite.Design.Controls
             InitializeComponent();
 
             ApplicationEnv.Instance.ApplyStatus(ApplicationStatus.Normal);
+        }
+
+        private void BootSettings()
+        {
+            GameSettings = CfgMgr.Instance.GetProvider().Read<GameCfg>(false);
+            if (GameSettings == null)
+            {
+                GameSettings = CfgMgr.Instance.GetProvider().Read<GameCfg>(true);
+                if (GameSettings == null)
+                {
+                    CfgMgr.Instance.GetProvider().Add(new GameCfg(), new GameCfg()).Build();
+
+                    BootSettings();
+                }
+            }
         }
 
         private void AddNews()
@@ -196,7 +209,7 @@ namespace Ignite.Design.Controls
 
             Task.Run(() =>
             {
-                var task = FileMgr.Instance.GetManifest(true, ServerId);
+                var task = FileMgr.Instance.GetManifest(true, ServerId, GameSettings.GetFolder(ServerId));
                 task.GetAwaiter();
 
                 if (task.GetAwaiter().GetResult())
@@ -237,7 +250,7 @@ namespace Ignite.Design.Controls
                     FileMgr.Instance.OnStoppedProcesses += FileMgrStopAll;
                     FileMgr.Instance.OnDownloadProcess += FileMgrDownloadProcess;
 
-                    FileMgr.Instance.StartUpdate();
+                    FileMgr.Instance.StartUpdate(GameSettings.GetFolder(ServerId));
                 }
                 else
                 {
@@ -381,8 +394,8 @@ namespace Ignite.Design.Controls
 
             try
             {
-                data = File.ReadAllLines(SettingsMgr.Instance.GetValue(ServerId + ".path") + "\\Wtf\\Config.wtf");
-                File.Delete(SettingsMgr.Instance.GetValue(ServerId + ".path") + "\\Wtf\\Config.wtf");
+                data = File.ReadAllLines(GameSettings.GetFolder(ServerId) + "\\Wtf\\Config.wtf");
+                File.Delete(GameSettings.GetFolder(ServerId) + "\\Wtf\\Config.wtf");
 
                 for(int i = 0; i < data.Length; i++)
                 {
@@ -400,7 +413,7 @@ namespace Ignite.Design.Controls
                 };
             }
 
-            using (FileStream io = new FileStream(SettingsMgr.Instance.GetValue(ServerId + ".path") + "\\Wtf\\Config.wtf", FileMode.OpenOrCreate))
+            using (FileStream io = new FileStream(GameSettings.GetFolder(ServerId) + "\\Wtf\\Config.wtf", FileMode.OpenOrCreate))
             {
                 bool adjusted = false;
 
@@ -417,7 +430,7 @@ namespace Ignite.Design.Controls
                 }
             }
 
-            var prc = Process.Start(SettingsMgr.Instance.GetValue(ServerId + ".path") + "\\WoW.exe");
+            var prc = Process.Start(GameSettings.GetFolder(ServerId) + "\\WoW.exe");
 
             PlayButton.IsEnabled = false;
             CheckButton.IsEnabled = false;
@@ -453,8 +466,8 @@ namespace Ignite.Design.Controls
 
                 }
 
-                SettingsMgr.Instance.WriteOption(new Option(ServerId + ".path", dialog.SelectedPath));
-                SettingsMgr.Instance.Save();
+                GameSettings.AddFolder(ServerId, dialog.SelectedPath);
+                CfgMgr.Instance.GetProvider().Write(GameSettings, false);
 
                 CheckButton_Click(CheckButton, null);
             }

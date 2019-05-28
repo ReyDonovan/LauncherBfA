@@ -1,4 +1,5 @@
 ﻿using Ignite.Core.Components.Configuration.Providers;
+using System;
 
 namespace Ignite.Core.Components.Configuration
 {
@@ -15,6 +16,19 @@ namespace Ignite.Core.Components.Configuration
         {
             return CurrentProvider.Read<T>(def);
         }
+        public void Write<T>(Action<T> act, bool def)
+        {
+            var setting = CurrentProvider.Read<T>(def);
+            if(setting != null)
+            {
+                act(setting);
+
+                Write(setting, def);
+            }
+            else
+                throw null;
+        }
+
         public void Write<T>(T data, bool def)
         {
             CurrentProvider.Append(data, def);

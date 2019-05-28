@@ -95,6 +95,9 @@
     <Compile Include="Core\Components\FileSystem\FileMgr.cs" />
     <Compile Include="Core\Components\FileSystem\Types\FileObj.cs" />
     <Compile Include="Core\Components\FileSystem\Types\FileObjectsCollection.cs" />
+    <Compile Include="Core\Components\Game\GameCfg.cs" />
+    <Compile Include="Core\Components\Log\LogCfg.cs" />
+    <Compile Include="Core\Components\News\NewsCfg.cs" />
     <Compile Include="Core\Components\Update\Types\UpdateAnnotation.cs" />
     <Compile Include="Core\Components\Update\UpdateApiHandler.cs" />
     <Compile Include="Core\Components\Update\UpdateFacade.cs" />

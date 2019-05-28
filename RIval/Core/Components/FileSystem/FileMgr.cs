@@ -89,11 +89,11 @@ namespace Ignite.Core.Components
                 }
             });
         }
-        public void StartUpdate(int server = 1)
+        public void StartUpdate(string path, int server = 1)
         {
             Task.Run(() =>
             {
-                DriveInfo drive = DriveInfo.GetDrives().First((dr) => dr.Name.Contains(SettingsMgr.Instance.GetValue($"{server}.path").Split(':').First()));
+                DriveInfo drive = DriveInfo.GetDrives().First((dr) => dr.Name.Contains(path.Split(':').First()));
                 if(drive != null)
                 {
                     if(drive.AvailableFreeSpace <= 64424509440)
@@ -184,7 +184,7 @@ namespace Ignite.Core.Components
             OnDownloadProcess(info, ((CurrentDownloadedFile * 100) / Collection.Count), e.ProgressPercentage);
         }
 
-        public Task<bool> GetManifest(bool full, int serverid)
+        public Task<bool> GetManifest(bool full, int serverid, string path)
         {
             return Task.Run(() =>
             {
@@ -200,7 +200,7 @@ namespace Ignite.Core.Components
                     {
                         res[i].Id = i;
                         res[i].NiceFileName = res[i].FileName;
-                        res[i].FileName = SettingsMgr.Instance.GetValue(serverid + ".path") + res[i].FileName;
+                        res[i].FileName = path + res[i].FileName;
                         Collection.Add(res[i]);
                     }
 
