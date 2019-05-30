@@ -51,6 +51,12 @@ namespace Ignite.Core.Language
                 new Phrase("Seconds_Short", "s"),
                 new Phrase("Error_FreeSpaceUnavailable_Title", "Installation error"),
                 new Phrase("LangButton", "LANGUAGE"),
+
+                //Api phrases
+                new Phrase("api_server_error", "Server not responding. Please try again later"),
+                new Phrase("api_auth_password_too_short", "Password must be at least 6 characters long"),
+                new Phrase("api_auth_incorrect_password", "Incorrect password for account: '{0}'"),
+                new Phrase("api_register_email_already_exists", "Current email: '{0}' already exists!"),
             });
 
             lng.SetLanguage(Languages.English);
@@ -94,6 +100,12 @@ namespace Ignite.Core.Language
                 new Phrase("Seconds_Short", "с"),
                 new Phrase("Error_FreeSpaceUnavailable_Title", "Ошибка инсталляции"),
                 new Phrase("LangButton", "ЯЗЫК"),
+
+                 //Api phrases
+                new Phrase("api_server_error", "Сервер не отвечает. Повторите свой запрос позже."),
+                new Phrase("api_auth_password_too_short", "Пароль должен состоять из не менее 6 символов."),
+                new Phrase("api_auth_incorrect_password", "Неверный пароль для аккаунта: '{0}'"),
+                new Phrase("api_register_email_already_exists", "Указанный email: '{0}' уже существует!"),
             });
 
             lng.SetLanguage(Languages.Russian);

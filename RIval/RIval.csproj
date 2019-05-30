@@ -91,6 +91,7 @@
     <Compile Include="Core\Components\Configuration\ConfigurationProvider.cs" />
     <Compile Include="Core\Components\Configuration\Providers\IConfiguration.cs" />
     <Compile Include="Core\Components\Configuration\Providers\JsonConfiguration.cs" />
+    <Compile Include="Core\Components\Crypto\CryptoProvider.cs" />
     <Compile Include="Core\Components\FileSystem\FileCrashBuilder.cs" />
     <Compile Include="Core\Components\FileSystem\FileMgr.cs" />
     <Compile Include="Core\Components\FileSystem\Types\FileObj.cs" />
@@ -105,9 +106,6 @@
     <Compile Include="Core\Extensions\ByteArrayEx.cs" />
     <Compile Include="Core\Extensions\StringEx.cs" />
     <Compile Include="Core\Language\LangCfg.cs" />
-    <Compile Include="WaitWindow.xaml.cs">
-      <DependentUpon>WaitWindow.xaml</DependentUpon>
-    </Compile>
     <Page Include="Design\Controls\GameComponent.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -200,23 +198,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Login.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="AuthWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WaitWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Design\Graphics\Snapshot.cs" />
-    <Compile Include="Login.xaml.cs">
-      <DependentUpon>Login.xaml</DependentUpon>
+    <Compile Include="AuthWindow.xaml.cs">
+      <DependentUpon>AuthWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -347,11 +341,13 @@
     <Resource Include="Resources\Images\Minis\gavno_dva.jpg" />
     <Resource Include="Resources\Images\Minis\logo_gavno.png" />
     <Resource Include="Resources\Images\Bg\bfa.jpeg" />
+    <Resource Include="Resources\Images\Bg\auth_bg.jpg" />
     <Content Include="Resources\Images\Bg\bfa_bg.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\Components\Configuration\Exceptions\" />
     <Folder Include="Core\Language\Langs\" />
+    <Folder Include="Design\Controls\Auth\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

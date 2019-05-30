@@ -152,6 +152,9 @@ namespace Ignite
             SetActive((FrameworkElement)sender);
 
             Process.Start(ApiFacade.Instance.GetUri("shop-link"));
+
+            var auth = new AuthWindow();
+            auth.ShowDialog();
         }
         private void MagazineButton_MouseDown(object sender, MouseButtonEventArgs e)
         {

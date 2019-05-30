@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ignite.Core.Components.Crypto;
+using IX.Composer.Architecture;
 using Newtonsoft.Json;
 
 namespace Ignite.Core.Components.Configuration.Providers
@@ -17,6 +19,12 @@ namespace Ignite.Core.Components.Configuration.Providers
         private event JsonConfigurationChanged OnChanged;
 
         private Dictionary<object, object> m_ObjectsForSave = new Dictionary<object, object>();
+        private Hardware m_CurrentHardware { get; set; }
+
+        public JsonConfiguration()
+        {
+            m_CurrentHardware = ApplicationEnv.Instance.CurrentHardware;
+        }
 
         public void Initialize() { }
 
@@ -59,7 +67,7 @@ namespace Ignite.Core.Components.Configuration.Providers
             {
                 if(File.Exists(CONFIG_PATH + "\\" + $"{typeof(T).Name}.json"))
                 {
-                    strObj = File.ReadAllText(CONFIG_PATH + "\\" + $"{typeof(T).Name}.json");
+                    strObj = CryptoProvider.Instance.Decrypt(File.ReadAllText(CONFIG_PATH + "\\" + $"{typeof(T).Name}.json"), m_CurrentHardware.GetOS().GetOSNumber());
                 }
                 else
                 {
@@ -70,7 +78,7 @@ namespace Ignite.Core.Components.Configuration.Providers
             {
                 if (File.Exists(CONFIG_PATH + "\\" + $"{typeof(T).Name}.json"))
                 {
-                    File.ReadAllText(CONFIG_PATH + "\\" + DEFAULTS_PATH + "\\" + $"{typeof(T).Name}.json");
+                    strObj = CryptoProvider.Instance.Decrypt(File.ReadAllText(CONFIG_PATH + "\\" + DEFAULTS_PATH + "\\" + $"{typeof(T).Name}.json"), m_CurrentHardware.GetOS().GetOSNumber());
                 }
                 else
                 {
@@ -114,7 +122,7 @@ namespace Ignite.Core.Components.Configuration.Providers
             }
 
 
-            File.WriteAllText(path, JsonConvert.SerializeObject(data));
+            File.WriteAllText(path, Crypto.CryptoProvider.Instance.Encrypt(JsonConvert.SerializeObject(data), m_CurrentHardware.GetOS().GetOSNumber()));
         }
 
         private void MakeDirectories()
