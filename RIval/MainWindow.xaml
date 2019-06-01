@@ -61,7 +61,7 @@
                         <TextBlock Text="MOTHERLODE" Margin="6,14,-51,11" TextAlignment="Center" FontSize="20"/>
                     </Grid>
                 </Button>
-                <Button x:Name="LangButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="20" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,353,0,0" Grid.ColumnSpan="3" Content="ЯЗЫК">
+                <Button x:Name="LangButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="20" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,353,0,0" Grid.ColumnSpan="3" Content="ЯЗЫК" Click="LangButton_Click">
                     <Button.ContextMenu>
                         <ContextMenu>
                             <MenuItem x:Name="MenuItem_LangSwitch_English" Header="English" MouseDown="MenuItem_LangSwitch_English_MouseDown" Click="MenuItem_LangSwitch_English_Click">

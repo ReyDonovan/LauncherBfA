@@ -57,6 +57,26 @@ namespace Ignite.Core.Language
                 new Phrase("api_auth_password_too_short", "Password must be at least 6 characters long"),
                 new Phrase("api_auth_incorrect_password", "Incorrect password for account: '{0}'"),
                 new Phrase("api_register_email_already_exists", "Current email: '{0}' already exists!"),
+
+
+                //Auth --windows phrases
+                new Phrase("Auth_LoginComponent_Title", "AUTHORIZE"),
+                new Phrase("Auth_LoginComponent_LoginButton", "Login"),
+                new Phrase("Auth_LoginComponent_RegisterButton", "Create new account"),
+                new Phrase("Auth_LoginComponent_RecoveryPasswordLink", "Reset password"),
+                new Phrase("Auth_PrivacyLink", "Privacy Policy"),
+                new Phrase("Auth_RegisterComponent_EmailBoxHelpText", "Enter EMail"),
+                new Phrase("Auth_RegisterComponent_QuestionsAnswerHelpText", "Enter answer"),
+                new Phrase("Auth_RegisterComponent_CreateAccount", "Create new account"),
+                new Phrase("Auth_RegisterComponent_AlreadyExistsAccountButton", "I already have account"),
+
+                //Auth --register phrases
+                new Phrase("Register_questions_1", "Brand of your first car"),
+                new Phrase("Register_questions_2", "The name of the street where you lived when you graduated from high school"),
+                new Phrase("Register_questions_3", "The place where you first flew the plane"),
+                new Phrase("Register_questions_4", "The first computer game that you have successfully passed"),
+                new Phrase("Register_questions_5", "The name of your second pet"),
+                new Phrase("Register_questions_6", "Name of your favorite sports team or name of your favorite player"),
             });
 
             lng.SetLanguage(Languages.English);
@@ -106,6 +126,25 @@ namespace Ignite.Core.Language
                 new Phrase("api_auth_password_too_short", "Пароль должен состоять из не менее 6 символов."),
                 new Phrase("api_auth_incorrect_password", "Неверный пароль для аккаунта: '{0}'"),
                 new Phrase("api_register_email_already_exists", "Указанный email: '{0}' уже существует!"),
+
+                //Auth --windows phrases
+                new Phrase("Auth_LoginComponent_Title", "АВТОРИЗАЦИЯ"),
+                new Phrase("Auth_LoginComponent_LoginButton", "Войти"),
+                new Phrase("Auth_LoginComponent_RegisterButton", "Создать учетную запись"),
+                new Phrase("Auth_LoginComponent_RecoveryPasswordLink", "Восстановление доступа"),
+                new Phrase("Auth_PrivacyLink", "Политика конфиденциальности"),
+                new Phrase("Auth_RegisterComponent_EmailBoxHelpText", "Введите адрес эл. почты"),
+                new Phrase("Auth_RegisterComponent_QuestionsAnswerHelpText", "Введи ответ"),
+                new Phrase("Auth_RegisterComponent_CreateAccount", "Создать учетную запись"),
+                new Phrase("Auth_RegisterComponent_AlreadyExistsAccountButton", "У меня уже есть аккаунт"),
+
+                //Auth --register phrases
+                new Phrase("Register_questions_1", "Марка вашей первой машины"),
+                new Phrase("Register_questions_2", "Название улицы, где вы жили, когда оканчивали школу"),
+                new Phrase("Register_questions_3", "Место, куда вы в первый раз летали самолетом"),
+                new Phrase("Register_questions_4", "Первая компьютерная игра, которую вы успешно прошли"),
+                new Phrase("Register_questions_5", "Кличка вашего второго домашнего животного"),
+                new Phrase("Register_questions_6", "Название любимой спортивной команды или имя любимого игрока"),
             });
 
             lng.SetLanguage(Languages.Russian);

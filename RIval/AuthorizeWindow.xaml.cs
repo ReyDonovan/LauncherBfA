@@ -1,32 +1,38 @@
 ﻿using Ignite.Core;
-using Ignite.Core.Components;
-using Ignite.Core.Components.Api;
-using Ignite.Core.Components.Update;
-using Ignite.Design.Controls;
-using Ignite.Design.Graphics;
+using Ignite.Design.Controls.Auth;
 using System;
-using System.Diagnostics;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace Ignite
 {
     /// <summary>
-    /// Логика взаимодействия для AuthWindow.xaml
+    /// Логика взаимодействия для AuthorizeWindow.xaml
     /// </summary>
-    public partial class AuthWindow : Window, IWindowDispatcher
+    public partial class AuthorizeWindow : Window, IWindowDispatcher
     {
-        public AuthWindow()
+        public AuthorizeWindow()
         {
             InitializeComponent();
+
+            WindowMgr.Instance.AddHosted(this);
+
+            SetActiveComponent(new LoginComponent());
         }
 
         public void AppendLocale(LanguageMgr langMgr)
         {
-            
+            throw new NotImplementedException();
         }
 
         public void Banned()
@@ -59,9 +65,26 @@ namespace Ignite
             throw new NotImplementedException();
         }
 
+        public void SetActiveComponent(UIElement elem)
+        {
+            Container.Children.Clear();
+
+            Container.Children.Add(elem);
+        }
+
+        public void SetPreloader(bool enabled)
+        {
+            Preloader.IsEnabled = enabled;
+        }
+
         public Window ToWindow()
         {
             return this;
+        }
+
+        private void CloseButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }

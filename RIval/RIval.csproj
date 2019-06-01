@@ -84,6 +84,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AuthorizeWindow.xaml.cs">
+      <DependentUpon>AuthorizeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Core\Components\Auth\AuthFacade.cs" />
     <Compile Include="Core\Components\Auth\RegisterFacade.cs" />
     <Compile Include="Core\Components\Auth\Types\AuthResult.cs" />
@@ -106,6 +109,18 @@
     <Compile Include="Core\Extensions\ByteArrayEx.cs" />
     <Compile Include="Core\Extensions\StringEx.cs" />
     <Compile Include="Core\Language\LangCfg.cs" />
+    <Page Include="AuthorizeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\Auth\LoginComponent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Design\Controls\Auth\RegisterComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Design\Controls\GameComponent.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -149,6 +164,12 @@
     <Compile Include="Core\Windows\ApplicationEnv.cs" />
     <Compile Include="Core\Singleton\Singleton.cs" />
     <Compile Include="Core\Windows\WindowMgr.cs" />
+    <Compile Include="Design\Controls\Auth\LoginComponent.xaml.cs">
+      <DependentUpon>LoginComponent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\Auth\RegisterComponent.xaml.cs">
+      <DependentUpon>RegisterComponent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Design\Controls\GameComponent.xaml.cs">
       <DependentUpon>GameComponent.xaml</DependentUpon>
     </Compile>
@@ -198,10 +219,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AuthWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -209,9 +226,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Design\Graphics\Snapshot.cs" />
-    <Compile Include="AuthWindow.xaml.cs">
-      <DependentUpon>AuthWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -337,6 +351,7 @@
     <Resource Include="Resources\Images\Minis\bfa_min.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Images\Bg\bg.jpg" />
     <Resource Include="Resources\Images\Minis\logo_wowv2.png" />
     <Resource Include="Resources\Images\Minis\gavno_dva.jpg" />
     <Resource Include="Resources\Images\Minis\logo_gavno.png" />
@@ -347,7 +362,6 @@
   <ItemGroup>
     <Folder Include="Core\Components\Configuration\Exceptions\" />
     <Folder Include="Core\Language\Langs\" />
-    <Folder Include="Design\Controls\Auth\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

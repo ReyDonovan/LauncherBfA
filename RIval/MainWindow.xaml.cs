@@ -103,6 +103,9 @@ namespace Ignite
             }
 
             Page.Children.Add(component);
+
+            var auth = new AuthorizeWindow();
+            auth.ShowDialog();
         }
 
         private void SetActive(FrameworkElement element)
@@ -152,9 +155,6 @@ namespace Ignite
             SetActive((FrameworkElement)sender);
 
             Process.Start(ApiFacade.Instance.GetUri("shop-link"));
-
-            var auth = new AuthWindow();
-            auth.ShowDialog();
         }
         private void MagazineButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -297,6 +297,11 @@ namespace Ignite
         private void MenuItem_LangSwitch_Russian_Click(object sender, RoutedEventArgs e)
         {
             LanguageMgr.Instance.SetLang(Languages.Russian);
+        }
+
+        private void LangButton_Click(object sender, RoutedEventArgs e)
+        {
+            LangButton.ContextMenu.IsOpen = !LangButton.ContextMenu.IsOpen;
         }
     }
 }
