@@ -1,4 +1,5 @@
 ﻿using Ignite.Core;
+using Ignite.Core.Components.Auth;
 using Ignite.Design.Controls.Auth;
 using System;
 using System.Collections.Generic;
@@ -62,7 +63,7 @@ namespace Ignite
 
         public void Normal()
         {
-            throw new NotImplementedException();
+            
         }
 
         public void SetActiveComponent(UIElement elem)
@@ -75,6 +76,17 @@ namespace Ignite
         public void SetPreloader(bool enabled)
         {
             Preloader.IsEnabled = enabled;
+        }
+
+        public void OpenGates()
+        {
+            WindowMgr.Instance.Run<MainWindow>((mw) =>
+            {
+                mw.AppendUser(AuthFacade.Instance.CurrentUser.UserName);
+                mw.Show();
+            });
+
+            this.Hide();
         }
 
         public Window ToWindow()

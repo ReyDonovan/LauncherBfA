@@ -90,6 +90,7 @@
     <Compile Include="Core\Components\Auth\AuthFacade.cs" />
     <Compile Include="Core\Components\Auth\RegisterFacade.cs" />
     <Compile Include="Core\Components\Auth\Types\AuthResult.cs" />
+    <Compile Include="Core\Components\Auth\Types\User.cs" />
     <Compile Include="Core\Components\Configuration\CfgMgr.cs" />
     <Compile Include="Core\Components\Configuration\ConfigurationProvider.cs" />
     <Compile Include="Core\Components\Configuration\Providers\IConfiguration.cs" />
@@ -357,6 +358,7 @@
     <Resource Include="Resources\Images\Minis\logo_gavno.png" />
     <Resource Include="Resources\Images\Bg\bfa.jpeg" />
     <Resource Include="Resources\Images\Bg\auth_bg.jpg" />
+    <Resource Include="Image1.png" />
     <Content Include="Resources\Images\Bg\bfa_bg.jpg" />
   </ItemGroup>
   <ItemGroup>

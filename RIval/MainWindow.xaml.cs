@@ -38,8 +38,18 @@ namespace Ignite
 
             ApplicationEnv.Instance.SetLocale(LanguageMgr.Instance.GetCurrentLang());
 
+            this.Hide();
+
+            AuthorizeWindow auth = new AuthorizeWindow();
+            auth.Show();
+
             Ataldazar_Button_Click(Ataldazar_Button, null);
             VersionLabel.Text = $"ignite.l.v {ApplicationEnv.Instance.AppVersion}";
+        }
+
+        public void AppendUser(string user)
+        {
+            UserProfileButton.Text = user;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -103,9 +113,6 @@ namespace Ignite
             }
 
             Page.Children.Add(component);
-
-            var auth = new AuthorizeWindow();
-            auth.ShowDialog();
         }
 
         private void SetActive(FrameworkElement element)

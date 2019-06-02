@@ -133,6 +133,17 @@
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
                         </TextBlock.Foreground>
                     </TextBlock>
+                    <TextBlock
+                        x:Name="UserProfileButton"
+                        Margin="763,38,0,3"
+                        TextAlignment="Center"
+                        VerticalAlignment="Center"
+                        Text=""
+                        FontSize="25" Height="34" MouseEnter="TextBlock_MouseEnter" MouseLeave="TextBlock_MouseLeave" MouseDown="ProductsButton_MouseDown" Grid.ColumnSpan="2" Background="#FF212121" Opacity="0.6" >
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                        </TextBlock.Foreground>
+                    </TextBlock>
                 </Grid>
             </controls:BlurryUserControl>
         </Grid>

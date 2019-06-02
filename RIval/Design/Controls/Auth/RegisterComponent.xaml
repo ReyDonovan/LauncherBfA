@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ignite.Design.Controls.Auth"
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
              mc:Ignorable="d" Width="338.964" Height="408.311">
     <Grid Margin="0">
         <Image HorizontalAlignment="Left" Height="409" VerticalAlignment="Top" Width="339" Source="/Ignite;component/Resources/Images/Bg/bg.jpg" Stretch="UniformToFill"/>
@@ -22,5 +23,7 @@
         <TextBox x:Name="QuestionAnswer" HorizontalAlignment="Left" Height="29" Margin="32,226,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" FontSize="16" Background="#FF151723" Opacity="0.85" Foreground="#FFEAE7E7" BorderBrush="#FF818181" SelectionBrush="White" Text="Enter Answer"/>
         <ComboBox x:Name="QuestionsSelector" HorizontalAlignment="Left" Margin="32,189,0,0" VerticalAlignment="Top" Width="274" Height="29" Background="#FF151723" BorderBrush="#FF818181" Foreground="#FF178BEC" Opacity="0.85" FontSize="16"/>
         <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="32,152,0,0" VerticalAlignment="Top" Width="274" Height="29" Background="#FF151723" BorderBrush="#FF818181" Foreground="#FFEAE7E7" SelectionBrush="White" Opacity="0.85" FontSize="16" Password="password"/>
+        <Rectangle x:Name="CurtainElement" HorizontalAlignment="Left" Height="408" Stroke="Black" VerticalAlignment="Top" Width="339" Opacity="0.9" Fill="Black" Visibility="Hidden"/>
+        <Image x:Name="Preloader" gif:ImageBehavior.AnimatedSource="/Ignite;component/Resources/Loaders/loader.gif" HorizontalAlignment="Left" Height="35" Margin="156,190,0,0" VerticalAlignment="Top" Width="35" Stretch="Fill" Visibility="Hidden"/>
     </Grid>
 </UserControl>

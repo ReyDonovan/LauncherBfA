@@ -58,9 +58,12 @@ namespace Ignite.Core.Language
                 new Phrase("api_auth_incorrect_password", "Incorrect password for account: '{0}'"),
                 new Phrase("api_register_email_already_exists", "Current email: '{0}' already exists!"),
 
+                //Auth --mesagebox phrases
+                new Phrase("Auth_MessageBox_Title_Error", "Authorize Error"),
 
                 //Auth --windows phrases
                 new Phrase("Auth_LoginComponent_Title", "AUTHORIZE"),
+                new Phrase("Auth_LoginComponent_RememberMeCheckBox", "Remember Me"),
                 new Phrase("Auth_LoginComponent_LoginButton", "Login"),
                 new Phrase("Auth_LoginComponent_RegisterButton", "Create new account"),
                 new Phrase("Auth_LoginComponent_RecoveryPasswordLink", "Reset password"),
@@ -127,8 +130,12 @@ namespace Ignite.Core.Language
                 new Phrase("api_auth_incorrect_password", "Неверный пароль для аккаунта: '{0}'"),
                 new Phrase("api_register_email_already_exists", "Указанный email: '{0}' уже существует!"),
 
+                //Auth --mesagebox phrases
+                new Phrase("Auth_MessageBox_Title_Error", "Ошибка Авторизации"),
+
                 //Auth --windows phrases
                 new Phrase("Auth_LoginComponent_Title", "АВТОРИЗАЦИЯ"),
+                new Phrase("Auth_LoginComponent_RememberMeCheckBox", "Запомнить меня"),
                 new Phrase("Auth_LoginComponent_LoginButton", "Войти"),
                 new Phrase("Auth_LoginComponent_RegisterButton", "Создать учетную запись"),
                 new Phrase("Auth_LoginComponent_RecoveryPasswordLink", "Восстановление доступа"),

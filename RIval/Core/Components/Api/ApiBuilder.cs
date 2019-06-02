@@ -1,39 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Newtonsoft.Json;
+using System.Net.Http;
 
 namespace Ignite.Core.Components.Api
 {
+    public enum RequestMethod
+    {
+        GET,
+        POST
+    }
     public class ApiBuilder<T>
     {
         private List<T> Response { get; set; }
+        private HttpClient Http { get; set; }
 
         public ApiBuilder()
         {
             Response = new List<T>();
+            Http = new HttpClient();
         }
 
         public async Task<string> GetAsync(string uri)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-            request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-
-            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-            using (Stream stream = response.GetResponseStream())
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                return await reader.ReadToEndAsync();
-            }
+            return await Http.GetAsync(uri).GetAwaiter().GetResult().Content.ReadAsStringAsync();
         }
 
-        public ApiBuilder<T> CreateRequest(string uri)
+        public async Task<string> PostAsync(string uri, Dictionary<string, string> body)
+        {
+            var content = new FormUrlEncodedContent(body);
+
+            return await Http.PostAsync(uri, content).GetAwaiter().GetResult().Content.ReadAsStringAsync();
+        }
+
+        public ApiBuilder<T> CreateRequest(string uri, RequestMethod method = RequestMethod.GET, Dictionary<string, string> body = null)
         {
             if (uri == "")
             {
@@ -44,14 +49,33 @@ namespace Ignite.Core.Components.Api
 
             try
             {
-                var result = GetAsync(uri);
-                result.Wait();
+                Task<string> awaiter;
 
-                var response = JsonConvert.DeserializeObject<T[]>(result.GetAwaiter().GetResult());
-
-                foreach (var item in response)
+                if (method == RequestMethod.GET)
                 {
-                    Response.Add(item);
+                    awaiter = GetAsync(uri);
+                    awaiter.Wait();
+                }
+                else
+                {
+                    awaiter = PostAsync(uri, body);
+                    awaiter.Wait();
+                }
+
+                try
+                {
+                    var response = JsonConvert.DeserializeObject<T[]>(awaiter.GetAwaiter().GetResult());
+
+                    foreach (var item in response)
+                    {
+                        Response.Add(item);
+                    }
+                }
+                catch(Exception)
+                {
+                    var response = JsonConvert.DeserializeObject<T>(awaiter.GetAwaiter().GetResult());
+
+                    Response.Add(response);
                 }
             }
             catch(Exception ex)
@@ -59,10 +83,7 @@ namespace Ignite.Core.Components.Api
                 ex.Report("UNKNOWN WEB ERROR");
                 ex.ToLog(LogLevel.Error);
 
-                MessageBox.Show("Не удалось установить соединение с сервером. Это может привести к проблемам проверки " +
-                    "игрового клиента, а так же вы больше не будете вкурсе всех свежих новостей о проекте Ignite.\n\n" +
-                    "Рекомендуем вам как можно скорее связаться с Администрацией, для решения ваших проблем, если у вас нет " +
-                    "проблем с соединением на стороне вашего провайдера.\n\nС Уважением Ignite Dev Team", "Ошибка соединения",
+                MessageBox.Show("Server connection error. Please try again later", "Connection Error",
                     MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }

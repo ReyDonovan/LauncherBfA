@@ -32,6 +32,8 @@ namespace Ignite.Design.Controls
 
         public GameComponent(string server, int id)
         {
+            InitializeComponent();
+
             Logger.Instance.WriteLine($"Initialize the game component with parent: {server}. In: {DateTime.Now.ToFileTimeUtc()}", LogLevel.Debug);
 
             BootSettings();
@@ -103,8 +105,6 @@ namespace Ignite.Design.Controls
                 }
 
             }).GetAwaiter();
-
-            InitializeComponent();
 
             ApplicationEnv.Instance.ApplyStatus(ApplicationStatus.Normal);
         }

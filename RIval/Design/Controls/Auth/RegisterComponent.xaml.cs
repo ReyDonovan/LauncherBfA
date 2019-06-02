@@ -1,18 +1,9 @@
 ﻿using Ignite.Core;
+using Ignite.Core.Components.Auth;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Ignite.Design.Controls.Auth
 {
@@ -66,6 +57,9 @@ namespace Ignite.Design.Controls.Auth
                 QuestionAnswer.IsEnabled = false;
                 CreateAccount.IsEnabled = false;
                 AlreadyExistsAccountButton.IsEnabled = false;
+
+                CurtainElement.Visibility = Visibility.Visible;
+                Preloader.Visibility = Visibility.Visible;
             }
             else
             {
@@ -75,12 +69,10 @@ namespace Ignite.Design.Controls.Auth
                 QuestionAnswer.IsEnabled = true;
                 CreateAccount.IsEnabled = true;
                 AlreadyExistsAccountButton.IsEnabled = true;
-            }
 
-            WindowMgr.Instance.Run<AuthorizeWindow>((authWindow) =>
-            {
-                authWindow.SetPreloader(enabled);
-            });
+                CurtainElement.Visibility = Visibility.Hidden;
+                Preloader.Visibility = Visibility.Hidden;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -94,6 +86,43 @@ namespace Ignite.Design.Controls.Auth
         private void CreateAccount_Click(object sender, RoutedEventArgs e)
         {
             SetLoadingState(true);
+
+            if(QuestionsSelector.SelectedIndex == -1)
+            {
+                MessageBox.Show("Надо выбрать вопрос", "", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                QuestionAnswer.Text = "";
+                SetLoadingState(false);
+            }
+            else
+            {
+                var result = RegisterFacade.Instance.Attempt(EmailBox.Text, PasswordBox.Password, QuestionsSelector.SelectedIndex.ToString(), QuestionAnswer.Text);
+                if(result.Code == Core.Components.Auth.Types.AuthResultEnum.Ok)
+                {
+                    result = AuthFacade.Instance.Attempt(EmailBox.Text, PasswordBox.Password);
+                    if(result.Code == Core.Components.Auth.Types.AuthResultEnum.Ok)
+                    {
+                        AuthFacade.Instance.CreateUser();
+
+                        WindowMgr.Instance.Run<AuthorizeWindow>((auth) =>
+                        {
+                            auth.OpenGates();
+                        });
+                    }
+                    else
+                    {
+                        MessageBox.Show(result.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                        SetLoadingState(false);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(result.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                    SetLoadingState(false);
+                }
+            }
         }
     }
 }
