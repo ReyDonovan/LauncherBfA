@@ -42,9 +42,17 @@ namespace Ignite.Core.Components.Auth
         {
             await Task.Run(() => { Auth.Save(); });
         }
+        public async void SaveUserAsync(string token)
+        {
+            await Task.Run(() => { Auth.Save(token); });
+        }
         public void SaveUser()
         {
             Auth.Save();
+        }
+        public void SaveUser(string token)
+        {
+            Auth.Save(token);
         }
 
         public T GetFacadeAccessor<T>() where T : Facade

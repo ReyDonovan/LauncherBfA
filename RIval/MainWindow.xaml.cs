@@ -49,7 +49,7 @@ namespace Ignite
 
         public void AppendUser(string user)
         {
-            UserProfileButton.Text = user;
+            UserProfileButton.Text = user.ToUpper();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

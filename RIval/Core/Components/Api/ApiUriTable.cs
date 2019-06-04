@@ -8,11 +8,11 @@ namespace Ignite.Core.Components.Api
 {
     public class ApiUriTable
     {
-        public const string API_WWW = "http://crux.intellixservice.ru";
+        public const string API_WWW = "http://wowignite.ru";
 
         private Dictionary<string, string> UrisTable = new Dictionary<string, string>()
         {
-            ["api-news-get"] = "/api/articles/getall",
+            ["api-news-get"] = "/api/articles",
             ["api-update-check"] = "/api/update/check",
             ["api-update-get"] = "/api/update/get",
             ["api-update-util"] = "/api/update/utility",
@@ -22,8 +22,9 @@ namespace Ignite.Core.Components.Api
             ["acp-link"] = "/ru-ru/account/management",
             ["forum-link"] = "/ru-ru/forums",
             ["bug-report-link"] = "/community/bugs/report",
-            ["api-user-login"] = "/api/user/login",
-            ["api-user-register"] = "/api/user/register",
+            ["api-user-login"] = "/api/auth/login",
+            ["api-user-register"] = "/api/auth/signup",
+            ["api-user-getdata"] = "/api/auth/user",
         };
 
         public string GetUri(string key)

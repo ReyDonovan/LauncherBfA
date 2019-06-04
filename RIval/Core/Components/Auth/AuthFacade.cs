@@ -25,8 +25,7 @@ namespace Ignite.Core.Components.Auth
                 {
                     return ApiFacade.Instance.Builder<AuthResult>()
                         .CreateRequest(
-                            //ApiFacade.Instance.GetUri("api-user-login"),
-                            "https://bfa.wowlegions.ru/api/login",
+                            ApiFacade.Instance.GetUri("api-user-login"),
                             RequestMethod.POST, new Dictionary<string, string>()
                             {
                                 ["email"] = user,
@@ -49,24 +48,7 @@ namespace Ignite.Core.Components.Auth
             {
                 try
                 {
-                    if (GetToken() == null) throw new ArgumentNullException();
-
-                    var result = ApiFacade.Instance.Builder<AuthResult>()
-                    .CreateRequest(
-                        //ApiFacade.Instance.GetUri("api-user-remember-token"),
-                        "https://bfa.wowlegions.ru/oauth/login",
-                        RequestMethod.POST,
-                        new Dictionary<string, string>()
-                        {
-                            ["token"] = GetToken()
-                        })
-                    .GetResponse()
-                    .First();
-
-                    if (result.Code == AuthResultEnum.Ok)
-                    {
-                        CreateUser();
-                    }
+                    CreateUser();
                 }
                 catch(ArgumentNullException)
                 {
@@ -76,7 +58,7 @@ namespace Ignite.Core.Components.Auth
                 }
                 catch(Exception ex)
                 {
-                    LogAsync(this, $"Attempted login by token remember  with error: {ex.Message}. Data: {GetToken()}", LogLevel.Error);
+                    LogAsync(this, $"Attempted login by token remember with error: {ex.Message}. Data: {GetToken()}", LogLevel.Error);
 
                     CurrentUser = null;
                 }
@@ -89,26 +71,29 @@ namespace Ignite.Core.Components.Auth
         {
             try
             {
-                CurrentUser = ApiFacade.Instance.Builder<User>().CreateRequest("https://bfa.wowlegions.ru/api/user").GetResponse().First();
+                CurrentUser = ApiFacade.Instance
+                    .Builder<User>()
+                    .AddHeader("Authorization", $"Bearer {GetToken()}")
+                    .CreateRequest(ApiFacade.Instance.GetUri("api-user-getdata"))
+                    .GetResponse()
+                    .First();
             }
             catch(Exception ex)
             {
                 LogAsync(this, $"Failed after getting user data from api: {ex.Message}. Data: {GetToken()}", LogLevel.Error);
             }
-
-            Save();
         }
         
         private string GetToken()
         {
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Ignite");
+            string path = "cache";
 
             if (File.Exists(path + $"\\crd.sflow"))
             {
                 string result = File.ReadAllText(path + $"\\crd.sflow");
                 if(result != null || result != "" || result != string.Empty)
                 {
-                    return User.GetToken(result);
+                    return result;
                 }
             }
             else
@@ -129,7 +114,7 @@ namespace Ignite.Core.Components.Auth
 
         public void Save()
         {
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Ignite");
+            string path = "cache";
 
             if (!Directory.Exists(path))
             {
@@ -141,7 +126,16 @@ namespace Ignite.Core.Components.Auth
                 File.Create(path + $"\\crd.sflow");
             }
 
-            File.WriteAllText(path + $"\\crd.sflow", CurrentUser.SaveToken());
+            File.WriteAllText(path + $"\\crd.sflow", CurrentUser.Token);
+        }
+        public void Save(string token)
+        {
+            CurrentUser = new User
+            {
+                Token = token
+            };
+
+            Save();
         }
 
         public override T Do<T>(params object[] data)
@@ -170,11 +164,11 @@ namespace Ignite.Core.Components.Auth
                     var result = AttemptToken();
                     result.Wait();
 
-                    return (T)(object)result.GetAwaiter().GetResult();
+                    return (T)(object)CurrentUser;
                 }
                 catch (Exception)
                 {
-                    return (T)(object)CurrentUser;
+                    return (T)(object)null;
                 }
             }
             else
@@ -183,12 +177,10 @@ namespace Ignite.Core.Components.Auth
 
         public async override Task<T> DoAsync<T>(params object[] data)
         {
-            if (data.Count() <= 0) throw new ArgumentNullException();
-            var data_str = data.Reinterpret<string>();
-
             if (typeof(T) == typeof(AuthResult))
             {
                 if (data.Count() < 2) throw new InvalidDataException();
+                var data_str = data.Reinterpret<string>();
 
                 try
                 {
@@ -201,8 +193,6 @@ namespace Ignite.Core.Components.Auth
             }
             else if (typeof(T) == typeof(User))
             {
-                if (data.Count() < 1) throw new InvalidDataException();
-
                 try
                 {
                     return (T)(object)await AttemptToken();

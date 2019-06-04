@@ -45,11 +45,12 @@ namespace Ignite.Core.Components.Auth
                 try
                 {
                     return ApiFacade.Instance.Builder<AuthResult>()
-                        .CreateRequest("https://bfa.wowlegions.ru/api/signup", RequestMethod.POST, new Dictionary<string, string>()
+                        .CreateRequest(ApiFacade.Instance.GetUri("api-user-register"), RequestMethod.POST, new Dictionary<string, string>()
                         {
                             ["name"] = user.Split('@')[0],
                             ["email"] = user,
                             ["password"] = password,
+                            ["password_confirmation"] = password,
                             ["question"] = question,
                             ["answer"] = answer,
                             ["receive"] = "no",

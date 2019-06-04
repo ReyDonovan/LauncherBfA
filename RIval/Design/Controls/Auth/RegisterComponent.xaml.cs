@@ -97,6 +97,7 @@ namespace Ignite.Design.Controls.Auth
                     result = await AuthMgr.Instance.LoginAsync(EmailBox.Text, PasswordBox.Password);
                     if(result.Code == Core.Components.Auth.Types.AuthResultEnum.Ok)
                     {
+                        AuthMgr.Instance.SaveUser(result.Token);
                         await AuthMgr.Instance.LoadUserAsync();
 
                         WindowMgr.Instance.Run<AuthorizeWindow>((auth) =>

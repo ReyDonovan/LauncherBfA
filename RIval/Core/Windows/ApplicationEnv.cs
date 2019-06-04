@@ -1,9 +1,6 @@
 ﻿using IX.Composer.Architecture;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using Version = IX.Composer.Architecture.Version;
 
@@ -32,7 +29,7 @@ namespace Ignite.Core
 
         public ApplicationEnv()
         {
-            AppVersion = new Version("1.2.251.189");
+            AppVersion = new Version("1.3.1.1867");
             CurrentHardware = GetCoreComponent<Hardware>();
             Status = ApplicationStatus.Loading;
 

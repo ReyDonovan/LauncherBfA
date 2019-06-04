@@ -80,6 +80,8 @@ namespace Ignite.Design.Controls.Auth
 
             if (result.Code == Core.Components.Auth.Types.AuthResultEnum.Ok)
             {
+                AuthMgr.Instance.SaveUser(result.Token);
+
                 if (RememberCheckBox.IsChecked == true)
                     await AuthMgr.Instance.LoadUserAsync();
 
@@ -90,12 +92,11 @@ namespace Ignite.Design.Controls.Auth
             }
             else
             {
-                if(result.Message != "api_server_error")
-                    MessageBox.Show(
-                        LanguageMgr.Instance.ValueOf(result.Message), 
-                        LanguageMgr.Instance.ValueOf("Auth_MessageBox_Title_Error"), 
-                        MessageBoxButton.OK, 
-                        MessageBoxImage.Error);
+                MessageBox.Show(
+                    LanguageMgr.Instance.ValueOf(result.Message), 
+                    LanguageMgr.Instance.ValueOf("Auth_MessageBox_Title_Error"), 
+                    MessageBoxButton.OK, 
+                    MessageBoxImage.Error);
 
                 PasswordBox.Password = "";
 

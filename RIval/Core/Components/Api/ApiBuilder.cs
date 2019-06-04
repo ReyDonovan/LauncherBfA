@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using Newtonsoft.Json;
 using System.Net.Http;
+using Headers = System.Collections.Generic.Dictionary<string, string>;
+using System.Net.Http.Headers;
 
 namespace Ignite.Core.Components.Api
 {
@@ -19,15 +21,23 @@ namespace Ignite.Core.Components.Api
     {
         private List<T> Response { get; set; }
         private HttpClient Http { get; set; }
+        private Headers RequestHeaders { get; set; }
 
         public ApiBuilder()
         {
             Response = new List<T>();
             Http = new HttpClient();
+            RequestHeaders = new Headers();
         }
 
         public async Task<string> GetAsync(string uri)
         {
+            if(RequestHeaders.Count > 0)
+            {
+                foreach (var header in RequestHeaders)
+                    Http.DefaultRequestHeaders.Add(header.Key, header.Value);
+            }
+
             return await Http.GetAsync(uri).GetAwaiter().GetResult().Content.ReadAsStringAsync();
         }
 
@@ -64,7 +74,13 @@ namespace Ignite.Core.Components.Api
 
                 try
                 {
-                    Logger.Instance.WriteLine(awaiter.GetAwaiter().GetResult(), LogLevel.Warning);
+                    if(RequestHeaders.Count > 0)
+                    {
+                        foreach (var header in RequestHeaders)
+                            Http.DefaultRequestHeaders.Remove(header.Key);
+
+                        RequestHeaders.Clear();
+                    }
 
                     var response = JsonConvert.DeserializeObject<T[]>(awaiter.GetAwaiter().GetResult());
 
@@ -84,10 +100,16 @@ namespace Ignite.Core.Components.Api
             {
                 //ex.Report("UNKNOWN WEB ERROR");
                 ex.ToLog(LogLevel.Error);
+            }
 
-                MessageBox.Show("Server connection error. Please try again later", "Connection Error",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
+            return this;
+        }
+
+        public ApiBuilder<T> AddHeader(string key, string val)
+        {
+            if(!RequestHeaders.ContainsKey(key))
+            {
+                RequestHeaders.Add(key, val);
             }
 
             return this;
