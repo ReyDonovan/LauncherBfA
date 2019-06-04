@@ -1,6 +1,7 @@
 ﻿using Ignite.Core;
 using Ignite.Core.Components.Auth;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -21,30 +22,15 @@ namespace Ignite.Design.Controls.Auth
 
             SetLoadingState(true);
 
-            if(AuthFacade.Instance.IsRemembered())
+            if(AuthMgr.Instance.LoadUser() != null)
             {
-                EmailBox.Text = AuthFacade.Instance.CurrentUser.Email;
-
-                var result = AuthFacade.Instance.AttemptToken();
-
-                SetLoadingState(false);
-
-                if (result.Code == Core.Components.Auth.Types.AuthResultEnum.Ok)
+                WindowMgr.Instance.Run<AuthorizeWindow>((auth) =>
                 {
-                    WindowMgr.Instance.Run<AuthorizeWindow>((auth) =>
-                    {
-                        auth.OpenGates();
-                    });
-                }
-                else
-                {
-                    MessageBox.Show(LanguageMgr.Instance.ValueOf(result.Message), LanguageMgr.Instance.ValueOf("Auth_MessageBox_Title_Error"), MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                    auth.OpenGates();
+                });
             }
-            else
-            {
-                SetLoadingState(false);
-            }
+
+            SetLoadingState(false);
         }
 
         private void Localize()
@@ -83,19 +69,19 @@ namespace Ignite.Design.Controls.Auth
             });
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             SetLoadingState(true);
 
             var email = EmailBox.Text;
             var password = PasswordBox.Password;
 
-            var result = AuthFacade.Instance.Attempt(email, password);
+            var result = await AuthMgr.Instance.LoginAsync(email, password);
 
             if (result.Code == Core.Components.Auth.Types.AuthResultEnum.Ok)
             {
-                if(RememberCheckBox.IsChecked == true)
-                    AuthFacade.Instance.CreateUser();
+                if (RememberCheckBox.IsChecked == true)
+                    await AuthMgr.Instance.LoadUserAsync();
 
                 WindowMgr.Instance.Run<AuthorizeWindow>((auth) =>
                 {
@@ -104,9 +90,13 @@ namespace Ignite.Design.Controls.Auth
             }
             else
             {
-                MessageBox.Show(result.Message, LanguageMgr.Instance.ValueOf("Auth_MessageBox_Title_Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+                if(result.Message != "api_server_error")
+                    MessageBox.Show(
+                        LanguageMgr.Instance.ValueOf(result.Message), 
+                        LanguageMgr.Instance.ValueOf("Auth_MessageBox_Title_Error"), 
+                        MessageBoxButton.OK, 
+                        MessageBoxImage.Error);
 
-                EmailBox.Text = "";
                 PasswordBox.Password = "";
 
                 SetLoadingState(false);

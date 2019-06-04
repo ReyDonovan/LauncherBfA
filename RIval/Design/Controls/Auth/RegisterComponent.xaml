@@ -6,6 +6,55 @@
              xmlns:local="clr-namespace:Ignite.Design.Controls.Auth"
              xmlns:gif="http://wpfanimatedgif.codeplex.com"
              mc:Ignorable="d" Width="338.964" Height="408.311">
+    <UserControl.Resources>
+        <Style x:Key="ComboBoxTest2" TargetType="{x:Type ComboBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton Grid.Column="2" Focusable="false" IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" >
+                                <ToggleButton.Template>
+                                    <ControlTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="8*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Border x:Name="Border"  Grid.ColumnSpan="2" Background="#FF151723" BorderBrush="#FF818181" BorderThickness="1" />
+                                            <Border Grid.Column="0" CornerRadius="5,0,0,5"  Margin="1"  Background="#FF151723"  BorderBrush="#FF818181" BorderThickness="0,0,1,0" />
+                                            <Path x:Name="Arrow" Grid.Column="1"  Fill="#FF818181" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+                                                <Setter TargetName="Border" Property="Background" Value="#FF151723" />
+                                            </Trigger>
+                                            <Trigger Property="ToggleButton.IsChecked" Value="true">
+                                                <Setter TargetName="Border" Property="Background" Value="#FF151723" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Margin="3"  />
+                            <TextBox x:Name="PART_EditableTextBox" Visibility="Hidden" IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                            <Popup Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True"  Focusable="False" PopupAnimation="Slide">
+                                <Grid  Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder" Background="#FF111427" Opacity="0.85" />
+                                    <ScrollViewer SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" CanVerticallyScroll="False"/>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    
+    <!-- Start control code -->
     <Grid Margin="0">
         <Image HorizontalAlignment="Left" Height="409" VerticalAlignment="Top" Width="339" Source="/Ignite;component/Resources/Images/Bg/bg.jpg" Stretch="UniformToFill"/>
         <TextBox x:Name="EmailBox" HorizontalAlignment="Left" Height="29" Margin="32,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" FontSize="16" Background="#FF151723" Opacity="0.85" Foreground="#FFEAE7E7" BorderBrush="#FF818181" SelectionBrush="White" Text="Enter EMail"/>
@@ -21,7 +70,7 @@
             </Image.ToolTip>
         </Image>
         <TextBox x:Name="QuestionAnswer" HorizontalAlignment="Left" Height="29" Margin="32,226,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" FontSize="16" Background="#FF151723" Opacity="0.85" Foreground="#FFEAE7E7" BorderBrush="#FF818181" SelectionBrush="White" Text="Enter Answer"/>
-        <ComboBox x:Name="QuestionsSelector" HorizontalAlignment="Left" Margin="32,189,0,0" VerticalAlignment="Top" Width="274" Height="29" Background="#FF151723" BorderBrush="#FF818181" Foreground="#FF178BEC" Opacity="0.85" FontSize="16"/>
+        <ComboBox x:Name="QuestionsSelector" Style="{StaticResource ComboBoxTest2}" HorizontalAlignment="Left" Margin="32,189,0,0" VerticalAlignment="Top" Width="274" Height="29" BorderBrush="#FF818181" Foreground="#FF178BEC" FontSize="16" ScrollViewer.CanContentScroll="False" UseLayoutRounding="True" Background="#FF151723" Opacity="0.85" OverridesDefaultStyle="True" ContextMenuClosing="QuestionsSelector_ContextMenuClosing"/>
         <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="32,152,0,0" VerticalAlignment="Top" Width="274" Height="29" Background="#FF151723" BorderBrush="#FF818181" Foreground="#FFEAE7E7" SelectionBrush="White" Opacity="0.85" FontSize="16" Password="password"/>
         <Rectangle x:Name="CurtainElement" HorizontalAlignment="Left" Height="408" Stroke="Black" VerticalAlignment="Top" Width="339" Opacity="0.9" Fill="Black" Visibility="Hidden"/>
         <Image x:Name="Preloader" gif:ImageBehavior.AnimatedSource="/Ignite;component/Resources/Loaders/loader.gif" HorizontalAlignment="Left" Height="35" Margin="156,190,0,0" VerticalAlignment="Top" Width="35" Stretch="Fill" Visibility="Hidden"/>

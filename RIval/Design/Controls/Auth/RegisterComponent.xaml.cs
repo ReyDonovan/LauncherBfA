@@ -24,11 +24,6 @@ namespace Ignite.Design.Controls.Auth
         {
             for(int i = 1; i <= 6; i++)
             {
-                if(i == 1)
-                {
-                    QuestionsSelector.Text = LanguageMgr.Instance.ValueOf($"Register_questions_{i}");
-                }
-
                 QuestionsSelector.Items.Add(LanguageMgr.Instance.ValueOf($"Register_questions_{i}"));
             }
         }
@@ -83,7 +78,7 @@ namespace Ignite.Design.Controls.Auth
             });
         }
 
-        private void CreateAccount_Click(object sender, RoutedEventArgs e)
+        private async void CreateAccount_Click(object sender, RoutedEventArgs e)
         {
             SetLoadingState(true);
 
@@ -96,13 +91,13 @@ namespace Ignite.Design.Controls.Auth
             }
             else
             {
-                var result = RegisterFacade.Instance.Attempt(EmailBox.Text, PasswordBox.Password, QuestionsSelector.SelectedIndex.ToString(), QuestionAnswer.Text);
+                var result = await AuthMgr.Instance.RegisterAsync(EmailBox.Text, PasswordBox.Password, QuestionsSelector.SelectedIndex.ToString(), QuestionAnswer.Text);
                 if(result.Code == Core.Components.Auth.Types.AuthResultEnum.Ok)
                 {
-                    result = AuthFacade.Instance.Attempt(EmailBox.Text, PasswordBox.Password);
+                    result = await AuthMgr.Instance.LoginAsync(EmailBox.Text, PasswordBox.Password);
                     if(result.Code == Core.Components.Auth.Types.AuthResultEnum.Ok)
                     {
-                        AuthFacade.Instance.CreateUser();
+                        await AuthMgr.Instance.LoadUserAsync();
 
                         WindowMgr.Instance.Run<AuthorizeWindow>((auth) =>
                         {
@@ -122,6 +117,15 @@ namespace Ignite.Design.Controls.Auth
 
                     SetLoadingState(false);
                 }
+            }
+        }
+
+        private void QuestionsSelector_ContextMenuClosing(object sender, ContextMenuEventArgs e)
+        {
+            var cb = (ComboBox)sender;
+            if(cb.SelectedIndex > -1)
+            {
+                cb.Text = cb.Text.Remove(20).Insert(cb.Text.Length, "...");
             }
         }
     }

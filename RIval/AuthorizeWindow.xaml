@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Ignite"
         xmlns:gif="http://wpfanimatedgif.codeplex.com" x:Class="Ignite.AuthorizeWindow"
         mc:Ignorable="d"
-        Title="AuthorizeWindow" Height="411.262" Width="340.629" WindowStyle="None" BorderThickness="1" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="AuthorizeWindow" Height="411.262" Width="340.629" WindowStyle="None" BorderThickness="1" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" IsManipulationEnabled="True">
     <Grid x:Name="Container">
 
         <Image x:Name="Preloader" gif:ImageBehavior.AnimatedSource="Resources/Loaders/loader.gif" HorizontalAlignment="Left" Height="35" Margin="156,181,0,0" VerticalAlignment="Top" Width="35" Stretch="Fill"/>

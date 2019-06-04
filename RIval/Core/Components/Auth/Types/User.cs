@@ -4,7 +4,7 @@ using IX.Spider;
 
 namespace Ignite.Core.Components.Auth.Types
 {
-    internal class User
+    public class User
     {
         public int Id { get; set; }
         public string UserCode { get; set; }
@@ -12,15 +12,13 @@ namespace Ignite.Core.Components.Auth.Types
         public string Email { get; set; }
         public string Token { get; set; }
 
-        public static User FromCrypto(string cryptoString)
+        public static string GetToken(string cryptoString)
         {
             SpiderSiph crypto = new SpiderSiph();
 
             try
             {
-                var result = crypto.Decrypt(cryptoString, ApplicationEnv.Instance.CurrentHardware.GetOS().GetOSNumber());
-
-                return JsonConvert.DeserializeObject<User>(result);
+                return crypto.Decrypt(cryptoString, ApplicationEnv.Instance.CurrentHardware.GetOS().GetOSNumber());
             }
             catch(Exception)
             {
@@ -28,13 +26,13 @@ namespace Ignite.Core.Components.Auth.Types
             }
         }
 
-        public string ToCrypto()
+        public string SaveToken()
         {
             SpiderSiph crypto = new SpiderSiph();
 
             try
             {
-                return crypto.Decrypt(JsonConvert.SerializeObject(this), ApplicationEnv.Instance.CurrentHardware.GetOS().GetOSNumber());
+                return crypto.Decrypt(Token, ApplicationEnv.Instance.CurrentHardware.GetOS().GetOSNumber());
             }
             catch (Exception)
             {

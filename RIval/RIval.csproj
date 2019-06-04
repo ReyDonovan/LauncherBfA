@@ -26,6 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,6 +37,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>111111.ico</ApplicationIcon>
@@ -88,6 +90,7 @@
       <DependentUpon>AuthorizeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\Components\Auth\AuthFacade.cs" />
+    <Compile Include="Core\Components\Auth\AuthMgr.cs" />
     <Compile Include="Core\Components\Auth\RegisterFacade.cs" />
     <Compile Include="Core\Components\Auth\Types\AuthResult.cs" />
     <Compile Include="Core\Components\Auth\Types\User.cs" />
@@ -103,12 +106,14 @@
     <Compile Include="Core\Components\Game\GameCfg.cs" />
     <Compile Include="Core\Components\Log\LogCfg.cs" />
     <Compile Include="Core\Components\News\NewsCfg.cs" />
+    <Compile Include="Core\Components\Support\Extensions\ObjectArrayEx.cs" />
     <Compile Include="Core\Components\Update\Types\UpdateAnnotation.cs" />
     <Compile Include="Core\Components\Update\UpdateApiHandler.cs" />
     <Compile Include="Core\Components\Update\UpdateFacade.cs" />
     <Compile Include="Core\Components\Update\UpdateParser.cs" />
-    <Compile Include="Core\Extensions\ByteArrayEx.cs" />
-    <Compile Include="Core\Extensions\StringEx.cs" />
+    <Compile Include="Core\Components\Support\Extensions\ByteArrayEx.cs" />
+    <Compile Include="Core\Components\Support\Extensions\StringEx.cs" />
+    <Compile Include="Core\Components\Support\Facades\Facade.cs" />
     <Compile Include="Core\Language\LangCfg.cs" />
     <Page Include="AuthorizeWindow.xaml">
       <SubType>Designer</SubType>
@@ -141,7 +146,7 @@
     <Compile Include="Core\Components\News\NewsApiHandler.cs" />
     <Compile Include="Core\Components\News\NewsCache.cs" />
     <Compile Include="Core\Components\News\NewsFacade.cs" />
-    <Compile Include="Core\Extensions\ExceptionEx.cs" />
+    <Compile Include="Core\Components\Support\Extensions\ExceptionEx.cs" />
     <Compile Include="Core\Language\Dictionaries.cs" />
     <Compile Include="Core\Language\LanguageFileMgr.cs" />
     <Compile Include="Core\Language\LanguageMgr.cs" />
@@ -163,7 +168,7 @@
     <Compile Include="Core\Settings\SettingsProvider.cs" />
     <Compile Include="Core\Windows\Contracts\IWindowDispatcher.cs" />
     <Compile Include="Core\Windows\ApplicationEnv.cs" />
-    <Compile Include="Core\Singleton\Singleton.cs" />
+    <Compile Include="Core\Components\Support\Singleton\Singleton.cs" />
     <Compile Include="Core\Windows\WindowMgr.cs" />
     <Compile Include="Design\Controls\Auth\LoginComponent.xaml.cs">
       <DependentUpon>LoginComponent.xaml</DependentUpon>

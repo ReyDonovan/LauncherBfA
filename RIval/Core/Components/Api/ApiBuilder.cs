@@ -64,6 +64,8 @@ namespace Ignite.Core.Components.Api
 
                 try
                 {
+                    Logger.Instance.WriteLine(awaiter.GetAwaiter().GetResult(), LogLevel.Warning);
+
                     var response = JsonConvert.DeserializeObject<T[]>(awaiter.GetAwaiter().GetResult());
 
                     foreach (var item in response)
@@ -80,7 +82,7 @@ namespace Ignite.Core.Components.Api
             }
             catch(Exception ex)
             {
-                ex.Report("UNKNOWN WEB ERROR");
+                //ex.Report("UNKNOWN WEB ERROR");
                 ex.ToLog(LogLevel.Error);
 
                 MessageBox.Show("Server connection error. Please try again later", "Connection Error",

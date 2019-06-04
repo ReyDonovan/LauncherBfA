@@ -2,18 +2,8 @@
 using Ignite.Core.Components.Auth;
 using Ignite.Design.Controls.Auth;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Ignite
 {
@@ -82,7 +72,7 @@ namespace Ignite
         {
             WindowMgr.Instance.Run<MainWindow>((mw) =>
             {
-                mw.AppendUser(AuthFacade.Instance.CurrentUser.UserName);
+                mw.AppendUser(AuthMgr.Instance.GetUser().UserName);
                 mw.Show();
             });
 

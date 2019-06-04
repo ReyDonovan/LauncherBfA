@@ -67,7 +67,8 @@ namespace Ignite.Core.Components.Configuration.Providers
             {
                 if(File.Exists(CONFIG_PATH + "\\" + $"{typeof(T).Name}.json"))
                 {
-                    strObj = CryptoProvider.Instance.Decrypt(File.ReadAllText(CONFIG_PATH + "\\" + $"{typeof(T).Name}.json"), m_CurrentHardware.GetOS().GetOSNumber());
+                    //strObj = CryptoProvider.Instance.Decrypt(File.ReadAllText(CONFIG_PATH + "\\" + $"{typeof(T).Name}.json"), m_CurrentHardware.GetOS().GetOSNumber());
+                    strObj = File.ReadAllText(CONFIG_PATH + "\\" + $"{typeof(T).Name}.json");
                 }
                 else
                 {
@@ -78,7 +79,8 @@ namespace Ignite.Core.Components.Configuration.Providers
             {
                 if (File.Exists(CONFIG_PATH + "\\" + $"{typeof(T).Name}.json"))
                 {
-                    strObj = CryptoProvider.Instance.Decrypt(File.ReadAllText(CONFIG_PATH + "\\" + DEFAULTS_PATH + "\\" + $"{typeof(T).Name}.json"), m_CurrentHardware.GetOS().GetOSNumber());
+                    strObj = File.ReadAllText(CONFIG_PATH + "\\" + DEFAULTS_PATH + "\\" + $"{typeof(T).Name}.json");
+                    //strObj = CryptoProvider.Instance.Decrypt(File.ReadAllText(CONFIG_PATH + "\\" + DEFAULTS_PATH + "\\" + $"{typeof(T).Name}.json"), m_CurrentHardware.GetOS().GetOSNumber());
                 }
                 else
                 {
@@ -122,7 +124,8 @@ namespace Ignite.Core.Components.Configuration.Providers
             }
 
 
-            File.WriteAllText(path, Crypto.CryptoProvider.Instance.Encrypt(JsonConvert.SerializeObject(data), m_CurrentHardware.GetOS().GetOSNumber()));
+            //File.WriteAllText(path, CryptoProvider.Instance.Encrypt(JsonConvert.SerializeObject(data), m_CurrentHardware.GetOS().GetOSNumber()));
+            File.WriteAllText(path, JsonConvert.SerializeObject(data));
         }
 
         private void MakeDirectories()

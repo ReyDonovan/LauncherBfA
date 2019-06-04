@@ -141,7 +141,7 @@ namespace Ignite.Core.Language
                 new Phrase("Auth_LoginComponent_RecoveryPasswordLink", "Восстановление доступа"),
                 new Phrase("Auth_PrivacyLink", "Политика конфиденциальности"),
                 new Phrase("Auth_RegisterComponent_EmailBoxHelpText", "Введите адрес эл. почты"),
-                new Phrase("Auth_RegisterComponent_QuestionsAnswerHelpText", "Введи ответ"),
+                new Phrase("Auth_RegisterComponent_QuestionsAnswerHelpText", "Введите ответ"),
                 new Phrase("Auth_RegisterComponent_CreateAccount", "Создать учетную запись"),
                 new Phrase("Auth_RegisterComponent_AlreadyExistsAccountButton", "У меня уже есть аккаунт"),
 
