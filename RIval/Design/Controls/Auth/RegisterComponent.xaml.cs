@@ -1,6 +1,7 @@
 ﻿using Ignite.Core;
 using Ignite.Core.Components.Auth;
 using System;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -35,6 +36,7 @@ namespace Ignite.Design.Controls.Auth
             QuestionAnswer.Text = LanguageMgr.Instance.ValueOf("Auth_RegisterComponent_QuestionsAnswerHelpText");
             CreateAccount.Content = LanguageMgr.Instance.ValueOf("Auth_RegisterComponent_CreateAccount");
             AlreadyExistsAccountButton.Content = LanguageMgr.Instance.ValueOf("Auth_RegisterComponent_AlreadyExistsAccountButton");
+            LoginBox.Text = LanguageMgr.Instance.ValueOf("Auth_RegisterComponent_LoginBoxHelpText");
         }
 
         private void CloseButton_MouseDown(object sender, MouseButtonEventArgs e)
@@ -78,24 +80,45 @@ namespace Ignite.Design.Controls.Auth
             });
         }
 
+        private void SetErrorBorder(Control element, string errorText)
+        {
+            element.BorderBrush = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 155, 45, 48));
+            if(element is TextBox)
+            {
+                ((TextBox)element).Text = errorText;
+            }
+        }
+        private void DropErrors()
+        {
+            var defbrush = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 129, 129, 129));
+            EmailBox.BorderBrush = defbrush;
+            LoginBox.BorderBrush = defbrush;
+            PasswordBox.BorderBrush = defbrush;
+            QuestionsSelector.BorderBrush = defbrush;
+            QuestionAnswer.BorderBrush = defbrush;
+
+            //Localize();
+        }
+
         private async void CreateAccount_Click(object sender, RoutedEventArgs e)
         {
             SetLoadingState(true);
 
+            DropErrors();
+
             if(QuestionsSelector.SelectedIndex == -1)
             {
-                MessageBox.Show("Надо выбрать вопрос", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                SetErrorBorder(QuestionAnswer, "Требуется ответ на вопрос");
 
-                QuestionAnswer.Text = "";
                 SetLoadingState(false);
             }
             else
             {
-                var result = await AuthMgr.Instance.RegisterAsync(EmailBox.Text, PasswordBox.Password, QuestionsSelector.SelectedIndex.ToString(), QuestionAnswer.Text);
-                if(result.Code == Core.Components.Auth.Types.AuthResultEnum.Ok)
+                var result = await AuthMgr.Instance.RegisterAsync(LoginBox.Text, EmailBox.Text, PasswordBox.Password, QuestionsSelector.SelectedIndex.ToString(), QuestionAnswer.Text);
+                if (result.Code == Core.Components.Auth.Types.AuthResultEnum.Ok)
                 {
                     result = await AuthMgr.Instance.LoginAsync(EmailBox.Text, PasswordBox.Password);
-                    if(result.Code == Core.Components.Auth.Types.AuthResultEnum.Ok)
+                    if (result.Code == Core.Components.Auth.Types.AuthResultEnum.Ok)
                     {
                         AuthMgr.Instance.SaveUser(result.Token);
                         await AuthMgr.Instance.LoadUserAsync();
@@ -107,14 +130,14 @@ namespace Ignite.Design.Controls.Auth
                     }
                     else
                     {
-                        MessageBox.Show(result.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show(LanguageMgr.Instance.ValueOf(result.Message), "", MessageBoxButton.OK, MessageBoxImage.Error);
 
                         SetLoadingState(false);
                     }
                 }
                 else
                 {
-                    MessageBox.Show(result.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(LanguageMgr.Instance.ValueOf(result.Message), "", MessageBoxButton.OK, MessageBoxImage.Error);
 
                     SetLoadingState(false);
                 }

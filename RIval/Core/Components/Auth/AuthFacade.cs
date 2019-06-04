@@ -67,6 +67,18 @@ namespace Ignite.Core.Components.Auth
             });
         }
 
+        public void Logout()
+        {
+            string path = "cache";
+
+            if (File.Exists(path + $"\\crd.sflow"))
+            {
+                File.Delete(path + $"\\crd.sflow");
+            }
+
+            ApplicationEnv.Instance.Restart();
+        }
+
         private void CreateUser()
         {
             try

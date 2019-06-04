@@ -28,9 +28,9 @@ namespace Ignite.Design.Controls
         {
             InitializeComponent();
 
-            NewsBg.Visibility = Visibility.Hidden;
-            Content.Visibility = Visibility.Hidden;
-            Title.Visibility = Visibility.Hidden;
+            NewsBg.Visibility = Visibility.Visible;
+            Content.Visibility = Visibility.Visible;
+            Title.Visibility = Visibility.Visible;
         }
 
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)
@@ -42,16 +42,9 @@ namespace Ignite.Design.Controls
 
         private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
-            NewsBg.Visibility = Visibility.Hidden;
-            Content.Visibility = Visibility.Hidden;
-            Title.Visibility = Visibility.Hidden;
-
-            /*
-            var ani = new ThicknessAnimation();
-            ani.By = new Thickness(0, 100, 0, 0);
-            ani.Duration = new Duration(TimeSpan.FromSeconds(0.1));
-            NewsBg.BeginAnimation(MarginProperty, ani);
-            */
+            NewsBg.Visibility = Visibility.Visible;
+            Content.Visibility = Visibility.Visible;
+            Title.Visibility = Visibility.Visible;
         }
 
         private void UserControl_MouseDown(object sender, MouseButtonEventArgs e)

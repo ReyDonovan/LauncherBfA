@@ -18,14 +18,19 @@ namespace Ignite.Core.Components.Auth
             return Auth.Do<AuthResult>(user, password);
         }
 
-        public async Task<AuthResult> RegisterAsync(string user, string password, string question, string answer)
+        public async Task<AuthResult> RegisterAsync(string name, string user, string password, string question, string answer)
         {
-            return await Signup.DoAsync<AuthResult>(user, password, question, answer);
+            return await Signup.DoAsync<AuthResult>(name, user, password, question, answer);
         }
 
-        public AuthResult Register(string user, string password, string question, string answer)
+        public AuthResult Register(string name, string user, string password, string question, string answer)
         {
-            return Signup.Do<AuthResult>(user, password, question, answer);
+            return Signup.Do<AuthResult>(name, user, password, question, answer);
+        }
+
+        public void Logout()
+        {
+            Auth.Logout();
         }
 
         public User LoadUser()

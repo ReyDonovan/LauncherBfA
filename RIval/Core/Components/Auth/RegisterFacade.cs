@@ -12,9 +12,9 @@ namespace Ignite.Core.Components.Auth
     {
         public override T Do<T>(params object[] @params)
         {
-            if (@params.Count() < 4) throw new InvalidDataException();
+            if (@params.Count() < 5) throw new InvalidDataException();
             var data = @params.Reinterpret<string>();
-            var result = Attempt(data[0], data[1], data[2], data[3]);
+            var result = Attempt(data[0], data[1], data[2], data[3], data[4]);
             result.Wait();
 
             return (T)(object)result.GetAwaiter().GetResult();
@@ -22,10 +22,10 @@ namespace Ignite.Core.Components.Auth
 
         public async override Task<T> DoAsync<T>(params object[] @params)
         {
-            if (@params.Count() < 4) throw new InvalidDataException();
+            if (@params.Count() < 5) throw new InvalidDataException();
             var data = @params.Reinterpret<string>();
 
-            return (T)(object)await AttemptAsync(data[0], data[1], data[2], data[3]);
+            return (T)(object)await AttemptAsync(data[0], data[1], data[2], data[3], data[4]);
         }
 
         public override Facade GetFacadeAccessor()
@@ -33,12 +33,12 @@ namespace Ignite.Core.Components.Auth
             return this;
         }
 
-        private async Task<AuthResult> AttemptAsync(string user, string password, string question, string answer)
+        private async Task<AuthResult> AttemptAsync(string name, string user, string password, string question, string answer)
         {
-            return await Attempt(user, password, question, answer);
+            return await Attempt(name, user, password, question, answer);
         }
 
-        private Task<AuthResult> Attempt(string user, string password, string question, string answer)
+        private Task<AuthResult> Attempt(string name, string user, string password, string question, string answer)
         {
             return Task.Run(() =>
             {
@@ -47,7 +47,7 @@ namespace Ignite.Core.Components.Auth
                     return ApiFacade.Instance.Builder<AuthResult>()
                         .CreateRequest(ApiFacade.Instance.GetUri("api-user-register"), RequestMethod.POST, new Dictionary<string, string>()
                         {
-                            ["name"] = user.Split('@')[0],
+                            ["name"] = name,
                             ["email"] = user,
                             ["password"] = password,
                             ["password_confirmation"] = password,

@@ -262,17 +262,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\loader_title.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\opa.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Icons\notify-icon.png" />
     <Resource Include="Resources\Icons\settings-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\pubg_product.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\logo_new.jpg" />
@@ -286,20 +277,6 @@
     <Resource Include="Resources\Icons\minimise-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\logo_basic.png" />
-    <Resource Include="Resources\Images\logo_basic_white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\logo_new_bg.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\logo_mini.png" />
-    <Resource Include="Resources\Images\logo_mini_white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\login_bg.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Icons\Contextmenu\feedback-icon.png" />
     <Resource Include="Resources\Icons\Contextmenu\manage-icon.png" />
     <Resource Include="Resources\Icons\Contextmenu\new-icon.png" />
@@ -308,17 +285,8 @@
     <Resource Include="Resources\Icons\Contextmenu\support-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icons\lang-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Icons\Languages\english-icon.png" />
     <Resource Include="Resources\Icons\Languages\russian-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\sierralogo_main.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\sierra_logo_mini.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\Window\window_close.png" />
@@ -339,9 +307,6 @@
     <Resource Include="Resources\Icons\HeaderMenu\support.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Wait\bg.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="111111.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -357,6 +322,8 @@
     <Resource Include="Resources\Images\Minis\bfa_min.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Images\Bg\bfa_bg_1.jpg" />
+    <Resource Include="Resources\Images\Minis\bez_wow.png" />
     <Resource Include="Resources\Images\Bg\bg.jpg" />
     <Resource Include="Resources\Images\Minis\logo_wowv2.png" />
     <Resource Include="Resources\Images\Minis\gavno_dva.jpg" />
@@ -364,11 +331,17 @@
     <Resource Include="Resources\Images\Bg\bfa.jpeg" />
     <Resource Include="Resources\Images\Bg\auth_bg.jpg" />
     <Resource Include="Image1.png" />
+    <Resource Include="Resources\Icons\icon-exit.png" />
+    <Resource Include="Resources\Icons\lang-icon.png" />
+    <Resource Include="Resources\Icons\profile-icon.png" />
+    <Resource Include="Resources\Icons\settings-hm-icon.png" />
+    <Resource Include="Resources\Icons\logout-icon.png" />
     <Content Include="Resources\Images\Bg\bfa_bg.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\Components\Configuration\Exceptions\" />
     <Folder Include="Core\Language\Langs\" />
+    <Folder Include="Resources\Wait\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

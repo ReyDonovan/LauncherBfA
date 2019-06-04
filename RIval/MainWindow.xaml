@@ -19,7 +19,8 @@
                 </Grid.ColumnDefinitions>
                 <Image x:Name="PartiallyBluredDoge"
                        Stretch="UniformToFill"
-                       Source="/Resources/Images/Bg/bfa.jpeg" Height="620" VerticalAlignment="Bottom" Grid.ColumnSpan="4" Margin="0,-36,0,0" />
+                       Source="Resources/Images/Bg/bfa_bg_1.jpg" Height="620" VerticalAlignment="Bottom" Grid.ColumnSpan="4" Margin="0,-35,0,-1">
+                </Image>
                 <controls:BlurryUserControl VerticalAlignment="Top"
                     HorizontalAlignment="Stretch"
                     Height="530"
@@ -30,13 +31,6 @@
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
                     </TextBlock.Foreground>
                 </TextBlock>
-                <TextBlock x:Name="MiscLabel" Grid.Column="2" HorizontalAlignment="Left" Margin="10,268,0,0" TextWrapping="Wrap" Text="ДОПОЛНИТЕЛЬНО" VerticalAlignment="Top">
-                    <TextBlock.Foreground>
-                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
-                    </TextBlock.Foreground>
-                </TextBlock>
-                <Button x:Name="SettingsButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="20" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,294,0,0" Grid.ColumnSpan="3" Click="Button_Click_2" IsEnabled="False" Content="НАСТРОЙКИ">
-                </Button>
                 <Button x:Name="Ataldazar_Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="16" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,92,0,0" Grid.ColumnSpan="3" Click="Ataldazar_Button_Click">
                     <Grid>
                         <Image Source="Resources/Images/Minis/bfa_min.png" Margin="-81,1,83,2"/>
@@ -48,12 +42,12 @@
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
                     </TextBlock.Foreground>
                 </TextBlock>
-                <TextBlock x:Name="LinksLabel" Grid.Column="2" HorizontalAlignment="Left" Margin="10,445,0,0" TextWrapping="Wrap" Text="ССЫЛКИ" VerticalAlignment="Top">
+                <TextBlock x:Name="LinksLabel" Grid.Column="2" HorizontalAlignment="Left" Margin="10,392,0,0" TextWrapping="Wrap" Text="ССЫЛКИ" VerticalAlignment="Top">
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
                     </TextBlock.Foreground>
                 </TextBlock>
-                <Button x:Name="Bugreport_Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="20" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,471,0,0" Grid.ColumnSpan="3" Click="Bugreport_Button_Click" Content="БАГТРЕКЕР">
+                <Button x:Name="Bugreport_Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="20" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,418,0,0" Grid.ColumnSpan="3" Click="Bugreport_Button_Click" Content="БАГТРЕКЕР">
                 </Button>
                 <Button x:Name="Motherlode_Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="16" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,151,0,0" Grid.ColumnSpan="3" Click="Motherlode_Button_Click">
                     <Grid>
@@ -61,29 +55,13 @@
                         <TextBlock Text="MOTHERLODE" Margin="6,14,-51,11" TextAlignment="Center" FontSize="20"/>
                     </Grid>
                 </Button>
-                <Button x:Name="LangButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="58" FontSize="20" Cursor="Hand" HorizontalContentAlignment="Left" Margin="-1,353,0,0" Grid.ColumnSpan="3" Content="ЯЗЫК" Click="LangButton_Click">
-                    <Button.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem x:Name="MenuItem_LangSwitch_English" Header="English" MouseDown="MenuItem_LangSwitch_English_MouseDown" Click="MenuItem_LangSwitch_English_Click">
-                                <MenuItem.Icon>
-                                    <Image Height="17" Width="17" Source="/Ignite;component/Resources/Icons/Languages/english-icon.png"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem x:Name="MenuItem_LangSwitch_Russian" Header="Russian" MouseDown="MenuItem_LangSwitch_Russian_MouseDown" Click="MenuItem_LangSwitch_Russian_Click">
-                                <MenuItem.Icon>
-                                    <Image Height="17" Width="17" Source="/Ignite;component/Resources/Icons/Languages/russian-icon.png"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                        </ContextMenu>
-                    </Button.ContextMenu>
-                </Button>
             </Grid>
 
             <controls:BlurryUserControl VerticalAlignment="Top"
                     HorizontalAlignment="Stretch"
                     Height="74"
                     BlurContainer="{Binding ElementName=InnerBlurContainer}"
-                    Magnification="0.75" Background="{x:Null}" BlurRadius="12" Margin="10,0,-1,0" BorderBrush="#FFB2AFAF" BorderThickness="0,0,0,1">
+                    Magnification="0.75" Background="{x:Null}" BlurRadius="56" Margin="10,0,-1,0" BorderBrush="#FF7C7C7C" BorderThickness="0,0,0,1" Opacity="0.995">
                 <Grid Margin="0,0,0,-2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="113*"/>
@@ -91,7 +69,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock
                             x:Name="MagazineButtonHeader"
-                            Margin="184,19,500,22"
+                            Margin="156,25,528,16"
                             TextAlignment="Center"
                             VerticalAlignment="Center"
                             Text="МАГАЗИН"
@@ -102,7 +80,7 @@
                     </TextBlock>
                     <TextBlock
                             x:Name="ACPButtonHeader"
-                            Margin="336,19,252,22"
+                            Margin="308,25,280,16"
                             TextAlignment="Center"
                             VerticalAlignment="Center"
                             Text="ЛИЧНЫЙ КАБИНЕТ"
@@ -111,20 +89,20 @@
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
                         </TextBlock.Foreground>
                     </TextBlock>
-                    <Image x:Name="CloseButton" HorizontalAlignment="Left" Height="25" Margin="130,8,0,0" VerticalAlignment="Top" Width="25" Source="/Ignite;component/Resources/Icons/Window/window_close.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Grid.Column="1" MouseDown="Image_MouseDown">
+                    <Image x:Name="CloseButton" HorizontalAlignment="Left" Height="15" Margin="144,4,0,0" VerticalAlignment="Top" Width="15" Source="/Ignite;component/Resources/Icons/Window/window_close.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Grid.Column="1" MouseDown="Image_MouseDown">
                         <Image.ToolTip>
                             <ToolTip x:Name="CloseTooltip" Content="Выйти из программы"/>
                         </Image.ToolTip>
                     </Image>
-                    <Image x:Name="MinimizeButton" HorizontalAlignment="Left" Height="20" Margin="105,10,0,0" VerticalAlignment="Top" Width="20" Source="/Ignite;component/Resources/Icons/Window/window_mns.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Grid.Column="1" MouseDown="MinimizeButton_MouseDown">
+                    <Image x:Name="MinimizeButton" HorizontalAlignment="Left" Height="15" Margin="124,4,0,0" VerticalAlignment="Top" Width="15" Source="/Ignite;component/Resources/Icons/Window/window_mns.png" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Grid.Column="1" MouseDown="MinimizeButton_MouseDown">
                         <Image.ToolTip>
                             <ToolTip x:Name="MinimizeTooltip" Content="Свернуть окно"/>
                         </Image.ToolTip>
                     </Image>
-                    <Image Source="Resources/Images/Minis/logo_wowv2.png" Margin="-6,-11,628,-3"/>
+                    <Image Source="Resources/Images/Minis/bez_wow.png" Margin="6,16,672,15"/>
                     <TextBlock
             x:Name="ForumButtonHeader"
-            Margin="584,19,133,22"
+            Margin="556,25,161,16"
             TextAlignment="Center"
             VerticalAlignment="Center"
             Text="ФОРУМ"
@@ -135,14 +113,74 @@
                     </TextBlock>
                     <TextBlock
                         x:Name="UserProfileButton"
-                        Margin="763,38,0,3"
+                        Margin="740,31,53,20"
                         VerticalAlignment="Center"
-                        Text=""
-                        FontSize="25" Height="34" MouseEnter="TextBlock_MouseEnter" MouseLeave="TextBlock_MouseLeave" MouseDown="ProductsButton_MouseDown" Grid.ColumnSpan="2" Background="#FF212121" Opacity="0.6" >
+                        Text="123"
+                        FontSize="18" Height="24" Grid.ColumnSpan="2" Padding="15,0,0,0" Cursor="Hand" >
                         <TextBlock.Foreground>
-                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                            <SolidColorBrush Color="Gainsboro"/>
                         </TextBlock.Foreground>
+                        <TextBlock.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="English" MouseDown="MenuItem_LangSwitch_English_MouseDown" Click="MenuItem_LangSwitch_English_Click">
+                                    <MenuItem.Icon>
+                                        <Image Height="17" Width="17" Source="/Ignite;component/Resources/Icons/Languages/english-icon.png"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="Russian" MouseDown="MenuItem_LangSwitch_Russian_MouseDown" Click="MenuItem_LangSwitch_Russian_Click">
+                                    <MenuItem.Icon>
+                                        <Image Height="17" Width="17" Source="/Ignite;component/Resources/Icons/Languages/russian-icon.png"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </TextBlock.ContextMenu>
                     </TextBlock>
+                    <Border BorderBrush="#FF939393" BorderThickness="1" Height="32" Margin="740,27,90,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Opacity="0.3" Cursor="Hand" Background="#FF1F1F1F"/>
+                    <Border BorderBrush="#FF939393" BorderThickness="0,1,1,1" HorizontalAlignment="Left" Height="32" Margin="109,27,0,0" VerticalAlignment="Top" Width="37" Opacity="0.3" Grid.Column="1" Background="#FF1F1F1F"/>
+                    <Image HorizontalAlignment="Left" Height="22" Margin="116,32,0,0" VerticalAlignment="Top" Width="22" Grid.Column="1" Source="Resources/Icons/lang-icon.png" Cursor="Hand">
+                        <Image.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="English" MouseDown="MenuItem_LangSwitch_English_MouseDown" Click="MenuItem_LangSwitch_English_Click">
+                                    <MenuItem.Icon>
+                                        <Image Height="17" Width="17" Source="/Ignite;component/Resources/Icons/Languages/english-icon.png"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="Russian" MouseDown="MenuItem_LangSwitch_Russian_MouseDown" Click="MenuItem_LangSwitch_Russian_Click">
+                                    <MenuItem.Icon>
+                                        <Image Height="17" Width="17" Source="/Ignite;component/Resources/Icons/Languages/russian-icon.png"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </Image.ContextMenu>
+                    </Image>
+                    <Ellipse Width="45" Height="45" Margin="703,21,83,9">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="Resources/Images/Minis/wow_logo.png" Stretch="UniformToFill"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <Border BorderBrush="#FF939393" BorderThickness="0,1,1,1" HorizontalAlignment="Left" Height="32" Margin="72,27,0,0" VerticalAlignment="Top" Width="37" Opacity="0.3" Grid.Column="1" Background="#FF1F1F1F"/>
+                    <Image x:Name="SettingsButtons" HorizontalAlignment="Left" Height="22" Margin="80,32,0,0" VerticalAlignment="Top" Width="22" Grid.Column="1" Source="Resources/Icons/settings-icon.png" Cursor="Hand" MouseDown="SettingsButtons_MouseDown">
+                        <Image.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Профиль">
+                                    <MenuItem.Icon>
+                                        <Image Height="17" Width="17" Source="Resources/Icons/profile-icon.png"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="Параметры">
+                                    <MenuItem.Icon>
+                                        <Image Height="17" Width="17" Source="Resources/Icons/settings-hm-icon.png"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <Separator></Separator>
+                                <MenuItem Header="Сменить пользователя" Click="MenuItem_Click">
+                                    <MenuItem.Icon>
+                                        <Image Height="17" Width="17" Source="Resources/Icons/logout-icon.png"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </Image.ContextMenu>
+                    </Image>
                 </Grid>
             </controls:BlurryUserControl>
         </Grid>

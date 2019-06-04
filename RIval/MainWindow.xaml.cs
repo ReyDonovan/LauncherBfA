@@ -1,6 +1,7 @@
 ﻿using Ignite.Core;
 using Ignite.Core.Components;
 using Ignite.Core.Components.Api;
+using Ignite.Core.Components.Auth;
 using Ignite.Core.Components.Update;
 using Ignite.Design.Controls;
 using Ignite.Design.Graphics;
@@ -81,7 +82,7 @@ namespace Ignite
         }
         private void TextBlock_MouseLeave(object sender, MouseEventArgs e)
         {
-            EffectManager.Instance.ChangeTextBlockColor((TextBlock)sender, Colors.Gray);
+            EffectManager.Instance.ChangeTextBlockColor((TextBlock)sender, Color.FromRgb(232, 228, 228));
         }
 
         private void Ataldazar_Button_Click(object sender, RoutedEventArgs e)
@@ -131,7 +132,6 @@ namespace Ignite
         }
         private void DropAll()
         {
-            SettingsButton.Effect = null;
             Ataldazar_Button.Effect = null;
             Motherlode_Button.Effect = null;
 
@@ -140,21 +140,21 @@ namespace Ignite
             MagazineButtonHeader.MouseLeave -= TextBlock_MouseLeave;
             MagazineButtonHeader.MouseEnter += TextBlock_MouseEnter;
             MagazineButtonHeader.MouseLeave += TextBlock_MouseLeave;
-            MagazineButtonHeader.Foreground = new SolidColorBrush(Colors.Gray);
+            MagazineButtonHeader.Foreground = new SolidColorBrush(Color.FromRgb(232, 228, 228));
 
             ACPButtonHeader.Effect = null;
             ACPButtonHeader.MouseEnter -= TextBlock_MouseEnter;
             ACPButtonHeader.MouseLeave -= TextBlock_MouseLeave;
             ACPButtonHeader.MouseEnter += TextBlock_MouseEnter;
             ACPButtonHeader.MouseLeave += TextBlock_MouseLeave;
-            ACPButtonHeader.Foreground = new SolidColorBrush(Colors.Gray);
+            ACPButtonHeader.Foreground = new SolidColorBrush(Color.FromRgb(232, 228, 228));
 
             ForumButtonHeader.Effect = null;
             ForumButtonHeader.MouseEnter -= TextBlock_MouseEnter;
             ForumButtonHeader.MouseLeave -= TextBlock_MouseLeave;
             ForumButtonHeader.MouseEnter += TextBlock_MouseEnter;
             ForumButtonHeader.MouseLeave += TextBlock_MouseLeave;
-            ForumButtonHeader.Foreground = new SolidColorBrush(Colors.Gray);
+            ForumButtonHeader.Foreground = new SolidColorBrush(Color.FromRgb(232, 228, 228));
         }
 
         private void ProductsButton_MouseDown(object sender, MouseButtonEventArgs e)
@@ -241,13 +241,11 @@ namespace Ignite
             {
                 Ataldazar_Button.IsEnabled = true;
                 Motherlode_Button.IsEnabled = true;
-                SettingsButton.IsEnabled = true;
             }
             else
             {
                 Ataldazar_Button.IsEnabled = false;
                 Motherlode_Button.IsEnabled = false;
-                SettingsButton.IsEnabled = false;
             }
         }
 
@@ -279,11 +277,8 @@ namespace Ignite
             ACPButtonHeader.Text      = langMgr.ValueOf(ACPButtonHeader.Name);
             ForumButtonHeader.Text    = langMgr.ValueOf(ForumButtonHeader.Name);
             ServersLabel.Text         = langMgr.ValueOf(ServersLabel.Name);
-            MiscLabel.Text            = langMgr.ValueOf(MiscLabel.Name);
             LinksLabel.Text           = langMgr.ValueOf(LinksLabel.Name);
-            SettingsButton.Content    = langMgr.ValueOf(SettingsButton.Name);
             Bugreport_Button.Content  = langMgr.ValueOf(Bugreport_Button.Name);
-            LangButton.Content        = langMgr.ValueOf(LangButton.Name);
         }
 
         private void MenuItem_LangSwitch_English_MouseDown(object sender, MouseButtonEventArgs e)
@@ -306,9 +301,14 @@ namespace Ignite
             LanguageMgr.Instance.SetLang(Languages.Russian);
         }
 
-        private void LangButton_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            LangButton.ContextMenu.IsOpen = !LangButton.ContextMenu.IsOpen;
+            AuthMgr.Instance.Logout();
+        }
+
+        private void SettingsButtons_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            SettingsButtons.ContextMenu.IsOpen = !SettingsButtons.ContextMenu.IsOpen;
         }
     }
 }

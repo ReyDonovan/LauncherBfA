@@ -3,22 +3,22 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Height="226.86" Width="328.232" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave" MouseDown="UserControl_MouseDown" BorderThickness="2" BorderBrush="Black" Cursor="Hand">
+             mc:Ignorable="d" Height="226.86" Width="328.232" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave" MouseDown="UserControl_MouseDown" BorderThickness="1" BorderBrush="#FF939393" Cursor="Hand">
     <Grid>
         <Grid Margin="0,0,41,33">
         </Grid>
         <Grid>
             <Image x:Name="PartiallyBluredDoge"
                        Stretch="UniformToFill"
-                       Source="/Resources/Images/login_bg.jpg" Height="225" VerticalAlignment="Bottom" />
-            <Rectangle x:Name="NewsBg" Fill="Black" HorizontalAlignment="Left" Height="92" Margin="0,133,-4,-2" Stroke="Black" VerticalAlignment="Top" Width="328" Opacity="0.7">
+                       Source="/Ignite;component/Resources/Icons/HeaderMenu/forum.png" Height="225" VerticalAlignment="Bottom" />
+            <Rectangle x:Name="NewsBg" Fill="Black" HorizontalAlignment="Left" Height="92" Margin="0,133,-4,-2" Stroke="Black" VerticalAlignment="Top" Width="327" Opacity="0.7">
             </Rectangle>
             <TextBlock x:Name="Title"
                            Margin="10,135,0,0"
                            VerticalAlignment="Top"
                            HorizontalAlignment="Left"
                            FontSize="16"
-                           TextWrapping="Wrap" FontWeight="Bold" Height="29" Width="259" Foreground="#FF1A5399" Text="Открытие ЗБТ" >
+                           TextWrapping="Wrap" FontWeight="Bold" Height="29" Width="259" Foreground="#FF288BDE" Text="Открытие ЗБТ" >
                 </TextBlock>
             <TextBlock x:Name="Content" HorizontalAlignment="Left" Margin="10,166,0,0" TextWrapping="Wrap" Text="Сегодня мы хотим объявить о долгожданном открытии ЗБТ проекта Sierra. Все подробности можно узнать нажав на новость!" VerticalAlignment="Top" Height="49" Width="257" FontSize="12"/>
             <Grid.ToolTip>
