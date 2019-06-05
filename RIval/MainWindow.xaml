@@ -19,7 +19,7 @@
                 </Grid.ColumnDefinitions>
                 <Image x:Name="PartiallyBluredDoge"
                        Stretch="UniformToFill"
-                       Source="Resources/Images/Bg/bfa_bg_1.jpg" Height="620" VerticalAlignment="Bottom" Grid.ColumnSpan="4" Margin="0,-35,0,-1">
+                       Source="Resources/Images/Bg/bfa_bg_1.jpg" Height="620" VerticalAlignment="Bottom" Grid.ColumnSpan="4" Margin="0,-32,0,-4">
                 </Image>
                 <controls:BlurryUserControl VerticalAlignment="Top"
                     HorizontalAlignment="Stretch"
@@ -135,9 +135,9 @@
                             </ContextMenu>
                         </TextBlock.ContextMenu>
                     </TextBlock>
-                    <Border BorderBrush="#FF939393" BorderThickness="1" Height="32" Margin="740,27,90,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Opacity="0.3" Cursor="Hand" Background="#FF1F1F1F"/>
-                    <Border BorderBrush="#FF939393" BorderThickness="0,1,1,1" HorizontalAlignment="Left" Height="32" Margin="109,27,0,0" VerticalAlignment="Top" Width="37" Opacity="0.3" Grid.Column="1" Background="#FF1F1F1F"/>
-                    <Image HorizontalAlignment="Left" Height="22" Margin="116,32,0,0" VerticalAlignment="Top" Width="22" Grid.Column="1" Source="Resources/Icons/lang-icon.png" Cursor="Hand">
+                    <Border x:Name="UsernameBlock" BorderBrush="#FF939393" BorderThickness="1" Height="32" Margin="740,27,90,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Opacity="0.3" Cursor="Hand" Background="#FF1F1F1F" MouseEnter="UsernameBlock_MouseEnter" MouseLeave="UsernameBlock_MouseLeave"/>
+                    <Border x:Name="LangBlock" BorderBrush="#FF939393" BorderThickness="0,1,1,1" HorizontalAlignment="Left" Height="32" Margin="109,27,0,0" VerticalAlignment="Top" Width="37" Opacity="0.3" Grid.Column="1" Background="#FF1F1F1F" MouseLeave="UsernameBlock_MouseLeave" MouseEnter="UsernameBlock_MouseEnter"/>
+                    <Image HorizontalAlignment="Left" Height="22" Margin="116,32,0,0" VerticalAlignment="Top" Width="22" Grid.Column="1" Source="Resources/Icons/lang-icon.png" Cursor="Hand" MouseEnter="Image_MouseEnter_1" MouseLeave="Image_MouseLeave_1">
                         <Image.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="English" MouseDown="MenuItem_LangSwitch_English_MouseDown" Click="MenuItem_LangSwitch_English_Click">
@@ -158,8 +158,8 @@
                             <ImageBrush ImageSource="Resources/Images/Minis/wow_logo.png" Stretch="UniformToFill"/>
                         </Ellipse.Fill>
                     </Ellipse>
-                    <Border BorderBrush="#FF939393" BorderThickness="0,1,1,1" HorizontalAlignment="Left" Height="32" Margin="72,27,0,0" VerticalAlignment="Top" Width="37" Opacity="0.3" Grid.Column="1" Background="#FF1F1F1F"/>
-                    <Image x:Name="SettingsButtons" HorizontalAlignment="Left" Height="22" Margin="80,32,0,0" VerticalAlignment="Top" Width="22" Grid.Column="1" Source="Resources/Icons/settings-icon.png" Cursor="Hand" MouseDown="SettingsButtons_MouseDown">
+                    <Border x:Name="SettingsBlock" BorderBrush="#FF939393" BorderThickness="0,1,1,1" HorizontalAlignment="Left" Height="32" Margin="72,27,0,0" VerticalAlignment="Top" Width="37" Opacity="0.3" Grid.Column="1" Background="#FF1F1F1F" MouseEnter="UsernameBlock_MouseEnter" MouseLeave="UsernameBlock_MouseLeave"/>
+                    <Image x:Name="SettingsButtons" HorizontalAlignment="Left" Height="22" Margin="79,32,0,0" VerticalAlignment="Top" Width="22" Grid.Column="1" Source="Resources/Icons/settings-icon.png" Cursor="Hand" MouseDown="SettingsButtons_MouseDown" MouseEnter="SettingsButtons_MouseEnter" MouseLeave="SettingsButtons_MouseLeave">
                         <Image.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Профиль">

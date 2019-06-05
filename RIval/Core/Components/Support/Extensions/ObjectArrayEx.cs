@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ignite.Core.Components.Message;
+using System;
 
 namespace Ignite.Core
 {
@@ -19,6 +20,8 @@ namespace Ignite.Core
             }
             catch(Exception)
             {
+                MessageBoxMgr.Instance.Show(MessageBoxType.Error, "#06-41123", "Error occured while casting objects. Please report this!", true, true);
+
                 return (T[])(object)null;
             }
         }

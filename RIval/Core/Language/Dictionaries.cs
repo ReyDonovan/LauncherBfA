@@ -55,8 +55,8 @@ namespace Ignite.Core.Language
                 //Api phrases
                 new Phrase("api_server_error", "Server not responding. Please try again later"),
                 new Phrase("api_auth_password_too_short", "Password must be at least 6 characters long"),
-                new Phrase("api_auth_incorrect_password", "Incorrect password for account: '{0}'"),
-                new Phrase("api_register_email_already_exists", "Current email: '{0}' already exists!"),
+                new Phrase("api_auth_incorrect_password", "Incorrect login or password. Please try again"),
+                new Phrase("api_register_email_already_exists", "Email already exists!"),
 
                 //Auth --mesagebox phrases
                 new Phrase("Auth_MessageBox_Title_Error", "Authorize Error"),
@@ -81,6 +81,15 @@ namespace Ignite.Core.Language
                 new Phrase("Register_questions_4", "The first computer game that you have successfully passed"),
                 new Phrase("Register_questions_5", "The name of your second pet"),
                 new Phrase("Register_questions_6", "Name of your favorite sports team or name of your favorite player"),
+
+                //MessageBox phrases
+                new Phrase("MessageBox_Title_Error", "Critical error"),
+                new Phrase("MessageBox_Title_Success", "Success"),
+                new Phrase("MessageBox_Title_Warning", "Warning"),
+
+                //MessageBox --buttons phrases
+                new Phrase("MessageBox_OkButton", "Continue"),
+                new Phrase("MessageBox_ReportButton", "Report"),
             });
 
             lng.SetLanguage(Languages.English);
@@ -128,8 +137,8 @@ namespace Ignite.Core.Language
                  //Api phrases
                 new Phrase("api_server_error", "Сервер не отвечает. Повторите свой запрос позже."),
                 new Phrase("api_auth_password_too_short", "Пароль должен состоять из не менее 6 символов."),
-                new Phrase("api_auth_incorrect_password", "Неверный пароль для аккаунта: '{0}'"),
-                new Phrase("api_register_email_already_exists", "Указанный email: '{0}' уже существует!"),
+                new Phrase("api_auth_incorrect_password", "Неверный логин или пароль. Повторите попытку"),
+                new Phrase("api_register_email_already_exists", "Указанный email уже существует!"),
 
                 //Auth --mesagebox phrases
                 new Phrase("Auth_MessageBox_Title_Error", "Ошибка Авторизации"),
@@ -154,6 +163,15 @@ namespace Ignite.Core.Language
                 new Phrase("Register_questions_4", "Первая компьютерная игра, которую вы успешно прошли"),
                 new Phrase("Register_questions_5", "Кличка вашего второго домашнего животного"),
                 new Phrase("Register_questions_6", "Название любимой спортивной команды или имя любимого игрока"),
+
+                //MessageBox phrases
+                new Phrase("MessageBox_Title_Error", "Критическая ошибка"),
+                new Phrase("MessageBox_Title_Success", "Успешное действие"),
+                new Phrase("MessageBox_Title_Warning", "Предупреждение"),
+
+                //MessageBox --buttons phrases
+                new Phrase("MessageBox_OkButton", "Продолжить"),
+                new Phrase("MessageBox_ReportButton", "Сообщить"),
             });
 
             lng.SetLanguage(Languages.Russian);

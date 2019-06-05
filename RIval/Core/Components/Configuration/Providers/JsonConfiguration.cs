@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ignite.Core.Components.Crypto;
 using IX.Composer.Architecture;
 using Newtonsoft.Json;
 
@@ -67,7 +63,6 @@ namespace Ignite.Core.Components.Configuration.Providers
             {
                 if(File.Exists(CONFIG_PATH + "\\" + $"{typeof(T).Name}.json"))
                 {
-                    //strObj = CryptoProvider.Instance.Decrypt(File.ReadAllText(CONFIG_PATH + "\\" + $"{typeof(T).Name}.json"), m_CurrentHardware.GetOS().GetOSNumber());
                     strObj = File.ReadAllText(CONFIG_PATH + "\\" + $"{typeof(T).Name}.json");
                 }
                 else
@@ -80,7 +75,6 @@ namespace Ignite.Core.Components.Configuration.Providers
                 if (File.Exists(CONFIG_PATH + "\\" + $"{typeof(T).Name}.json"))
                 {
                     strObj = File.ReadAllText(CONFIG_PATH + "\\" + DEFAULTS_PATH + "\\" + $"{typeof(T).Name}.json");
-                    //strObj = CryptoProvider.Instance.Decrypt(File.ReadAllText(CONFIG_PATH + "\\" + DEFAULTS_PATH + "\\" + $"{typeof(T).Name}.json"), m_CurrentHardware.GetOS().GetOSNumber());
                 }
                 else
                 {
@@ -101,7 +95,6 @@ namespace Ignite.Core.Components.Configuration.Providers
             }
             catch(Exception ex)
             {
-                ex.Report("SERIALIZE CRITICAL EX");
                 ex.ToLog(LogLevel.Error);
 
                 return (T)(object)null;

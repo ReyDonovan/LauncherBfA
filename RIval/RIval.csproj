@@ -105,6 +105,7 @@
     <Compile Include="Core\Components\FileSystem\Types\FileObjectsCollection.cs" />
     <Compile Include="Core\Components\Game\GameCfg.cs" />
     <Compile Include="Core\Components\Log\LogCfg.cs" />
+    <Compile Include="Core\Components\Message\MessageBoxMgr.cs" />
     <Compile Include="Core\Components\News\NewsCfg.cs" />
     <Compile Include="Core\Components\Support\Extensions\ObjectArrayEx.cs" />
     <Compile Include="Core\Components\Update\Types\UpdateAnnotation.cs" />
@@ -130,6 +131,10 @@
     <Page Include="Design\Controls\GameComponent.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Design\Controls\MessageBox\MessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Design\Controls\NewsComponent.xaml">
       <SubType>Designer</SubType>
@@ -179,6 +184,9 @@
     <Compile Include="Design\Controls\GameComponent.xaml.cs">
       <DependentUpon>GameComponent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Design\Controls\MessageBox\MessageBox.xaml.cs">
+      <DependentUpon>MessageBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Design\Controls\NewsComponent.xaml.cs">
       <DependentUpon>NewsComponent.xaml</DependentUpon>
     </Compile>
@@ -199,6 +207,12 @@
     </Compile>
     <Compile Include="Design\Controls\ProductsComponent.xaml.cs">
       <DependentUpon>ProductsComponent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\Settings\RealmSettings.xaml.cs">
+      <DependentUpon>RealmSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\Settings\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Design\Graphics\EffectManager.cs" />
     <Page Include="Design\Controls\NewsControl.xaml">
@@ -222,6 +236,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Design\Controls\ProductsComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\Settings\RealmSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\Settings\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -299,9 +321,6 @@
     <Resource Include="Resources\Icons\HeaderMenu\Eternal.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Loaders\loader.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Icons\HeaderMenu\forum.png" />
     <Resource Include="Resources\Icons\HeaderMenu\site.png" />
     <Resource Include="Resources\Icons\HeaderMenu\support.png" />
@@ -322,6 +341,7 @@
     <Resource Include="Resources\Images\Minis\bfa_min.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Loaders\loader.gif" />
     <Resource Include="Resources\Images\Bg\bfa_bg_1.jpg" />
     <Resource Include="Resources\Images\Minis\bez_wow.png" />
     <Resource Include="Resources\Images\Bg\bg.jpg" />
@@ -336,6 +356,10 @@
     <Resource Include="Resources\Icons\profile-icon.png" />
     <Resource Include="Resources\Icons\settings-hm-icon.png" />
     <Resource Include="Resources\Icons\logout-icon.png" />
+    <Content Include="Resources\Icons\loader.svg" />
+    <Resource Include="Resources\Icons\MessageBox\mb-icon-error.png" />
+    <Resource Include="Resources\Icons\MessageBox\mb-icon-warning.png" />
+    <Resource Include="Resources\Icons\MessageBox\mb-icon-success.png" />
     <Content Include="Resources\Images\Bg\bfa_bg.jpg" />
   </ItemGroup>
   <ItemGroup>

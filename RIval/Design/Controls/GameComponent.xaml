@@ -40,7 +40,7 @@
                         <DropShadowEffect/>
                     </TextBlock.Effect>
                 </TextBlock>
-                <Image x:Name="Preloader" gif:ImageBehavior.AnimatedSource="/Resources/Loaders/loader.gif" HorizontalAlignment="Left" Height="35" Margin="362,181,0,0" VerticalAlignment="Top" Width="35" Stretch="Fill"/>
+                <Image gif:ImageBehavior.AnimatedSource="/Ignite;component/Resources/Loaders/loader.gif" x:Name="Preloader" HorizontalAlignment="Left" Height="35" Margin="362,181,0,0" VerticalAlignment="Top" Width="35" Stretch="Fill"/>
             </Grid>
         </ScrollViewer>
         <TextBlock x:Name="StatusTextDesc" HorizontalAlignment="Left" Margin="26,475,0,0" TextWrapping="Wrap" Text="../Wtf/Config.wtf (243 KB/s) 14 %" VerticalAlignment="Top" FontSize="14">

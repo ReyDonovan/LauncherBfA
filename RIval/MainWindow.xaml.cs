@@ -308,7 +308,40 @@ namespace Ignite
 
         private void SettingsButtons_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            SettingsButtons.ContextMenu.IsOpen = !SettingsButtons.ContextMenu.IsOpen;
+            if(e.LeftButton == MouseButtonState.Pressed)
+                SettingsButtons.ContextMenu.IsOpen = !SettingsButtons.ContextMenu.IsOpen;
+        }
+
+        private void UsernameBlock_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Border ct = sender as Border;
+            ct.BorderBrush = new SolidColorBrush(Color.FromRgb(232, 228, 228));
+        }
+
+        private void UsernameBlock_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Border ct = sender as Border;
+            ct.BorderBrush = new SolidColorBrush(Color.FromRgb(147, 147, 147));
+        }
+
+        private void SettingsButtons_MouseEnter(object sender, MouseEventArgs e)
+        {
+            UsernameBlock_MouseEnter(SettingsBlock, null);
+        }
+
+        private void SettingsButtons_MouseLeave(object sender, MouseEventArgs e)
+        {
+            UsernameBlock_MouseLeave(SettingsBlock, null);
+        }
+
+        private void Image_MouseEnter_1(object sender, MouseEventArgs e)
+        {
+            UsernameBlock_MouseEnter(LangBlock, null);
+        }
+
+        private void Image_MouseLeave_1(object sender, MouseEventArgs e)
+        {
+            UsernameBlock_MouseLeave(LangBlock, null);
         }
     }
 }

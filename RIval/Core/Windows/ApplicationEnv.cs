@@ -68,6 +68,7 @@ namespace Ignite.Core
         public void Restart()
         {
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+
             try
             {
                 Application.Current.Shutdown();

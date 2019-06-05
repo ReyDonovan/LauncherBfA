@@ -1,0 +1,33 @@
+﻿<Window x:Class="Ignite.Design.Controls.MessageBox.MessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ignite.Design.Controls.MessageBox"
+        mc:Ignorable="d"
+        Title="MessageBox" Height="256" Width="460" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown_1">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF171723" Offset="0"/>
+            <GradientStop Color="#FF0E0E13" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid>
+        <Border BorderBrush="White" BorderThickness="1,0,1,1" HorizontalAlignment="Left" Height="208" Margin="0,48,0,0" VerticalAlignment="Top" Width="460" Background="#FF464646" Opacity="0.15">
+        </Border>
+        <Button x:Name="OkButton" Content="OK" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="40" FontSize="16" Cursor="Hand" HorizontalContentAlignment="Left" BorderBrush="White" Background="#33C5C5C5" Click="CheckButton_Click" Margin="282,205,0,0"/>
+
+        <RichTextBox x:Name="ErrorDescription" Margin="9,118,9,62" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" SelectionBrush="#FFB4B4B4" FontSize="16" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto"/>
+        <Border BorderBrush="#FFB4B4B4" BorderThickness="1" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="460" Background="#FF727272" Opacity="0.25">
+        </Border>
+        <Image x:Name="CloseButton" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="26" Source="/Ignite;component/Resources/Icons/Window/window_close.png" MouseDown="Image_MouseDown" Margin="428,7,0,0" Cursor="Hand">
+            <Image.ToolTip>
+                <ToolTip x:Name="CloseTooltip" Content="Выйти из программы"/>
+            </Image.ToolTip>
+        </Image>
+        <Label x:Name="Title" Content="Критическая ошибка" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16" FontWeight="Bold"/>
+        <Image x:Name="MessageBoxTypeIcon" HorizontalAlignment="Left" Height="64" Margin="8,49,0,0" VerticalAlignment="Top" Width="65" Source="/Ignite;component/Resources/Icons/MessageBox/mb-icon-warning.png"/>
+        <Label x:Name="ErrorCode" Content="ОШИБКА: #1156-785F" HorizontalAlignment="Left" Margin="70,65,0,0" VerticalAlignment="Top" Foreground="#FFFFFEFE" FontSize="16"/>
+        <Button x:Name="ReportButton" Content="СООБЩИТЬ" Height="Auto" Margin="101,205,189,11" Background="#FF288BDE" FontSize="16"/>
+    </Grid>
+</Window>

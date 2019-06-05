@@ -1,5 +1,6 @@
 ﻿using Ignite.Core.Components.FileSystem;
 using Ignite.Core.Components.FileSystem.Types;
+using Ignite.Core.Components.Message;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -98,14 +99,11 @@ namespace Ignite.Core.Components
                 {
                     if(drive.AvailableFreeSpace <= 64424509440)
                     {
-                        MessageBox.Show(
-                            string.Format("Not enough free disk space: {0}\nFree space: {1}\nNeeded: {2}\n\nIt is not possible to continue with the installation.", 
-                                drive.Name, 
-                                FormatByte(drive.AvailableFreeSpace), 
-                                FormatByte(ApplicationEnv.Instance.NeededGameBytes)), 
-                            LanguageMgr.Instance.ValueOf("Error_FreeSpaceUnavailable_Title"), 
-                            MessageBoxButton.OK, 
-                            MessageBoxImage.Error);
+                        MessageBoxMgr.Instance.Show(MessageBoxType.Error, "#14-5883",
+                            string.Format("Not enough free disk space: {0}\nFree space: {1}\nNeeded: {2}\nIt is not possible to continue with the installation.",
+                                drive.Name,
+                                FormatByte(drive.AvailableFreeSpace),
+                                FormatByte(ApplicationEnv.Instance.NeededGameBytes)));
 
                         return;
                     }

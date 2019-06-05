@@ -20,7 +20,7 @@ namespace Ignite.Core.Repositories
             Id = id;
             Title   = title;
             Description = description;
-            Link    = "http://crux.dev/public/news/" + Id;
+            Link    = "http://wowignite.ru/ru-ru/news/" + Id;
             Image = image;
         }
 

@@ -1,5 +1,6 @@
 ﻿using Ignite.Core;
 using Ignite.Core.Components.Auth;
+using Ignite.Core.Components.Message;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -92,11 +93,7 @@ namespace Ignite.Design.Controls.Auth
             }
             else
             {
-                MessageBox.Show(
-                    LanguageMgr.Instance.ValueOf(result.Message), 
-                    LanguageMgr.Instance.ValueOf("Auth_MessageBox_Title_Error"), 
-                    MessageBoxButton.OK, 
-                    MessageBoxImage.Error);
+                MessageBoxMgr.Instance.Show(MessageBoxType.Error, "#18-754", LanguageMgr.Instance.ValueOf(result.Message));
 
                 PasswordBox.Password = "";
 

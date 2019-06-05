@@ -155,7 +155,7 @@ namespace Ignite.Core
             }
 
             Exception ex = new Exception($"Window '{nameof(T)}' not founded in hosted windows.");
-            ex.ToLog(Components.LogLevel.Error);
+            ex.ToLog(LogLevel.Error);
 
             throw ex;
         }

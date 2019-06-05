@@ -250,6 +250,9 @@ namespace Ignite.Design.Controls
                     FileMgr.Instance.OnStoppedProcesses += FileMgrStopAll;
                     FileMgr.Instance.OnDownloadProcess += FileMgrDownloadProcess;
 
+                    PlayButton.IsEnabled = false;
+                    CheckButton.IsEnabled = true;
+
                     FileMgr.Instance.StartUpdate(GameSettings.GetFolder(ServerId));
                 }
                 else

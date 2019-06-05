@@ -1,5 +1,6 @@
 ﻿using Ignite.Core;
 using Ignite.Core.Components.Auth;
+using Ignite.Core.Components.Message;
 using System;
 using System.Drawing;
 using System.Windows;
@@ -96,8 +97,6 @@ namespace Ignite.Design.Controls.Auth
             PasswordBox.BorderBrush = defbrush;
             QuestionsSelector.BorderBrush = defbrush;
             QuestionAnswer.BorderBrush = defbrush;
-
-            //Localize();
         }
 
         private async void CreateAccount_Click(object sender, RoutedEventArgs e)
@@ -108,7 +107,7 @@ namespace Ignite.Design.Controls.Auth
 
             if(QuestionsSelector.SelectedIndex == -1)
             {
-                SetErrorBorder(QuestionAnswer, "Требуется ответ на вопрос");
+                SetErrorBorder(QuestionAnswer, "");
 
                 SetLoadingState(false);
             }
@@ -130,14 +129,14 @@ namespace Ignite.Design.Controls.Auth
                     }
                     else
                     {
-                        MessageBox.Show(LanguageMgr.Instance.ValueOf(result.Message), "", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBoxMgr.Instance.Show(MessageBoxType.Error, "#18-754", LanguageMgr.Instance.ValueOf(result.Message));
 
                         SetLoadingState(false);
                     }
                 }
                 else
                 {
-                    MessageBox.Show(LanguageMgr.Instance.ValueOf(result.Message), "", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBoxMgr.Instance.Show(MessageBoxType.Error, "#18-754", LanguageMgr.Instance.ValueOf(result.Message));
 
                     SetLoadingState(false);
                 }
