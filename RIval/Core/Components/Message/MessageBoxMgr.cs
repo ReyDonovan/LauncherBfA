@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using MessageBox = Ignite.Design.Controls.MessageBox.MessageBox;
 
 namespace Ignite.Core.Components.Message
@@ -18,58 +20,54 @@ namespace Ignite.Core.Components.Message
 
     public class MessageBoxMgr : Singleton<MessageBoxMgr>
     {
-        private MessageBox Box { get; set; }
+        private string ReportUrl { get; set; }
+        private string ReportData { get; set; }
 
-        public void Show(MessageBoxType type, string errorcode, string desc, bool report = false, bool withExit = false)
+
+        public void ShowReportError(string code, string desc, string reportUrl, string data)
         {
-            Application.Current.Dispatcher.Invoke(delegate {
+            ReportUrl = reportUrl;
+            ReportData = data;
 
-                if (Box != null)
-                    Box = null;
-
-                Box = new MessageBox();
-
-                SetImage(type);
-
-                if (!report)
-                {
-                    Box.EnableButtons(false, "", true, LanguageMgr.Instance.ValueOf("MessageBox_OkButton"));
-                }
-                else
-                {
-                    Box.EnableButtons(false, LanguageMgr.Instance.ValueOf("MessageBox_ReportButton"), true, LanguageMgr.Instance.ValueOf("MessageBox_OkButton"));
-                }
-
-                Box.SetData($"{errorcode}", desc, GetTitle(type), withExit);
-
-                Box.ShowDialog();
-            });
+            MessageBoxBuilder
+                .Create()
+                .SetData(MessageBoxType.Error, code, desc, true)
+                .ChangeActionButton(true, LanguageMgr.Instance.ValueOf("MessageBox_ReportError_ReportButtonName"), Report)
+                .Show();
         }
 
-        private void SetImage(MessageBoxType type)
+        public void ShowCriticalError(string code, string desc)
         {
-            var image = type switch
-            {
-                 MessageBoxType.Error => "pack://application:,,,/Resources/Icons/MessageBox/mb-icon-error.png",
-                 MessageBoxType.Success => "pack://application:,,,/Resources/Icons/MessageBox/mb-icon-success.png",
-                 MessageBoxType.Warning => "pack://application:,,,/Resources/Icons/MessageBox/mb-icon-warning.png",
-                 _ => "",
-            };
-
-            Box.SetImage(image);
+            MessageBoxBuilder
+                .Create()
+                .SetData(MessageBoxType.Error, code, desc, false)
+                .ChangeActionButton(false, "", null)
+                .Show();
         }
 
-        private string GetTitle(MessageBoxType type)
+        public void ShowWarning(string code, string desc)
         {
-            var title = type switch
-            {
-                MessageBoxType.Error => LanguageMgr.Instance.ValueOf("MessageBox_Title_Error"),
-                MessageBoxType.Success => LanguageMgr.Instance.ValueOf("MessageBox_Title_Success"),
-                MessageBoxType.Warning => LanguageMgr.Instance.ValueOf("MessageBox_Title_Warning"),
-                _ => "",
-            };
+            MessageBoxBuilder
+                .Create()
+                .SetData(MessageBoxType.Warning, code, desc, false)
+                .ChangeActionButton(false, "", null)
+                .Show();
+        }
 
-            return title;
+        public void ShowSuccess(string code, string desc)
+        {
+            MessageBoxBuilder
+                .Create()
+                .SetData(MessageBoxType.Success, code, desc, false)
+                .ChangeActionButton(false, "", null)
+                .Show();
+        }
+
+        public MessageBoxBuilder Builder() => MessageBoxBuilder.Create();
+
+        private void Report(object e, MouseButtonEventArgs args)
+        {
+
         }
     }
 }

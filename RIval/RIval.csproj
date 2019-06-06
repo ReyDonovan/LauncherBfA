@@ -99,14 +99,20 @@
     <Compile Include="Core\Components\Configuration\Providers\IConfiguration.cs" />
     <Compile Include="Core\Components\Configuration\Providers\JsonConfiguration.cs" />
     <Compile Include="Core\Components\Crypto\CryptoProvider.cs" />
+    <Compile Include="Core\Components\FileSystem\Additions\FileChecker.cs" />
+    <Compile Include="Core\Components\FileSystem\Additions\FileDownloader.cs" />
     <Compile Include="Core\Components\FileSystem\FileCrashBuilder.cs" />
     <Compile Include="Core\Components\FileSystem\FileMgr.cs" />
+    <Compile Include="Core\Components\FileSystem\FileUtils.cs" />
+    <Compile Include="Core\Components\FileSystem\Hashinger.cs" />
     <Compile Include="Core\Components\FileSystem\Types\FileObj.cs" />
     <Compile Include="Core\Components\FileSystem\Types\FileObjectsCollection.cs" />
     <Compile Include="Core\Components\Game\GameCfg.cs" />
     <Compile Include="Core\Components\Log\LogCfg.cs" />
+    <Compile Include="Core\Components\Message\MessageBoxBuilder.cs" />
     <Compile Include="Core\Components\Message\MessageBoxMgr.cs" />
     <Compile Include="Core\Components\News\NewsCfg.cs" />
+    <Compile Include="Core\Components\Parameters\ParamMgr.cs" />
     <Compile Include="Core\Components\Support\Extensions\ObjectArrayEx.cs" />
     <Compile Include="Core\Components\Update\Types\UpdateAnnotation.cs" />
     <Compile Include="Core\Components\Update\UpdateApiHandler.cs" />
@@ -208,6 +214,9 @@
     <Compile Include="Design\Controls\ProductsComponent.xaml.cs">
       <DependentUpon>ProductsComponent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Design\Controls\Settings\AccountSettings.xaml.cs">
+      <DependentUpon>AccountSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Design\Controls\Settings\RealmSettings.xaml.cs">
       <DependentUpon>RealmSettings.xaml</DependentUpon>
     </Compile>
@@ -238,6 +247,10 @@
     <Page Include="Design\Controls\ProductsComponent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\Settings\AccountSettings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Design\Controls\Settings\RealmSettings.xaml">
       <SubType>Designer</SubType>

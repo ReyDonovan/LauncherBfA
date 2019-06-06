@@ -17,6 +17,8 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Ignite.Core.Components.Game;
+using Ignite.Core.Components.FileSystem.Additions;
+using Ignite.Core.Components.Message;
 
 namespace Ignite.Design.Controls
 {
@@ -196,10 +198,16 @@ namespace Ignite.Design.Controls
             e.Handled = true;
         }
 
-        private void CheckButton_Click(object sender, RoutedEventArgs e)
+        private async void CheckButton_Click(object sender, RoutedEventArgs e)
         {
+            WindowMgr.Instance.Run<MainWindow>((window) =>
+            {
+                window.SwitchMenuButtons(false);
+            });
+
             StatusText.Text = LanguageMgr.Instance.ValueOf("StatusText_Init");
             StatusText.Visibility = Visibility.Visible;
+            StatusTextDesc.Visibility = Visibility.Visible;
             StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("DescText_Init");
 
             ProgressBar.Visibility = Visibility.Visible;
@@ -207,74 +215,120 @@ namespace Ignite.Design.Controls
             CheckButton.IsEnabled = false;
             PlayButton.IsEnabled = false;
 
-            Task.Run(() =>
+            if (FileMgr.Instance.IsEnoughFreeSpace(GameSettings.GetFolder(ServerId)))
             {
-                var task = FileMgr.Instance.GetManifest(true, ServerId, GameSettings.GetFolder(ServerId));
-                task.GetAwaiter();
-
-                if (task.GetAwaiter().GetResult())
+                if (await FileMgr.Instance.GetManifest(true, ServerId, GameSettings.GetFolder(ServerId)))
                 {
-                    FileMgr.Instance.OnCheckStarted -= FileMgrCheckStart;
-                    FileMgr.Instance.OnCheckStopped -= FileMgrCheckStop;
+                    FileMgr.Instance.Subscribe<FileChecker.FileCheckerProcess>(DoFileCheck);
 
-                    FileMgr.Instance.OnCheckStarted += FileMgrCheckStart;
-                    FileMgr.Instance.OnCheckStopped += FileMgrCheckStop;
+                    if (await FileMgr.Instance.CheckAsync())
+                    {
+                        StatusText.Visibility = Visibility.Hidden;
+                        StatusTextDesc.Visibility = Visibility.Visible;
+                        StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_Ready");
 
-                    FileMgr.Instance.StartCheck();
+                        PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
+
+                        PlayButton.IsEnabled = true;
+                        CheckButton.IsEnabled = true;
+                    }
+                    else
+                    {
+                        StatusText.Visibility = Visibility.Hidden;
+                        StatusTextDesc.Visibility = Visibility.Visible;
+                        StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_FilesDamaged");
+
+                        PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
+
+                        PlayButton.IsEnabled = false;
+                        CheckButton.IsEnabled = true;
+
+                        MessageBoxMgr.Instance
+                            .Builder()
+                            .ChangeActionButton(true, LanguageMgr.Instance.ValueOf("MainWindow_Downloading_MBStartButton"),
+                            (e, a) =>
+                            {
+                                StartUpdate();
+                            })
+                            .SetData(MessageBoxType.Warning,
+                                LanguageMgr.Instance.ValueOf("MainWindow_Downloading_MBStartHeader"),
+                                LanguageMgr.Instance.ValueOf("MainWindow_Downloading_MBStartDesc"));
+                    }
+
+                    FileMgr.Instance.Unsubscribe<FileChecker.FileCheckerProcess>(DoFileCheck);
                 }
                 else
                 {
-                    StatusText.Text = LanguageMgr.Instance.ValueOf("StatusText_UpdateError");
-                    StatusText.Visibility = Visibility.Visible;
-                    StatusTextDesc.Text = "";
+                    MessageBoxMgr.Instance.ShowCriticalError(LanguageMgr.Instance.ValueOf("MainWindow_DownloadStop_Error_Title"), LanguageMgr.Instance.ValueOf("MainWindow_DownloadStop_Error_Desc"));
                 }
-            }).Wait();
+            }
+            else
+            {
+                MessageBoxMgr.Instance.ShowCriticalError(LanguageMgr.Instance.ValueOf("MainWindow_EnoughSpace_Title"), LanguageMgr.Instance.ValueOf("MainWindow_EnoughSpace_Desc"));
+            }
+
+            ProgressBar.Visibility = Visibility.Hidden;
+            StatusText.Visibility = Visibility.Hidden;
+            StatusTextDesc.Visibility = Visibility.Hidden;
+
+            PlayButton.IsEnabled = false;
+            CheckButton.IsEnabled = true;
+
+            WindowMgr.Instance.Run<MainWindow>((window) =>
+            {
+                window.SwitchMenuButtons(true);
+            });
+        }
+        private async void StartUpdate()
+        {
+            ProgressBar.Visibility = Visibility.Hidden;
+            StatusText.Visibility = Visibility.Visible;
+            StatusTextDesc.Visibility = Visibility.Hidden;
+            CheckButton.IsEnabled = false;
+            PlayButton.IsEnabled = false;
+
+            //TODO: Start update
+            FileMgr.Instance.Subscribe<FileDownloader.FileDownloaderProcess>(DoFileDownload);
+
+            if(await FileMgr.Instance.DownloadAsync())
+            {
+                StatusText.Visibility = Visibility.Hidden;
+                StatusTextDesc.Visibility = Visibility.Visible;
+                StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_Ready");
+
+                PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
+
+                PlayButton.IsEnabled = true;
+                CheckButton.IsEnabled = true;
+
+                MessageBoxMgr.Instance.ShowSuccess(LanguageMgr.Instance.ValueOf("MainWindow_DownloadStop_Success_Title"), LanguageMgr.Instance.ValueOf("MainWindow_DownloadStop_Success_Desc"));
+            }
+            else
+            {
+                StatusText.Text = LanguageMgr.Instance.ValueOf("StatusText_FilesDamaged_One");
+                StatusTextDesc.Visibility = Visibility.Visible;
+
+                PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
+
+                PlayButton.IsEnabled = false;
+                CheckButton.IsEnabled = true;
+
+                MessageBoxMgr.Instance.ShowCriticalError(LanguageMgr.Instance.ValueOf("MainWindow_DownloadStop_Error_Title"), LanguageMgr.Instance.ValueOf("MainWindow_DownloadStop_Error_Desc"));
+            }
         }
 
-        private void FileMgrCheckStop(string fn, bool result)
+        private void DoFileCheck(string filename, int percentage)
         {
             System.Windows.Application.Current.Dispatcher.BeginInvoke((Action)delegate
             {
-                if (!result)
-                {
-                    StatusText.Text = LanguageMgr.Instance.ValueOf("StatusText_FilesDamaged");
-                    StatusTextDesc.Text = $"../{fn}";
+                StatusText.Text = LanguageMgr.Instance.ValueOf("StatusText_CheckFileBuilds");
+                StatusTextDesc.Text = $"../{filename}";
 
-                    FileMgr.Instance.OnDownloadStarted -= FileMgrDownloadStart;
-                    FileMgr.Instance.OnDownloadStopped -= FileMgrDownloadStop;
-                    FileMgr.Instance.OnStoppedProcesses -= FileMgrStopAll;
-                    FileMgr.Instance.OnDownloadProcess -= FileMgrDownloadProcess;
-
-                    FileMgr.Instance.OnDownloadStarted += FileMgrDownloadStart;
-                    FileMgr.Instance.OnDownloadStopped += FileMgrDownloadStop;
-                    FileMgr.Instance.OnStoppedProcesses += FileMgrStopAll;
-                    FileMgr.Instance.OnDownloadProcess += FileMgrDownloadProcess;
-
-                    PlayButton.IsEnabled = false;
-                    CheckButton.IsEnabled = true;
-
-                    FileMgr.Instance.StartUpdate(GameSettings.GetFolder(ServerId));
-                }
-                else
-                {
-                    StatusText.Visibility = Visibility.Hidden;
-                    StatusTextDesc.Visibility = Visibility.Visible;
-                    StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_Ready");
-                    StatusText.Text = "";
-
-                    PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
-
-                    PlayButton.IsEnabled = true;
-                    CheckButton.IsEnabled = true;
-                }
-
-                ProgressBar.Visibility = Visibility.Hidden;
-                AllPercentage.Visibility = Visibility.Hidden;
-                AllPercentage.Value = 0;
+                ProgressBar.Visibility = Visibility.Visible;
+                ProgressBar.Value = percentage;
             });
         }
-
-        private void FileMgrDownloadProcess(string info, int percentage, int currentFilePercantage)
+        private void DoFileDownload(string info, int percentage)
         {
             System.Windows.Application.Current.Dispatcher.BeginInvoke((Action)delegate
             {
@@ -287,107 +341,11 @@ namespace Ignite.Design.Controls
                 PercentStatus.Visibility = Visibility.Visible;
                 ProgressBar.Visibility = Visibility.Visible;
                 ProgressBar.Value = percentage;
-                AllPercentage.Visibility = Visibility.Visible;
-                AllPercentage.Value = currentFilePercantage;
-
-                CheckButton.IsEnabled = false;
-                PlayButton.IsEnabled = false;
 
                 WindowMgr.Instance.Run<MainWindow>((window) =>
                 {
                     window.SwitchMenuButtons(false);
                 });
-            });
-        }
-
-        private void FileMgrStopAll(bool result)
-        {
-            System.Windows.Application.Current.Dispatcher.BeginInvoke((Action)delegate
-            {
-                ProgressBar.Value = 0;
-                ProgressBar.Visibility = Visibility.Hidden;
-                PercentStatus.Visibility = Visibility.Hidden;
-                AllPercentage.Visibility = Visibility.Hidden;
-                AllPercentage.Value = 0;
-
-                if (result)
-                {
-                    StatusText.Visibility = Visibility.Hidden;
-                    StatusTextDesc.Visibility = Visibility.Visible;
-                    StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_Ready");
-
-                    PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
-
-                    PlayButton.IsEnabled = true;
-                    CheckButton.IsEnabled = true;
-                }
-                else
-                {
-                    StatusText.Visibility = Visibility.Hidden;
-                    StatusTextDesc.Visibility = Visibility.Visible;
-                    StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_UpdateError");
-
-                    PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
-
-                    PlayButton.IsEnabled = false;
-                    CheckButton.IsEnabled = true;
-                }
-            });
-        }
-
-        private void FileMgrDownloadStop(string fn, bool result)
-        {
-            System.Windows.Application.Current.Dispatcher.BeginInvoke((Action)delegate
-            {
-                ProgressBar.Value = 0;
-                ProgressBar.Visibility = Visibility.Hidden;
-                PercentStatus.Visibility = Visibility.Hidden;
-                AllPercentage.Visibility = Visibility.Hidden;
-                AllPercentage.Value = 0;
-
-                if (result)
-                {
-                    StatusText.Visibility = Visibility.Hidden;
-                    StatusTextDesc.Visibility = Visibility.Visible;
-                    StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_Ready");
-
-                    PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
-
-                    PlayButton.IsEnabled = true;
-                    CheckButton.IsEnabled = true;
-                }
-                else
-                {
-                    StatusText.Text = LanguageMgr.Instance.ValueOf("StatusText_FilesDamaged_One");
-                    StatusTextDesc.Visibility = Visibility.Visible;
-                    StatusTextDesc.Text = $"{fn}";
-
-                    PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
-
-                    PlayButton.IsEnabled = false;
-                    CheckButton.IsEnabled = true;
-                }
-            });
-        }
-
-        private void FileMgrDownloadStart(string fn)
-        {
-            System.Windows.Application.Current.Dispatcher.BeginInvoke((Action)delegate
-            {
-                StatusText.Text = "Загрузка: ";
-                StatusTextDesc.Text = $"{fn}";
-            });
-        }
-
-        private void FileMgrCheckStart(string fn, int percent)
-        {
-            System.Windows.Application.Current.Dispatcher.BeginInvoke((Action)delegate
-            {
-                StatusText.Text = LanguageMgr.Instance.ValueOf("StatusText_CheckFileBuilds");
-                StatusTextDesc.Text = $"../{fn}";
-
-                ProgressBar.Visibility = Visibility.Visible;
-                ProgressBar.Value = percent;
             });
         }
 
@@ -460,19 +418,17 @@ namespace Ignite.Design.Controls
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             if(dialog.ShowDialog() == DialogResult.OK)
             {
-                if (FileMgr.Instance.IsWowDirectory(dialog.SelectedPath))
+                if(FileMgr.Instance.IsEnoughFreeSpace(dialog.SelectedPath))
                 {
-                    PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
+                    GameSettings.AddFolder(ServerId, dialog.SelectedPath);
+                    CfgMgr.Instance.GetProvider().Write(GameSettings, false);
 
-                    PlayButton.IsEnabled = false;
-                    CheckButton.IsEnabled = false;
-
+                    CheckButton_Click(CheckButton, null);
                 }
-
-                GameSettings.AddFolder(ServerId, dialog.SelectedPath);
-                CfgMgr.Instance.GetProvider().Write(GameSettings, false);
-
-                CheckButton_Click(CheckButton, null);
+                else
+                {
+                    MessageBoxMgr.Instance.ShowCriticalError(LanguageMgr.Instance.ValueOf("MainWindow_EnoughSpace_Title"), LanguageMgr.Instance.ValueOf("MainWindow_EnoughSpace_Desc"));
+                }
             }
         }
     }

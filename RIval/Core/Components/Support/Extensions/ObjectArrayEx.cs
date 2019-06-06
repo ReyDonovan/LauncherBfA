@@ -18,9 +18,13 @@ namespace Ignite.Core
 
                 return data;
             }
-            catch(Exception)
+            catch(Exception ex)
             {
-                MessageBoxMgr.Instance.Show(MessageBoxType.Error, "#06-41123", "Error occured while casting objects. Please report this!", true, true);
+                MessageBoxMgr.Instance.ShowReportError(
+                    "#06-41123",
+                    "Error occured while casting objects. Please report this!",
+                    Components.Api.ApiFacade.Instance.GetUri("api-errorreporter-cast"),
+                    ex.ToString());
 
                 return (T[])(object)null;
             }

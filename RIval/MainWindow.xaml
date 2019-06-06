@@ -162,17 +162,15 @@
                     <Image x:Name="SettingsButtons" HorizontalAlignment="Left" Height="22" Margin="79,32,0,0" VerticalAlignment="Top" Width="22" Grid.Column="1" Source="Resources/Icons/settings-icon.png" Cursor="Hand" MouseDown="SettingsButtons_MouseDown" MouseEnter="SettingsButtons_MouseEnter" MouseLeave="SettingsButtons_MouseLeave">
                         <Image.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Профиль">
-                                    <MenuItem.Icon>
-                                        <Image Height="17" Width="17" Source="Resources/Icons/profile-icon.png"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <MenuItem Header="Параметры">
+                                <MenuItem x:Name="SettingsMenuItem" Header="Параметры" Click="SettingsMenuItem_Click">
                                     <MenuItem.Icon>
                                         <Image Height="17" Width="17" Source="Resources/Icons/settings-hm-icon.png"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
                                 <Separator></Separator>
+                                <MenuItem Header="Техническая поддержка" Click="MenuItem_Click">
+                                    
+                                </MenuItem>
                                 <MenuItem Header="Сменить пользователя" Click="MenuItem_Click">
                                     <MenuItem.Icon>
                                         <Image Height="17" Width="17" Source="Resources/Icons/logout-icon.png"/>

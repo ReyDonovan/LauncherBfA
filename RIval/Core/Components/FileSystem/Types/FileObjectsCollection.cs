@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ignite.Core.Components.FileSystem.Types
 {
-    internal class FileObjectsCollection : List<FileObj>
+    public class FileObjectsCollection : List<FileObj>
     {
         public const string UNKNOWN_PATH = "upath";
 

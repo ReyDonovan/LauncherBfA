@@ -1,185 +1,108 @@
 ﻿using Ignite.Core.Components.FileSystem;
+using Ignite.Core.Components.FileSystem.Additions;
 using Ignite.Core.Components.FileSystem.Types;
-using Ignite.Core.Components.Message;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Reflection;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace Ignite.Core.Components
 {
     public class FileMgr : Singleton<FileMgr>
     {
-        private FileObjectsCollection Collection = new FileObjectsCollection();
+        private FileObjectsCollection Collection { get; set; }
+        private FileChecker           Checker    { get; set; }
+        private FileDownloader        Downloader { get; set; }
 
-        public delegate void FileCheckStarted(string fn, int percent);
-        public delegate void FileCheckStopped(string fn, bool result);
-        public delegate void FileDownloadStarted(string fn);
-        public delegate void FileDownloadStopped(string fn, bool result);
-        public delegate void FileDownloadProcess(string info, int percentage, int currentFilePercentage);
-        public delegate void AllDownloadsStopped(bool result);
-
-        public event FileCheckStarted OnCheckStarted;
-        public event FileCheckStopped OnCheckStopped;
-        public event FileDownloadStarted OnDownloadStarted;
-        public event FileDownloadStopped OnDownloadStopped;
-        public event FileDownloadProcess OnDownloadProcess;
-        public event AllDownloadsStopped OnStoppedProcesses;
-
-        private int CurrentDownloadedFile = 0;
-        private int CurrentFileChecked = 0;
-        private string CurrentDownloading = "";
-        private bool IsWrongFiles = true;
-        private Stopwatch Sw = new Stopwatch();
+        public FileMgr()
+        {
+            Collection = new FileObjectsCollection();
+            Checker    = new FileChecker();
+            Downloader = new FileDownloader();
+        }
 
         public bool IsWowDirectory(string path)
         {
             return File.Exists(path + "\\Wow.exe") || File.Exists(path + "\\Wow-64.exe");
         }
-
         public FileCrashBuilder CreateCrash()
         {
             return new FileCrashBuilder();
         }
 
-        public void StartCheck()
+        public bool Check()
         {
-            Task.Run(() =>
+            if (Collection.Count <= 0) return false;
+            else
             {
-                string current = "";
-                CurrentFileChecked = 0;
-
-                try
-                {
-                    foreach (var item in Collection)
-                    {
-                        current = item.NiceFileName;
-                        OnCheckStarted(item.NiceFileName, ((CurrentFileChecked * 100) / Collection.Count));
-
-                        if (!File.Exists(item.FileName))
-                        {
-                            IsWrongFiles = true;
-                        }
-                        else
-                        {
-                            if(!CompareHashRaw(item.FileName, item.Hash))
-                            {
-                                IsWrongFiles = true;
-
-                                File.Delete(item.FileName);
-                            }
-                        }
-
-                        CurrentFileChecked++;
-                    }
-
-                    OnCheckStopped(current, !IsWrongFiles);
-                }
-                catch(Exception ex)
-                {
-                    ex.ToLog(LogLevel.Error);
-
-                    OnCheckStopped(current, false);
-                }
-            });
+                return Checker.Check(Collection);
+            }
         }
-        public void StartUpdate(string path, int server = 1)
+        public async Task<bool> CheckAsync()
         {
-            Task.Run(() =>
+            if (Collection.Count <= 0) return false;
+            else
             {
-                DriveInfo drive = DriveInfo.GetDrives().First((dr) => dr.Name.Contains(path.Split(':').First()));
-                if(drive != null)
-                {
-                    if(drive.AvailableFreeSpace <= 64424509440)
-                    {
-                        MessageBoxMgr.Instance.Show(MessageBoxType.Error, "#14-5883",
-                            string.Format("Not enough free disk space: {0}\nFree space: {1}\nNeeded: {2}\nIt is not possible to continue with the installation.",
-                                drive.Name,
-                                FormatByte(drive.AvailableFreeSpace),
-                                FormatByte(ApplicationEnv.Instance.NeededGameBytes)));
-
-                        return;
-                    }
-                }
-
-                var handler = new WebClient();
-
-                try
-                {
-                    foreach (var item in Collection)
-                    {
-                        if(!File.Exists(item.FileName))
-                        {
-                            CurrentDownloading = item.NiceFileName;
-
-                            string info = item.NiceFileName;
-                            if (info.Length > 35)
-                            {
-                                info = info.Remove(35) + "...";
-                            }
-
-                            OnDownloadStarted(info);
-
-                            handler.DownloadProgressChanged -= Handler_DownloadProgressChanged;
-                            handler.DownloadProgressChanged += Handler_DownloadProgressChanged;
-                            handler.DownloadFileCompleted -= Handler_DownloadFileCompleted;
-                            handler.DownloadFileCompleted += Handler_DownloadFileCompleted;
-
-                            if(!Directory.Exists(item.FileName.Replace(item.FileName.Split('\\').Last(), "")))
-                            {
-                                Directory.CreateDirectory(item.FileName.Replace(item.FileName.Split('\\').Last(), ""));
-                            }
-
-                            Sw.Start();
-                            handler.DownloadFileTaskAsync(item.RemotePath, item.FileName).Wait();
-
-                            CurrentDownloadedFile++;
-
-                            Task.Delay(1500);
-                        }
-                    }
-
-                    IsWrongFiles = false;
-                    OnStoppedProcesses(true);
-                }
-                catch(Exception ex)
-                {
-                    Logger.Instance.WriteLine(ex.ToString() + $" File: {CurrentDownloading}", LogLevel.Error);
-
-                    OnStoppedProcesses(false);
-                }
-            });
+                return await Checker.CheckAsync(Collection);
+            }
         }
 
-        private void Handler_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        public bool Download()
         {
-            if(e.Error != null)
+            if (Collection.Count <= 0) return false;
+            else
             {
-                e.Error.ToLog(LogLevel.Error);
+                return Downloader.UpdateClient(Collection);
+            }
+        }
+        public async Task<bool> DownloadAsync()
+        {
+            if (Collection.Count <= 0) return false;
+            else
+            {
+                return await Downloader.UpdateClientAsync(Collection);
+            }
+        }
+        public string GetDownloaderError()
+        {
+            return Downloader.GetError();
+        }
 
-                OnStoppedProcesses(false);
+        public void Subscribe<T>(T handler)
+        {
+            if(typeof(T) == typeof(FileDownloader.FileDownloaderProcess))
+            {
+                Downloader.Subscribe((FileDownloader.FileDownloaderProcess)(object)handler);
             }
 
-            Sw.Stop();
+            if(typeof(T) == typeof(FileChecker.FileCheckerProcess))
+            {
+                Checker.Subscribe((FileChecker.FileCheckerProcess)(object)handler);
+            }
         }
 
-        private void Handler_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        public void Unsubscribe<T>(T handler)
         {
-            string info = $"{CurrentDownloading}";
-            if(info.Length > 25)
+            if (typeof(T) == typeof(FileDownloader.FileDownloaderProcess))
             {
-                info = info.Remove(25) + "...";
+                Downloader.Unsubscribe((FileDownloader.FileDownloaderProcess)(object)handler);
             }
-            info += $" ({GetSpeed(e.BytesReceived)})";
 
-            OnDownloadProcess(info, ((CurrentDownloadedFile * 100) / Collection.Count), e.ProgressPercentage);
+            if (typeof(T) == typeof(FileChecker.FileCheckerProcess))
+            {
+                Checker.Unsubscribe((FileChecker.FileCheckerProcess)(object)handler);
+            }
+        }
+
+        public bool IsEnoughFreeSpace(string path)
+        {
+            DriveInfo drive = DriveInfo.GetDrives().First((dr) => dr.Name.Contains(path.Split(':').First()));
+            if (drive != null)
+            {
+                return drive.AvailableFreeSpace >= ApplicationEnv.Instance.NeededGameBytes;
+            }
+
+            return false;
         }
 
         public Task<bool> GetManifest(bool full, int serverid, string path)
@@ -202,7 +125,7 @@ namespace Ignite.Core.Components
                         Collection.Add(res[i]);
                     }
 
-                    return true;
+                    return Collection.Count > 0;
                 }
                 catch(Exception ex)
                 {
@@ -211,78 +134,6 @@ namespace Ignite.Core.Components
                     return false;
                 }
             });
-        }
-
-        public bool CompareHash(string h1, string h2)
-        {
-            return h1.ToLower() == h2.ToLower();
-        }
-
-        public bool CompareHashRaw(string fullpath, string hash)
-        {
-            using (var stream = File.OpenRead(fullpath))
-            {
-                return CompareHash(GetHash<MD5>(stream), hash);
-            }
-        }
-
-        private string GetHash<T>(Stream stream) where T : HashAlgorithm
-        {
-            StringBuilder sb = new StringBuilder();
-
-            MethodInfo create = typeof(T).GetMethod("Create", new Type[] { });
-            using (T crypt = (T)create.Invoke(null, null))
-            {
-                byte[] hashBytes = crypt.ComputeHash(stream);
-                foreach (byte bt in hashBytes)
-                {
-                    sb.Append(bt.ToString("x2"));
-                }
-            }
-
-            return sb.ToString();
-        }
-
-        public void CreateDirectory(string path)
-        {
-            if(Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-        }
-
-        private string FormatByte(long bytes)
-        {
-            int i;
-            double dblSByte = bytes;
-            for (i = 0; i < 5 && bytes >= 1024; i++, bytes /= 1024)
-            {
-                dblSByte = bytes / 1024.0;
-            }
-
-            return String.Format("{0:0.##} {1}", dblSByte, GetSuffix(i));
-        }
-        private string GetSpeed(long bytes)
-        {
-            int i;
-            double dblSbyte = bytes;
-
-            for (i = 0; i < 5 && bytes >= 1024; i++, bytes /= 1024)
-            {
-                dblSbyte = bytes / 1024.0;
-            }
-
-            return $"{(dblSbyte / Sw.Elapsed.TotalSeconds).ToString("0.00")} {GetSuffix(i)}/{LanguageMgr.Instance.ValueOf("Seconds_Short")}";
-        }
-
-        private string GetSuffix(int index)
-        {
-            string[] suffix =
-            {
-                "Bytes", "Kb", "Mb", "Gb", "Tb"
-            };
-
-            return LanguageMgr.Instance.ValueOf(suffix[index]);
         }
     }
 }

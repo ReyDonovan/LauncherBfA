@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -39,7 +40,7 @@ namespace Ignite.Design.Controls.MessageBox
             WithExit = withExit;
         }
 
-        public void EnableButtons(bool blue = true, string blueVal = "REPORT", bool red = true, string redVal = "OK")
+        public void EnableButtons(bool blue = true, string blueVal = "REPORT", MouseButtonEventHandler blueact = null, bool red = true, string redVal = "OK")
         {
             if(!blue)
             {
@@ -48,6 +49,7 @@ namespace Ignite.Design.Controls.MessageBox
             else
             {
                 ReportButton.Content = blueVal;
+                ReportButton.MouseDown += blueact;
             }
 
             if(!red)
@@ -57,6 +59,32 @@ namespace Ignite.Design.Controls.MessageBox
             else
             {
                 OkButton.Content = redVal;
+            }
+        }
+
+        public void SetPrimaryButton(bool enabled, string name)
+        {
+            if (!enabled)
+            {
+                OkButton.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                OkButton.Content = name;
+            }
+        }
+
+        public void SetActionButton(bool enabled, string name, MouseButtonEventHandler handler)
+        {
+            if(enabled)
+            {
+                ReportButton.Visibility = Visibility.Visible;
+                ReportButton.Content = name;
+                ReportButton.MouseDown += handler;
+            }
+            else
+            {
+                ReportButton.Visibility = Visibility.Hidden;
             }
         }
 

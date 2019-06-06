@@ -46,9 +46,13 @@ namespace Ignite.Core.Language
 
                 return lng;
             }
-            catch(Exception)
+            catch(Exception ex)
             {
-                MessageBoxMgr.Instance.Show(MessageBoxType.Error, "#03-1814", "Error while reading language file. Delete the 'locales' folder and try again", false, true);
+                MessageBoxMgr.Instance.ShowReportError(
+                    "#03-1814",
+                    "Error while reading language file. Delete the 'locales' folder and try again",
+                    Components.Api.ApiFacade.Instance.GetUri("api-errorreporter-language"),
+                    ex.ToString());
 
                 return null;
             }

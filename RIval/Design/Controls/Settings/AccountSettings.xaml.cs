@@ -18,21 +18,11 @@ namespace Ignite.Design.Controls.Settings
     /// <summary>
     /// Логика взаимодействия для RealmSettings.xaml
     /// </summary>
-    public partial class RealmSettings : UserControl
+    public partial class AccountSettings : UserControl
     {
-        public RealmSettings()
+        public AccountSettings()
         {
             InitializeComponent();
-        }
-
-        private void AppendFolders()
-        {
-
-        }
-
-        private void Localize()
-        {
-
         }
     }
 }

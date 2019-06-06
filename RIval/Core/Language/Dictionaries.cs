@@ -90,6 +90,34 @@ namespace Ignite.Core.Language
                 //MessageBox --buttons phrases
                 new Phrase("MessageBox_OkButton", "Continue"),
                 new Phrase("MessageBox_ReportButton", "Report"),
+
+                //Settings Window --general
+                new Phrase("SettingsWindow_General_Title", "App settings"),
+                new Phrase("SettingsWindow_General_AccountSettingsTitle", "Account settings"),
+                new Phrase("SettingsWindow_General_GameSettingsTabTitle", "Games settings"),
+                new Phrase("SettingsWindow_General_ResetSettingsButton", "Reset settings"),
+                new Phrase("SettingsWindow_General_CancelButton", "Cancel"),
+                new Phrase("SettingsWindow_General_AppendSettingsButton", "Append"),
+
+                //Settings Window --reset alert
+                new Phrase("SettingsWindow_General_ResetMBHead", "Reset all settings"),
+                new Phrase("SettingsWindow_General_ResetMBDesc", "All application settings will be reset. Are you sure you want to do this ?"),
+                new Phrase("SettingsWindow_General_ResetMBActionButton", "Reset"),
+                new Phrase("SettingsWindow_General_ResetMBPrimaryButton", "Cancel"),
+                new Phrase("SettingsWindow_General_ResetMBDescSuccess", "Settings successfully reset. The application will be reloaded"),
+
+                //MainWindow new filemgr system, --mb-box after checking
+                new Phrase("MainWindow_Downloading_MBStartButton", "Download"),
+                new Phrase("MainWindow_Downloading_MBStartHeader", "Needed update"),
+                new Phrase("MainWindow_Downloading_MBStartDesc", "An error occurred while checking the game client. You must download the data to continue. If you do not have unlimited Internet, you may be charged for downloading. Continue ?"),
+
+                //MainWindow download stopped success
+                new Phrase("MainWindow_DownloadStop_Success_Title", "Updating stopped"),
+                new Phrase("MainWindow_DownloadStop_Success_Desc", "Game client has been succefully updated. For game press the 'Play' button"),
+                new Phrase("MainWindow_DownloadStop_Error_Title", "Updating error"),
+                new Phrase("MainWindow_DownloadStop_Error_Desc", "An error occurred during the upgrade. Try running the application as an Administrator and try again. If the problem persists, contact Administrator with this error."),
+                new Phrase("MainWindow_EnoughSpace_Title", "#02-6632"),
+                new Phrase("MainWindow_EnoughSpace_Desc", "There is not enough space on the selected drive. Requires ~50GB to install"),
             });
 
             lng.SetLanguage(Languages.English);
@@ -172,6 +200,34 @@ namespace Ignite.Core.Language
                 //MessageBox --buttons phrases
                 new Phrase("MessageBox_OkButton", "Продолжить"),
                 new Phrase("MessageBox_ReportButton", "Сообщить"),
+
+                //Settings Window --general
+                new Phrase("SettingsWindow_General_Title", "Настройки приложения"),
+                new Phrase("SettingsWindow_General_AccountSettingsTitle", "Учетные записи"),
+                new Phrase("SettingsWindow_General_GameSettingsTabTitle", "Настройки игры"),
+                new Phrase("SettingsWindow_General_ResetSettingsButton", "Сбросить все настройки"),
+                new Phrase("SettingsWindow_General_CancelButton", "Отменить"),
+                new Phrase("SettingsWindow_General_AppendSettingsButton", "Применить"),
+
+                //Settings Window --reset alert
+                new Phrase("SettingsWindow_General_ResetMBHead", "Сброс всех настроек"),
+                new Phrase("SettingsWindow_General_ResetMBDesc", "Все настройки приложения будут сброшены. Вы уверены что хотите сделать это ?"),
+                new Phrase("SettingsWindow_General_ResetMBActionButton", "Сбросить"),
+                new Phrase("SettingsWindow_General_ResetMBPrimaryButton", "Отмена"),
+                new Phrase("SettingsWindow_General_ResetMBDescSuccess", "Настройки успешно сброшены. Приложение будет перезагружено"),
+
+                //MainWindow new filemgr system, --mb-box after checking
+                new Phrase("MainWindow_Downloading_MBStartButton", "Загрузить"),
+                new Phrase("MainWindow_Downloading_MBStartHeader", "Требуется обновление"),
+                new Phrase("MainWindow_Downloading_MBStartDesc", "Во время проверки игрового клиента возникла ошибка. Для продолжения требуется загрузить данные. Если у вас не безлимитный Интернет, то за загрузку может взиматься отдельная плата. Продолжить ?"),
+
+                //MainWindow download stopped success/errors
+                new Phrase("MainWindow_DownloadStop_Success_Title", "Обновление окончено"),
+                new Phrase("MainWindow_DownloadStop_Success_Desc", "Игровой клиент обновлен успешно. Чтобы войти в игру нажмите кнопку 'Играть'"),
+                new Phrase("MainWindow_DownloadStop_Error_Title", "Ошибка обновления"),
+                new Phrase("MainWindow_DownloadStop_Error_Desc", "Во время обновления произошла ошибка. Попробуйте запустить приложение от имени Администратора и повторить попытку. Если проблема не ушла, то обратитесь с этой ошибкой к Администратору."),
+                new Phrase("MainWindow_EnoughSpace_Title", "#02-6632"),
+                new Phrase("MainWindow_EnoughSpace_Desc", "Не достаточно места на выбранном Вами диске. Для установки требуется ~50GB"),
             });
 
             lng.SetLanguage(Languages.Russian);

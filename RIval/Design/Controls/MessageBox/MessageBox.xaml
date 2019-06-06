@@ -15,7 +15,7 @@
     <Grid>
         <Border BorderBrush="White" BorderThickness="1,0,1,1" HorizontalAlignment="Left" Height="208" Margin="0,48,0,0" VerticalAlignment="Top" Width="460" Background="#FF464646" Opacity="0.15">
         </Border>
-        <Button x:Name="OkButton" Content="OK" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="40" FontSize="16" Cursor="Hand" HorizontalContentAlignment="Left" BorderBrush="White" Background="#33C5C5C5" Click="CheckButton_Click" Margin="282,205,0,0"/>
+        <Button x:Name="OkButton" Content="OK" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="40" FontSize="16" Cursor="Hand" HorizontalContentAlignment="Left" BorderBrush="White" Background="#33C5C5C5" Click="CheckButton_Click" Margin="280,205,0,0"/>
 
         <RichTextBox x:Name="ErrorDescription" Margin="9,118,9,62" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" SelectionBrush="#FFB4B4B4" FontSize="16" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto"/>
         <Border BorderBrush="#FFB4B4B4" BorderThickness="1" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="460" Background="#FF727272" Opacity="0.25">
@@ -28,6 +28,6 @@
         <Label x:Name="Title" Content="Критическая ошибка" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16" FontWeight="Bold"/>
         <Image x:Name="MessageBoxTypeIcon" HorizontalAlignment="Left" Height="64" Margin="8,49,0,0" VerticalAlignment="Top" Width="65" Source="/Ignite;component/Resources/Icons/MessageBox/mb-icon-warning.png"/>
         <Label x:Name="ErrorCode" Content="ОШИБКА: #1156-785F" HorizontalAlignment="Left" Margin="70,65,0,0" VerticalAlignment="Top" Foreground="#FFFFFEFE" FontSize="16"/>
-        <Button x:Name="ReportButton" Content="СООБЩИТЬ" Height="Auto" Margin="101,205,189,11" Background="#FF288BDE" FontSize="16"/>
+        <Button x:Name="ReportButton" Content="СООБЩИТЬ" Height="Auto" Margin="99,205,191,11" Background="#FF288BDE" FontSize="16" Cursor="Hand"/>
     </Grid>
 </Window>

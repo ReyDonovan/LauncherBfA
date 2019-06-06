@@ -115,35 +115,6 @@ namespace Ignite.Core.Components.Api
             return this;
         }
 
-        public ApiBuilder<T> DownloadTo(string fullpath, Action<FileStream, string> callback)
-        {
-            try
-            {
-                FileMgr.Instance.CreateDirectory(fullpath.Replace(fullpath.Split('\\').Last(), ""));
-
-                WebClient client = new WebClient();
-
-                Task t = new Task(() =>
-                {
-                    client.DownloadFile(new Uri((string)(object)Response.First()), fullpath);
-                });
-
-                t.Start();
-                Task.WaitAll(t);
-
-                using (FileStream stream = File.OpenWrite(fullpath))
-                {
-                    callback(stream, fullpath);
-                }
-            }
-            catch(Exception ex)
-            {
-                ex.ToLog(LogLevel.Error);
-            }
-
-            return this;
-        }
-
         public List<T> GetResponse()
         {
             return Response;

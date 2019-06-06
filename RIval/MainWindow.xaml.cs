@@ -4,6 +4,7 @@ using Ignite.Core.Components.Api;
 using Ignite.Core.Components.Auth;
 using Ignite.Core.Components.Update;
 using Ignite.Design.Controls;
+using Ignite.Design.Controls.Settings;
 using Ignite.Design.Graphics;
 using System;
 using System.Diagnostics;
@@ -342,6 +343,12 @@ namespace Ignite
         private void Image_MouseLeave_1(object sender, MouseEventArgs e)
         {
             UsernameBlock_MouseLeave(LangBlock, null);
+        }
+
+        private void SettingsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow settings = new SettingsWindow();
+            settings.ShowDialog();
         }
     }
 }

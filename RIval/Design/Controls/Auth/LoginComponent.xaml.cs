@@ -93,7 +93,7 @@ namespace Ignite.Design.Controls.Auth
             }
             else
             {
-                MessageBoxMgr.Instance.Show(MessageBoxType.Error, "#18-754", LanguageMgr.Instance.ValueOf(result.Message));
+                MessageBoxMgr.Instance.ShowCriticalError("#18-754", LanguageMgr.Instance.ValueOf(result.Message));
 
                 PasswordBox.Password = "";
 
