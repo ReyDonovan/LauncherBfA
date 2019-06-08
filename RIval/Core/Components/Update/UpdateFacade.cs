@@ -1,4 +1,5 @@
-﻿using IX.Composer.Architecture;
+﻿using Ignite.Core.Components.Message;
+using IX.Composer.Architecture;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -13,20 +14,29 @@ namespace Ignite.Core.Components.Update
 
         public bool IsUpdateNeeded()
         {
-            var response = ApiHandle.GetRemoteVersionStr();
-            if (Version.TryParse(response, out var ver))
+            try
             {
-                if (ApplicationEnv.Instance.AppVersion.ToString() == ver.ToString())
+                var response = ApiHandle.GetRemoteVersionStr();
+                if (Version.TryParse(response, out var ver))
                 {
-                    return false;
+                    if (ApplicationEnv.Instance.AppVersion.ToString() == ver.ToString())
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
                 else
-                {
                     return true;
-                }
             }
-            else
-                return true;
+            catch(Exception)
+            {
+                MessageBoxMgr.Instance.ShowCriticalError(LanguageMgr.Instance.ValueOf("Updater_UpdateErrorMB_Title"), LanguageMgr.Instance.ValueOf("Updater_UpdateErrorMB_Desc"));
+
+                return false;
+            }
         }
 
         public void StartUpdate()

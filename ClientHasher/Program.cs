@@ -17,9 +17,9 @@ namespace ClientHasher
         private static TimeSpan ElapsedTime = new TimeSpan();
 
         //Change me for custom url
-        private static string downloadUrl_full = "http://crux.intellixservice.ru/cdn/full";
+        private static string downloadUrl_full = "http://wowignite.ru/cdn/full";
         //Change me for custom url
-        private static string downloadUrl_lite = "http://crux.intellixservice.ru/cdn/lite";
+        private static string downloadUrl_lite = "http://wowignite.ru/cdn/mini";
 
         static void Main(string[] args)
         {

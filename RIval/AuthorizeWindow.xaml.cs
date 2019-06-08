@@ -1,5 +1,6 @@
 ﻿using Ignite.Core;
 using Ignite.Core.Components.Auth;
+using Ignite.Core.Components.Message;
 using Ignite.Design.Controls.Auth;
 using System;
 using System.Windows;
@@ -63,6 +64,11 @@ namespace Ignite
             Container.Children.Add(elem);
         }
 
+        public UIElement GetActiveComponent()
+        {
+            return Container.Children[0];
+        }
+
         public void SetPreloader(bool enabled)
         {
             Preloader.IsEnabled = enabled;
@@ -70,13 +76,23 @@ namespace Ignite
 
         public void OpenGates()
         {
-            WindowMgr.Instance.Run<MainWindow>((mw) =>
+            var user = AuthMgr.Instance.GetUser();
+            if (user.UserName != null)
             {
-                mw.AppendUser(AuthMgr.Instance.GetUser().UserName);
-                mw.Show();
-            });
+                WindowMgr.Instance.Run<MainWindow>((mw) =>
+                {
+                    mw.AppendUser(user.UserName);
+                    mw.Show();
+                });
 
-            this.Hide();
+                Close();
+            }
+            else
+            {
+                ((LoginComponent)GetActiveComponent()).SetLoadingState(false);
+
+                MessageBoxMgr.Instance.ShowCriticalError("#18-934", "An error occured while parsing user data. Please try again later");
+            }
         }
 
         public Window ToWindow()

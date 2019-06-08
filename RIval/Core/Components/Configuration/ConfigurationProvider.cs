@@ -34,6 +34,11 @@ namespace Ignite.Core.Components.Configuration
             CurrentProvider.Append(data, def);
         }
 
+        public void Restore<T>()
+        {
+            CurrentProvider.MakeDefault<T>();
+        }
+
         public ConfigurationProvider Add<T>(T data, T def)
         {
             CurrentProvider.Add(data, def);

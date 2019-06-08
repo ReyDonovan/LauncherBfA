@@ -28,6 +28,12 @@ namespace Ignite.Core
         {
             return (Languages)Settings.LangKey;
         }
+
+        public string GetLangShort()
+        {
+            return Settings.LangShort;
+        }
+
         public Languages FromConfig()
         {
             Settings = CfgMgr.Instance.GetProvider().Read<LangCfg>(def: false);

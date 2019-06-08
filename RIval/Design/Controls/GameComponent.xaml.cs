@@ -225,6 +225,10 @@ namespace Ignite.Design.Controls
                     {
                         StatusText.Visibility = Visibility.Hidden;
                         StatusTextDesc.Visibility = Visibility.Visible;
+
+                        PercentStatus.Text = $"0%";
+                        PercentStatus.Visibility = Visibility.Hidden;
+
                         StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_Ready");
 
                         PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
@@ -241,18 +245,13 @@ namespace Ignite.Design.Controls
                         PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
 
                         PlayButton.IsEnabled = false;
-                        CheckButton.IsEnabled = true;
+                        CheckButton.IsEnabled = false;
 
-                        MessageBoxMgr.Instance
-                            .Builder()
-                            .ChangeActionButton(true, LanguageMgr.Instance.ValueOf("MainWindow_Downloading_MBStartButton"),
-                            (e, a) =>
-                            {
-                                StartUpdate();
-                            })
-                            .SetData(MessageBoxType.Warning,
-                                LanguageMgr.Instance.ValueOf("MainWindow_Downloading_MBStartHeader"),
-                                LanguageMgr.Instance.ValueOf("MainWindow_Downloading_MBStartDesc"));
+                        MessageBoxMgr.Instance.ShowWarning(
+                            LanguageMgr.Instance.ValueOf("MainWindow_Downloading_MBStartHeader"),
+                            LanguageMgr.Instance.ValueOf("MainWindow_Downloading_MBStartDesc"));
+
+                        StartUpdate();
                     }
 
                     FileMgr.Instance.Unsubscribe<FileChecker.FileCheckerProcess>(DoFileCheck);
@@ -269,10 +268,7 @@ namespace Ignite.Design.Controls
 
             ProgressBar.Visibility = Visibility.Hidden;
             StatusText.Visibility = Visibility.Hidden;
-            StatusTextDesc.Visibility = Visibility.Hidden;
-
-            PlayButton.IsEnabled = false;
-            CheckButton.IsEnabled = true;
+            StatusTextDesc.Visibility = Visibility.Visible;
 
             WindowMgr.Instance.Run<MainWindow>((window) =>
             {
@@ -315,6 +311,11 @@ namespace Ignite.Design.Controls
 
                 MessageBoxMgr.Instance.ShowCriticalError(LanguageMgr.Instance.ValueOf("MainWindow_DownloadStop_Error_Title"), LanguageMgr.Instance.ValueOf("MainWindow_DownloadStop_Error_Desc"));
             }
+
+            ProgressBar.Visibility = Visibility.Hidden;
+            ProgressBar.Value = 0;
+            PercentStatus.Text = $"0%";
+            PercentStatus.Visibility = Visibility.Hidden;
         }
 
         private void DoFileCheck(string filename, int percentage)
@@ -324,6 +325,8 @@ namespace Ignite.Design.Controls
                 StatusText.Text = LanguageMgr.Instance.ValueOf("StatusText_CheckFileBuilds");
                 StatusTextDesc.Text = $"../{filename}";
 
+                PercentStatus.Visibility = Visibility.Visible;
+                PercentStatus.Text = $"{percentage}%";
                 ProgressBar.Visibility = Visibility.Visible;
                 ProgressBar.Value = percentage;
             });

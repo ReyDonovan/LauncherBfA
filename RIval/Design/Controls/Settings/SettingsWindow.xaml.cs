@@ -1,5 +1,6 @@
 ﻿using Ignite.Core;
 using Ignite.Core.Components.Message;
+using Ignite.Core.Components.Parameters;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,6 +20,8 @@ namespace Ignite.Design.Controls.Settings
     /// </summary>
     public partial class SettingsWindow : Window
     {
+        private UserControl Active = null;
+
         public SettingsWindow()
         {
             InitializeComponent();
@@ -68,6 +71,7 @@ namespace Ignite.Design.Controls.Settings
                 toActive.BorderBrush = new SolidColorBrush(Color.FromRgb(40, 139, 222));
                 toActive.Background = new SolidColorBrush(Color.FromRgb(28, 29, 35));
 
+                Active = element;
                 Container.Children.Add(element);
             }
         }
@@ -143,8 +147,10 @@ namespace Ignite.Design.Controls.Settings
             catch (Exception) { }
         }
 
-        private void CancelAllSettings(object sender, MouseButtonEventArgs e)
+        private void CancelAllSettings(object sender, RoutedEventArgs e)
         {
+            ParamMgr.Instance.ResetAllSettings();
+
             MessageBoxMgr.Instance.ShowSuccess(LanguageMgr.Instance.ValueOf("SettingsWindow_General_ResetMBHead"), LanguageMgr.Instance.ValueOf("SettingsWindow_General_ResetMBDescSuccess"));
 
             ApplicationEnv.Instance.Restart();
@@ -152,7 +158,22 @@ namespace Ignite.Design.Controls.Settings
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
+        }
+
+        private void AppendSettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(Active != null)
+            {
+                ParamMgr.Instance.Append(((RealmSettings)Active).Pathes);
+            }
+
+            WindowMgr.Instance.Run<MainWindow>((window) =>
+            {
+                window.RestartGameComponents();
+            });
+
+            Close();
         }
     }
 }

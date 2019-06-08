@@ -168,10 +168,7 @@
                                     </MenuItem.Icon>
                                 </MenuItem>
                                 <Separator></Separator>
-                                <MenuItem Header="Техническая поддержка" Click="MenuItem_Click">
-                                    
-                                </MenuItem>
-                                <MenuItem Header="Сменить пользователя" Click="MenuItem_Click">
+                                <MenuItem x:Name="LogoutMenuItem" Header="Сменить пользователя" Click="MenuItem_Click">
                                     <MenuItem.Icon>
                                         <Image Height="17" Width="17" Source="Resources/Icons/logout-icon.png"/>
                                     </MenuItem.Icon>

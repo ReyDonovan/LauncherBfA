@@ -20,7 +20,14 @@ namespace Ignite.Core.Components.FileSystem.Additions
 
         public void Subscribe(FileDownloaderProcess handler)
         {
-            if(!OnDownload.GetInvocationList().Contains(handler))
+            try
+            {
+                if (!OnDownload.GetInvocationList().Contains(handler))
+                {
+                    OnDownload += handler;
+                }
+            }
+            catch (NullReferenceException)
             {
                 OnDownload += handler;
             }
@@ -28,9 +35,16 @@ namespace Ignite.Core.Components.FileSystem.Additions
 
         public void Unsubscribe(FileDownloaderProcess handler)
         {
-            if (OnDownload.GetInvocationList().Contains(handler))
+            try
             {
-                OnDownload -= handler;
+                if (OnDownload.GetInvocationList().Contains(handler))
+                {
+                    OnDownload -= handler;
+                }
+            }
+            catch (NullReferenceException)
+            {
+                OnDownload += handler;
             }
         }
 
@@ -50,9 +64,11 @@ namespace Ignite.Core.Components.FileSystem.Additions
                 {
                     if (!File.Exists(item.FileName))
                     {
+                        CurrentFile = item.NiceFileName;
+
                         if (item.NiceFileName.Length > 35)
                         {
-                            CurrentFile = item.NiceFileName.Remove(35) + "...";
+                            CurrentFile = CurrentFile.Remove(35) + "...";
                         }
 
                         if (!Directory.Exists(item.FileName.Replace(item.FileName.Split('\\').Last(), "")))

@@ -47,19 +47,26 @@ namespace Ignite.Core
         public GameComponent GetCachedGameComponent(int id)
         {
             GameComponent obj = null;
-            for(int i = 0; i < HostedControls.Count; i++)
+            try
             {
-                if(id == HostedControls[i].ServerId)
+                for (int i = 0; i < HostedControls.Count; i++)
                 {
-                    obj = HostedControls[i];
+                    if (id == HostedControls[i].ServerId)
+                    {
+                        obj = HostedControls[i];
 
-                    break;
+                        break;
+                    }
                 }
             }
+            catch(Exception) { }
 
             return obj;
         }
-
+        public void RemoveCachedGameComponent(int id)
+        {
+            HostedControls.Clear();
+        }
         public void CacheGameComponent(GameComponent comp, int id)
         {
             if(!HostedControls.Any((element) => element.ServerId == id))

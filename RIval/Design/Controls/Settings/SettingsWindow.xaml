@@ -22,7 +22,7 @@
         </Image>
         <Label x:Name="Title" Content="Настройки" HorizontalAlignment="Left" Margin="17,7,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16" FontWeight="Bold" Width="303"/>
         <Border BorderBrush="#FFB4B4B4" BorderThickness="1" HorizontalAlignment="Left" Height="66" VerticalAlignment="Top" Width="795" Background="#FF727272" Opacity="0.25" Margin="1,383,0,-1"/>
-        <Button x:Name="AppendSettingsButton" Content="Применить" Height="Auto" Margin="605,395,10,13" Background="#FF288BDE" FontSize="16" Cursor="Hand"/>
+        <Button x:Name="AppendSettingsButton" Content="Применить" Height="Auto" Margin="605,395,10,13" Background="#FF288BDE" FontSize="16" Cursor="Hand" Click="AppendSettingsButton_Click"/>
         <Button x:Name="CancelButton" Content="Отмена" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="40" FontSize="16" Cursor="Hand" HorizontalContentAlignment="Left" BorderBrush="White" Background="#33C5C5C5" Margin="430,395,0,0" Click="CancelButton_Click"/>
 
         <Controls:BlurryUserControl VerticalAlignment="Top"

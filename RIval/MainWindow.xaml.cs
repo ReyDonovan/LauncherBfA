@@ -41,12 +41,19 @@ namespace Ignite
             ApplicationEnv.Instance.SetLocale(LanguageMgr.Instance.GetCurrentLang());
 
             this.Hide();
-
             AuthorizeWindow auth = new AuthorizeWindow();
             auth.Show();
 
             Ataldazar_Button_Click(Ataldazar_Button, null);
             VersionLabel.Text = $"ignite.l.v {ApplicationEnv.Instance.AppVersion}";
+        }
+
+        public void RestartGameComponents()
+        {
+            WindowMgr.Instance.RemoveCachedGameComponent(1);
+            WindowMgr.Instance.RemoveCachedGameComponent(2);
+
+            Ataldazar_Button_Click(Ataldazar_Button, null);
         }
 
         public void AppendUser(string user)
@@ -280,6 +287,10 @@ namespace Ignite
             ServersLabel.Text         = langMgr.ValueOf(ServersLabel.Name);
             LinksLabel.Text           = langMgr.ValueOf(LinksLabel.Name);
             Bugreport_Button.Content  = langMgr.ValueOf(Bugreport_Button.Name);
+            CloseTooltip.Content      = langMgr.ValueOf("Tooltip_CloseApp");
+            MinimizeTooltip.Content   = langMgr.ValueOf("Tooltip_Minimise");
+            SettingsMenuItem.Header   = langMgr.ValueOf("Tooltip_Settigs");
+            LogoutMenuItem.Header     = langMgr.ValueOf("Tooltip_Logout");
         }
 
         private void MenuItem_LangSwitch_English_MouseDown(object sender, MouseButtonEventArgs e)

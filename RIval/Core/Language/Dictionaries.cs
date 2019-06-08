@@ -39,10 +39,10 @@ namespace Ignite.Core.Language
                 new Phrase("ButtonChooseGame", "CHOOSE"),
                 new Phrase("EmptyNews_Text", "PLEASE WAIT THE ACTUAL NEWS"),
                 new Phrase("StatusText_UpdateError", "Updating error"),
-                new Phrase("StatusText_FilesDamaged", "Files damaged:"),
-                new Phrase("StatusText_FilesDamaged_One", "File damaged:"),
+                new Phrase("StatusText_FilesDamaged", "Files corrupted"),
+                new Phrase("StatusText_FilesDamaged_One", "File corrupted"),
                 new Phrase("StatusText_GameStarted", "Game already runned"),
-                new Phrase("StatusText_CheckFileBuilds", "Check file build:"),
+                new Phrase("StatusText_CheckFileBuilds", "Check files build:"),
                 new Phrase("Tb", "TB"),
                 new Phrase("Gb", "GB"),
                 new Phrase("Mb", "MB"),
@@ -99,9 +99,16 @@ namespace Ignite.Core.Language
                 new Phrase("SettingsWindow_General_CancelButton", "Cancel"),
                 new Phrase("SettingsWindow_General_AppendSettingsButton", "Append"),
 
+                //Settings Window --realm_settings
+                new Phrase("RealmSettings_Title", "Game client settings"),
+                new Phrase("AtalDazarPath_Title", "Path: "),
+                new Phrase("ChangeAtaldazar_Button", "Change"),
+                new Phrase("MotherlodePath_Title", "Path: "),
+                new Phrase("ChangeMotherLode_Button", "Change"),
+
                 //Settings Window --reset alert
                 new Phrase("SettingsWindow_General_ResetMBHead", "Reset all settings"),
-                new Phrase("SettingsWindow_General_ResetMBDesc", "All application settings will be reset. Are you sure you want to do this ?"),
+                new Phrase("SettingsWindow_General_ResetMBDesc", "All application settings will be reset. To continue, right-click on the 'Reset' button"),
                 new Phrase("SettingsWindow_General_ResetMBActionButton", "Reset"),
                 new Phrase("SettingsWindow_General_ResetMBPrimaryButton", "Cancel"),
                 new Phrase("SettingsWindow_General_ResetMBDescSuccess", "Settings successfully reset. The application will be reloaded"),
@@ -109,7 +116,7 @@ namespace Ignite.Core.Language
                 //MainWindow new filemgr system, --mb-box after checking
                 new Phrase("MainWindow_Downloading_MBStartButton", "Download"),
                 new Phrase("MainWindow_Downloading_MBStartHeader", "Needed update"),
-                new Phrase("MainWindow_Downloading_MBStartDesc", "An error occurred while checking the game client. You must download the data to continue. If you do not have unlimited Internet, you may be charged for downloading. Continue ?"),
+                new Phrase("MainWindow_Downloading_MBStartDesc", "The client files are corrupted. To continue, the application will download the necessary data to the client"),
 
                 //MainWindow download stopped success
                 new Phrase("MainWindow_DownloadStop_Success_Title", "Updating stopped"),
@@ -118,12 +125,24 @@ namespace Ignite.Core.Language
                 new Phrase("MainWindow_DownloadStop_Error_Desc", "An error occurred during the upgrade. Try running the application as an Administrator and try again. If the problem persists, contact Administrator with this error."),
                 new Phrase("MainWindow_EnoughSpace_Title", "#02-6632"),
                 new Phrase("MainWindow_EnoughSpace_Desc", "There is not enough space on the selected drive. Requires ~50GB to install"),
+
+                //Updater --window
+                new Phrase("Updater_UpdateErrorMB_Title", "#01-378"),
+                new Phrase("Updater_UpdateErrorMB_Desc", "An internal error occurred during the upgrade. Try again later, if the problem persists - contact your Administrator"),
+
+                //Tooltips --phrases
+                new Phrase("Tooltip_CloseApp", "Close the app"),
+                new Phrase("Tooltip_Minimise", "Minimize window"),
+                new Phrase("Tooltip_Settigs", "Settings"),
+                new Phrase("Tooltip_Logout", "Logout"),
+                new Phrase("Tooltip_NewsLinkHelp", "Right-click to view the full content"),
             });
 
             lng.SetLanguage(Languages.English);
 
             return lng;
         }
+
         public static LanguagePhrases CreateRussian()
         {
             var lng = new LanguagePhrases();
@@ -149,8 +168,8 @@ namespace Ignite.Core.Language
                 new Phrase("ButtonChooseGame", "УКАЗАТЬ"),
                 new Phrase("EmptyNews_Text", "ОЖИДАЙТЕ СВЕЖИХ НОВОСТЕЙ"),
                 new Phrase("StatusText_UpdateError", "Ошибка обновления"),
-                new Phrase("StatusText_FilesDamaged", "Файлы повреждены:"),
-                new Phrase("StatusText_FilesDamaged_One", "Файл поврежден:"),
+                new Phrase("StatusText_FilesDamaged", "Файлы повреждены"),
+                new Phrase("StatusText_FilesDamaged_One", "Файл поврежден"),
                 new Phrase("StatusText_GameStarted", "Игра запущена"),
                 new Phrase("StatusText_CheckFileBuilds", "Проверка целостности:"),
                 new Phrase("Tb", "ТБ"),
@@ -209,9 +228,16 @@ namespace Ignite.Core.Language
                 new Phrase("SettingsWindow_General_CancelButton", "Отменить"),
                 new Phrase("SettingsWindow_General_AppendSettingsButton", "Применить"),
 
+                //Settings Window --realm_settings
+                new Phrase("RealmSettings_Title", "Настройки игрового клиента"),
+                new Phrase("AtalDazarPath_Title", "Путь: "),
+                new Phrase("ChangeAtaldazar_Button", "Изменить"),
+                new Phrase("MotherlodePath_Title", "Путь: "),
+                new Phrase("ChangeMotherLode_Button", "Изменить"),
+
                 //Settings Window --reset alert
                 new Phrase("SettingsWindow_General_ResetMBHead", "Сброс всех настроек"),
-                new Phrase("SettingsWindow_General_ResetMBDesc", "Все настройки приложения будут сброшены. Вы уверены что хотите сделать это ?"),
+                new Phrase("SettingsWindow_General_ResetMBDesc", "Все настройки приложения будут сброшены. Для продолжения нажмите правой кнопкой мыши на кнопку 'Сбросить'"),
                 new Phrase("SettingsWindow_General_ResetMBActionButton", "Сбросить"),
                 new Phrase("SettingsWindow_General_ResetMBPrimaryButton", "Отмена"),
                 new Phrase("SettingsWindow_General_ResetMBDescSuccess", "Настройки успешно сброшены. Приложение будет перезагружено"),
@@ -219,7 +245,7 @@ namespace Ignite.Core.Language
                 //MainWindow new filemgr system, --mb-box after checking
                 new Phrase("MainWindow_Downloading_MBStartButton", "Загрузить"),
                 new Phrase("MainWindow_Downloading_MBStartHeader", "Требуется обновление"),
-                new Phrase("MainWindow_Downloading_MBStartDesc", "Во время проверки игрового клиента возникла ошибка. Для продолжения требуется загрузить данные. Если у вас не безлимитный Интернет, то за загрузку может взиматься отдельная плата. Продолжить ?"),
+                new Phrase("MainWindow_Downloading_MBStartDesc", "Файлы клиента повреждены. Для дальнейшего продолжения, приложение загрузить необходимые клиенту данные"),
 
                 //MainWindow download stopped success/errors
                 new Phrase("MainWindow_DownloadStop_Success_Title", "Обновление окончено"),
@@ -228,6 +254,17 @@ namespace Ignite.Core.Language
                 new Phrase("MainWindow_DownloadStop_Error_Desc", "Во время обновления произошла ошибка. Попробуйте запустить приложение от имени Администратора и повторить попытку. Если проблема не ушла, то обратитесь с этой ошибкой к Администратору."),
                 new Phrase("MainWindow_EnoughSpace_Title", "#02-6632"),
                 new Phrase("MainWindow_EnoughSpace_Desc", "Не достаточно места на выбранном Вами диске. Для установки требуется ~50GB"),
+
+                //Updater --window
+                new Phrase("Updater_UpdateErrorMB_Title", "#01-378"),
+                new Phrase("Updater_UpdateErrorMB_Desc", "Во время обновления произошла внутренняя ошибка. Попробуйте позже, если проблема не решилась - обратитесь к Администратору"),
+
+                //Tooltips --phrases
+                new Phrase("Tooltip_CloseApp", "Выйти из приложения"),
+                new Phrase("Tooltip_Minimise", "Свернуть окно"),
+                new Phrase("Tooltip_Settigs", "Параметры"),
+                new Phrase("Tooltip_Logout", "Сменить пользователя"),
+                new Phrase("Tooltip_NewsLinkHelp", "Для просмотра полного содержимого нажмите правой кнопкой мыши"),
             });
 
             lng.SetLanguage(Languages.Russian);

@@ -72,7 +72,7 @@ namespace Ignite.Core.Components.Auth
 
         public User GetUser()
         {
-            return Auth.CurrentUser;
+            return Auth.CurrentUser ?? null;
         }
     }
 }

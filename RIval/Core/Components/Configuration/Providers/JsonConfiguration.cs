@@ -117,7 +117,6 @@ namespace Ignite.Core.Components.Configuration.Providers
             }
 
 
-            //File.WriteAllText(path, CryptoProvider.Instance.Encrypt(JsonConvert.SerializeObject(data), m_CurrentHardware.GetOS().GetOSNumber()));
             File.WriteAllText(path, JsonConvert.SerializeObject(data));
         }
 
@@ -135,5 +134,18 @@ namespace Ignite.Core.Components.Configuration.Providers
         }
 
         public static JsonConfiguration Prototype() => new JsonConfiguration();
+
+        public void MakeDefault<T>()
+        {
+            string path = Path.Combine(CONFIG_PATH, DEFAULTS_PATH, $"{typeof(T).Name}.default.json");
+            if (File.Exists(path))
+            {
+                string data = File.ReadAllText(path);
+
+                T deserialized = JsonConvert.DeserializeObject<T>(data);
+
+                Write(deserialized, false);
+            }
+        }
     }
 }

@@ -22,7 +22,7 @@
                 </TextBlock>
             <TextBlock x:Name="Content" HorizontalAlignment="Left" Margin="10,166,0,0" TextWrapping="Wrap" Text="Сегодня мы хотим объявить о долгожданном открытии ЗБТ проекта Sierra. Все подробности можно узнать нажав на новость!" VerticalAlignment="Top" Height="49" Width="257" FontSize="12"/>
             <Grid.ToolTip>
-                <ToolTip Content="Для перехода по ссылке нажмите правую кнопку мыши"></ToolTip>
+                <ToolTip x:Name="NewsHelpLink" Content="Для перехода по ссылке нажмите правую кнопку мыши"></ToolTip>
             </Grid.ToolTip>
         </Grid>
     </Grid>

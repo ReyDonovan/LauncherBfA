@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ignite.Core;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -31,6 +32,13 @@ namespace Ignite.Design.Controls
             NewsBg.Visibility = Visibility.Visible;
             Content.Visibility = Visibility.Visible;
             Title.Visibility = Visibility.Visible;
+
+            Localize();
+        }
+
+        private void Localize()
+        {
+            NewsHelpLink.Content = LanguageMgr.Instance.ValueOf("Tooltip_NewsLinkHelp");
         }
 
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)

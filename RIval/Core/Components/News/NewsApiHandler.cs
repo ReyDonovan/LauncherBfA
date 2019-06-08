@@ -15,7 +15,7 @@ namespace Ignite.Core.Components.News
         {
             return Task.Run(() =>
             {
-                return ApiFacade.Instance.Builder<NewsRepository>().CreateRequest(ApiFacade.Instance.GetUri("api-news-get")).GetResponse();
+                return ApiFacade.Instance.Builder<NewsRepository>().CreateRequest(ApiFacade.Instance.GetUri("api-news-get") + $"/{LanguageMgr.Instance.GetLangShort()}").GetResponse();
             });
         }
     }

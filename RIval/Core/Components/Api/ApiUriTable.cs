@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ignite.Core.Components.Api
 {
@@ -16,12 +13,12 @@ namespace Ignite.Core.Components.Api
             ["api-update-check"] = "/loader/update/check",
             ["api-update-get"] = "/loader/update/get",
             ["api-update-util"] = "/loader/update/utility",
-            ["api-get-clientfiles-mini"] = "/api/client/mini/list",
-            ["api-get-clientfiles-full"] = "/api/client/full/list",
-            ["shop-link"] = "/ru-ru/shop/family/world-of-warcraft",
-            ["acp-link"] = "/ru-ru/account/management",
-            ["forum-link"] = "/ru-ru/forums",
-            ["bug-report-link"] = "/community/bugs/report",
+            ["api-get-clientfiles-mini"] = "/loader/client/mini/list",
+            ["api-get-clientfiles-full"] = "/loader/client/full/list",
+            ["shop-link"] = "/shop/family/world-of-warcraft",
+            ["acp-link"] = "/account/management",
+            ["forum-link"] = "/forums",
+            ["bug-report-link"] = "/forums/59",
             ["api-user-login"] = "/api/auth/login",
             ["api-user-register"] = "/api/auth/signup",
             ["api-user-getdata"] = "/api/auth/user",
@@ -31,12 +28,20 @@ namespace Ignite.Core.Components.Api
         {
             if(UrisTable.ContainsKey(key))
             {
-                return API_WWW + UrisTable[key];
+                if (IsApiRoute(UrisTable[key]))
+                    return API_WWW + UrisTable[key];
+                else
+                    return API_WWW + $"/{LanguageMgr.Instance.GetLangShort()}" + UrisTable[key];
             }
             else
             {
                 return "";
             }
+        }
+
+        private bool IsApiRoute(string route)
+        {
+            return route.Contains("/api") || route.Contains("/loader");
         }
     }
 }

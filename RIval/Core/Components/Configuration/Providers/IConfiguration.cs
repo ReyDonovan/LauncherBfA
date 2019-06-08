@@ -13,5 +13,7 @@ namespace Ignite.Core.Components.Configuration.Providers
         void Append<T>(T data, bool isDefault);
         T Read<T>(bool @default);
         void Build();
+
+        void MakeDefault<T>();
     }
 }

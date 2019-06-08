@@ -40,7 +40,7 @@ namespace Ignite.Design.Controls.MessageBox
             WithExit = withExit;
         }
 
-        public void EnableButtons(bool blue = true, string blueVal = "REPORT", MouseButtonEventHandler blueact = null, bool red = true, string redVal = "OK")
+        public void EnableButtons(bool blue = true, string blueVal = "REPORT", RoutedEventHandler blueact = null, bool red = true, string redVal = "OK")
         {
             if(!blue)
             {
@@ -49,7 +49,7 @@ namespace Ignite.Design.Controls.MessageBox
             else
             {
                 ReportButton.Content = blueVal;
-                ReportButton.MouseDown += blueact;
+                ReportButton.Click += blueact;
             }
 
             if(!red)

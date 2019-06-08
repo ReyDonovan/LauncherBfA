@@ -12,10 +12,12 @@ namespace Ignite.Core.Components.Game
         {
             if (Folders == null) Folders = new Dictionary<int, string>();
 
-            if (!Folders.ContainsKey(id))
+            if (Folders.ContainsKey(id))
             {
-                Folders.Add(id, path);
+                Folders.Remove(id);
             }
+
+            Folders.Add(id, path);
         }
 
         public string GetFolder(int id)

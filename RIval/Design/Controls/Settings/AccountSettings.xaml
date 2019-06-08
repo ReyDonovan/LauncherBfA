@@ -14,12 +14,7 @@
     </UserControl.Background>
     <Grid Width="566" Height="328">
         <Label Content="Настройки учетной записи" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
-        <Ellipse Margin="12,45,434,163" Width="100" Height="100" Fill="#FF934747"/>
-        <TextBlock HorizontalAlignment="Left" Margin="169,60,0,0" TextWrapping="Wrap" Text="EMail: dw12d@mail.ru" VerticalAlignment="Top"/>
-        <Border BorderBrush="White" BorderThickness="1" HorizontalAlignment="Left" Height="138" VerticalAlignment="Top" Width="544" Background="#FF727272" Opacity="0.25" Margin="12,180,0,0"/>
-        <Border BorderBrush="#FFB4B4B4" BorderThickness="1" HorizontalAlignment="Left" Height="120" VerticalAlignment="Top" Width="1" Background="#FF727272" Opacity="0.25" Margin="151,51,0,0"/>
-        <TextBlock HorizontalAlignment="Left" Margin="169,86,0,0" TextWrapping="Wrap" Text="Login: dw12d@mail.ru" VerticalAlignment="Top"/>
-        <Image HorizontalAlignment="Left" Height="26" Margin="530,13,0,0" VerticalAlignment="Top" Width="26" Source="/Ignite;component/Resources/Icons/logout-icon.png"/>
+        <Label Content="In development right now" HorizontalAlignment="Left" Margin="127,155,0,0" VerticalAlignment="Top" Foreground="White" FontSize="24" FontWeight="Bold"/>
 
     </Grid>
 </UserControl>
