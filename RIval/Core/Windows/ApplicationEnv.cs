@@ -54,6 +54,7 @@ namespace Ignite.Core
         public void ApplyStatus(ApplicationStatus status)
         {
             SetLocalStatus(status);
+
             WindowMgr.Instance.Dispatch(status);
         }
         public void SetLocalStatus(ApplicationStatus status)
