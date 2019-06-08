@@ -136,6 +136,14 @@ namespace Ignite.Core.Language
                 new Phrase("Tooltip_Settigs", "Settings"),
                 new Phrase("Tooltip_Logout", "Logout"),
                 new Phrase("Tooltip_NewsLinkHelp", "Right-click to view the full content"),
+
+                //Launch --phrases
+                new Phrase("StatusText_GamePrepare", "Preparing the game"),
+                new Phrase("StatusText_GameStarted_Error", "Initialization error"),
+
+                //MainWindow --runas
+                new Phrase("MainWindow_Init_RunAs_Header", "#01-0011"),
+                new Phrase("MainWindow_Init_RunAs_Desc", "To run the application correctly, you must run it as an Administrator")
             });
 
             lng.SetLanguage(Languages.English);
@@ -265,6 +273,14 @@ namespace Ignite.Core.Language
                 new Phrase("Tooltip_Settigs", "Параметры"),
                 new Phrase("Tooltip_Logout", "Сменить пользователя"),
                 new Phrase("Tooltip_NewsLinkHelp", "Для просмотра полного содержимого нажмите правой кнопкой мыши"),
+
+                //Launch --phrases
+                new Phrase("StatusText_GamePrepare", "Подготовка к запуску"),
+                new Phrase("StatusText_GameStarted_Error", "Ошибка запуска"),
+
+                //MainWindow --runas
+                new Phrase("MainWindow_Init_RunAs_Header", "#01-0011"),
+                new Phrase("MainWindow_Init_RunAs_Desc", "Для корректной работы приложения требуется запустить его от имени Администратора")
             });
 
             lng.SetLanguage(Languages.Russian);

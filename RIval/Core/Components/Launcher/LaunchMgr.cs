@@ -9,57 +9,47 @@ using System.Collections.Generic;
 
 namespace Ignite.Core.Components.Launcher
 {
-    public class LaunchMgr
+    public class LaunchMgr : Singleton<LaunchMgr>
     {
         public static Dictionary<string, Tuple<long, byte[]>> PatchList = new Dictionary<string, Tuple<long, byte[]>>();
 
-        public async void LaunchAndWait(string path)
+        public async Task Launch(string path)
         {
             await Task.Run(() =>
             {
                 Store.Boot();
 
-                Start(Prepare(path + "\\Wow.exe"));
+                Start(Prepare(path + "\\Wow.exe", path));
             });
         }
 
-        private string Prepare(string wowBinary)
+        private string Prepare(string appPath, string folder)
         {
-            // App info
-            var curDir = AppDomain.CurrentDomain.BaseDirectory;
-            var appPath = $"{curDir}/{wowBinary}";
-
             if (!File.Exists(appPath))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-
-                //TODO:
-                Console.WriteLine("Please copy the launcher to your WoW folder.");
+                Logger.Instance.WriteLine($"Executeable file not founded in path: '{appPath}'", LogLevel.Error);
             }
 
             // Check wow version.
             // Also allow 0 as workaround for the mac binary.
             if (Helpers.GetVersionValueFromClient(appPath, 0) != 28153 && Helpers.GetVersionValueFromClient(appPath, 0) != 0)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-
-                //TODO:
-                Console.WriteLine($"Your client version {Helpers.GetVersionValueFromClient(appPath, 0)} is not supported.");
+                Logger.Instance.WriteLine($"Your client version {Helpers.GetVersionValueFromClient(appPath, 0)} is not supported.", LogLevel.Error);
             }
 
-            var baseDirectory = Path.GetDirectoryName(curDir);
+            var baseDirectory = Path.GetDirectoryName(folder);
 
             // Check and write the cert bundle.
-            if (File.Exists($"{curDir}/ca_bundle.txt.signed"))
+            if (File.Exists($"{folder}/ca_bundle.txt.signed"))
             {
                 var hash1 = BitConverter.ToString(SHA1.Create().ComputeHash(Convert.FromBase64String(Patches.Common.CertBundleData)));
-                var hash2 = BitConverter.ToString(SHA1.Create().ComputeHash(File.ReadAllBytes($"{curDir}/ca_bundle.txt.signed")));
+                var hash2 = BitConverter.ToString(SHA1.Create().ComputeHash(File.ReadAllBytes($"{folder}/ca_bundle.txt.signed")));
 
                 if (hash1 != hash2)
-                    File.WriteAllBytes($"{curDir}/ca_bundle.txt.signed", Convert.FromBase64String(Patches.Common.CertBundleData));
+                    File.WriteAllBytes($"{folder}/ca_bundle.txt.signed", Convert.FromBase64String(Patches.Common.CertBundleData));
             }
             else
-                File.WriteAllBytes($"{curDir}/ca_bundle.txt.signed", Convert.FromBase64String(Patches.Common.CertBundleData));
+                File.WriteAllBytes($"{folder}/ca_bundle.txt.signed", Convert.FromBase64String(Patches.Common.CertBundleData));
 
             return appPath;
         }
@@ -70,8 +60,7 @@ namespace Ignite.Core.Components.Launcher
 
             try
             {
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("Starting WoW client...");
+                Logger.Instance.WriteLine($"Starting WoW ....", LogLevel.Debug);
 
                 // Start process with suspend flags.
                 if (NativeWindows.CreateProcess(null, $"{appPath}", IntPtr.Zero, IntPtr.Zero, false, 4U, IntPtr.Zero, null, ref startupInfo, out processInfo))
@@ -110,7 +99,7 @@ namespace Ignite.Core.Components.Launcher
                         {
                             initOffset = memory?.Read(mbi.BaseAddress, mbi.RegionSize.ToInt32())?.FindPattern(Store.InitializePattern) ?? 0;
 
-                            Console.WriteLine("Waiting for client initialization...");
+                            Logger.Instance.WriteLine($"Waiting initialization ...", LogLevel.Debug);
                         }
 
                         initOffset += BitConverter.ToUInt32(memory.Read((long)initOffset + memory.BaseAddress.ToInt64() + 2, 4), 0) + 10;
@@ -128,9 +117,9 @@ namespace Ignite.Core.Components.Launcher
 
                         if (certBundleOffset == 0 || signatureOffset == 0)
                         {
-                            Console.WriteLine("Can't find all patterns.");
-                            Console.WriteLine($"CertBundle: {certBundleOffset == 0}");
-                            Console.WriteLine($"Signature: {signatureOffset == 0}");
+                            Logger.Instance.WriteLine("Can't find all patterns.", LogLevel.Error);
+                            Logger.Instance.WriteLine($"CertBundle: {certBundleOffset == 0}", LogLevel.Error);
+                            Logger.Instance.WriteLine($"Signature: {signatureOffset == 0}", LogLevel.Error);
                         }
 
                         // Add the patches to the patch list.
@@ -141,10 +130,7 @@ namespace Ignite.Core.Components.Launcher
 
                         if (memory.RemapAndPatch(PatchList))
                         {
-                            Console.WriteLine("Done :) ");
-
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("You can login now.");
+                            Logger.Instance.WriteLine($"Executeable successfully patched!", LogLevel.Debug);
 
                             binary = null;
                         }
@@ -152,8 +138,7 @@ namespace Ignite.Core.Components.Launcher
                         {
                             binary = null;
 
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Error while launching the client.");
+                            Logger.Instance.WriteLine("Error while launching the client.", LogLevel.Error);
 
                             NativeWindows.TerminateProcess(processInfo.ProcessHandle, 0);
                         }
@@ -162,9 +147,12 @@ namespace Ignite.Core.Components.Launcher
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Logger.Instance.WriteLine(ex.ToString(), LogLevel.Error);
+                //ex.ToLog(LogLevel.Error);
 
                 NativeWindows.TerminateProcess(processInfo.ProcessHandle, 0);
+
+                Task.Delay(2000);
             }
         }
     }

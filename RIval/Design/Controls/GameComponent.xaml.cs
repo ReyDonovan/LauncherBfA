@@ -19,6 +19,7 @@ using System.Windows.Media.Imaging;
 using Ignite.Core.Components.Game;
 using Ignite.Core.Components.FileSystem.Additions;
 using Ignite.Core.Components.Message;
+using Ignite.Core.Components.Launcher;
 
 namespace Ignite.Design.Controls
 {
@@ -352,7 +353,7 @@ namespace Ignite.Design.Controls
             });
         }
 
-        private void PlayButton_Click(object sender, RoutedEventArgs e)
+        private async void PlayButton_Click(object sender, RoutedEventArgs e)
         {
             string[] data = null;
 
@@ -394,15 +395,41 @@ namespace Ignite.Design.Controls
                 }
             }
 
-            var prc = Process.Start(GameSettings.GetFolder(ServerId) + "\\WoW.exe");
-
             PlayButton.IsEnabled = false;
             CheckButton.IsEnabled = false;
-            
-            StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_GameStarted");
 
-            prc.EnableRaisingEvents = true;
-            prc.Exited += Prc_Exited;
+            StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_GamePrepare");
+
+            await LaunchMgr.Instance.Launch(GameSettings.GetFolder(ServerId));
+
+            var list = Process.GetProcessesByName("Wow");
+
+            try
+            {
+                if (list.Count() > 0)
+                {
+                    var prc = list[0];
+
+                    StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_GameStarted");
+
+                    prc.EnableRaisingEvents = true;
+                    prc.Exited += Prc_Exited;
+                }
+                else
+                {
+                    StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_GameStarted_Error");
+
+                    PlayButton.IsEnabled = true;
+                    CheckButton.IsEnabled = true;
+                }
+            }
+            catch(Exception)
+            {
+                StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_GameStarted_Error");
+
+                PlayButton.IsEnabled = true;
+                CheckButton.IsEnabled = true;
+            }
         }
 
         private void Prc_Exited(object sender, EventArgs e)

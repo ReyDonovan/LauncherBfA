@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ignite.Core.Components.Launcher.Data
 {
-    public class Patterns
+    public static class Patterns
     {
         public static class Common
         {

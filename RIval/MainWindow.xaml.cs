@@ -2,6 +2,7 @@
 using Ignite.Core.Components;
 using Ignite.Core.Components.Api;
 using Ignite.Core.Components.Auth;
+using Ignite.Core.Components.Message;
 using Ignite.Core.Components.Update;
 using Ignite.Design.Controls;
 using Ignite.Design.Controls.Settings;
@@ -23,6 +24,13 @@ namespace Ignite
     {
         public MainWindow()
         {
+            if(!ApplicationEnv.Instance.IsUserAdministrator())
+            {
+                MessageBoxMgr.Instance.ShowCriticalError(LanguageMgr.Instance.ValueOf("MainWindow_Init_RunAs_Header"), LanguageMgr.Instance.ValueOf("MainWindow_Init_RunAs_Desc"));
+
+                Environment.Exit(0);
+            }
+
             InitializeComponent();
 
             Logger.Instance.WriteLine($"Application booted in: {DateTime.Now.ToFileTimeUtc()}", LogLevel.Info);
