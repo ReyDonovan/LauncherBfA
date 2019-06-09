@@ -40,7 +40,6 @@ namespace Ignite.Design.Controls.Auth
             LoginButton.Content = LanguageMgr.Instance.ValueOf("Auth_LoginComponent_LoginButton");
             RegisterButton.Content = LanguageMgr.Instance.ValueOf("Auth_LoginComponent_RegisterButton");
             RecoveryPasswordLink.Content = LanguageMgr.Instance.ValueOf("Auth_LoginComponent_RecoveryPasswordLink");
-            RememberMeLabel.Content = LanguageMgr.Instance.ValueOf("Auth_LoginComponent_RememberMeCheckBox");
         }
 
         public void SetLoadingState(bool loading)
@@ -83,8 +82,7 @@ namespace Ignite.Design.Controls.Auth
             {
                 AuthMgr.Instance.SaveUser(result.Token);
 
-                if (RememberCheckBox.IsChecked == true)
-                    await AuthMgr.Instance.LoadUserAsync();
+                await AuthMgr.Instance.LoadUserAsync();
 
                 WindowMgr.Instance.Run<AuthorizeWindow>((auth) =>
                 {

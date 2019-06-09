@@ -143,7 +143,11 @@ namespace Ignite.Core.Language
 
                 //MainWindow --runas
                 new Phrase("MainWindow_Init_RunAs_Header", "#01-0011"),
-                new Phrase("MainWindow_Init_RunAs_Desc", "To run the application correctly, you must run it as an Administrator")
+                new Phrase("MainWindow_Init_RunAs_Desc", "To run the application correctly, you must run it as an Administrator"),
+
+                //New download system
+                new Phrase("Download_Speed_Title", "Download speed: {0}/s"),
+                new Phrase("Download_Speed_Downloaded", "Downloaded: {0}"),
             });
 
             lng.SetLanguage(Languages.English);
@@ -280,7 +284,11 @@ namespace Ignite.Core.Language
 
                 //MainWindow --runas
                 new Phrase("MainWindow_Init_RunAs_Header", "#01-0011"),
-                new Phrase("MainWindow_Init_RunAs_Desc", "Для корректной работы приложения требуется запустить его от имени Администратора")
+                new Phrase("MainWindow_Init_RunAs_Desc", "Для корректной работы приложения требуется запустить его от имени Администратора"),
+
+                //New download system
+                new Phrase("Download_Speed_Title", "Скорость: {0}/с"),
+                new Phrase("Download_Speed_Downloaded", "Загружено: {0}"),
             });
 
             lng.SetLanguage(Languages.Russian);

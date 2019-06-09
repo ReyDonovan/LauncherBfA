@@ -24,12 +24,12 @@ namespace Ignite
     {
         public MainWindow()
         {
-            if(!ApplicationEnv.Instance.IsUserAdministrator())
-            {
-                MessageBoxMgr.Instance.ShowCriticalError(LanguageMgr.Instance.ValueOf("MainWindow_Init_RunAs_Header"), LanguageMgr.Instance.ValueOf("MainWindow_Init_RunAs_Desc"));
+            //if(!ApplicationEnv.Instance.IsUserAdministrator())
+            //{
+            //    MessageBoxMgr.Instance.ShowCriticalError(LanguageMgr.Instance.ValueOf("MainWindow_Init_RunAs_Header"), LanguageMgr.Instance.ValueOf("MainWindow_Init_RunAs_Desc"));
 
-                Environment.Exit(0);
-            }
+            //    Environment.Exit(0);
+            //}
 
             InitializeComponent();
 

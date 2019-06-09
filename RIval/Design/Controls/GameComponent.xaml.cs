@@ -2,13 +2,11 @@
 using Ignite.Core.Components;
 using Ignite.Core.Components.News;
 using Ignite.Core.Repositories;
-using Ignite.Core.Settings;
-using Ignite.Design.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
+using Ignite.Core.Components.FileSystem.Torrent;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,6 +18,7 @@ using Ignite.Core.Components.Game;
 using Ignite.Core.Components.FileSystem.Additions;
 using Ignite.Core.Components.Message;
 using Ignite.Core.Components.Launcher;
+using Ignite.Core.Components.FileSystem;
 
 namespace Ignite.Design.Controls
 {
@@ -276,7 +275,9 @@ namespace Ignite.Design.Controls
                 window.SwitchMenuButtons(true);
             });
         }
-        private async void StartUpdate()
+
+        [Obsolete]
+        private async void StartUpdate1()
         {
             ProgressBar.Visibility = Visibility.Hidden;
             StatusText.Visibility = Visibility.Visible;
@@ -319,6 +320,51 @@ namespace Ignite.Design.Controls
             PercentStatus.Visibility = Visibility.Hidden;
         }
 
+        private async void StartUpdate()
+        {
+            ProgressBar.Visibility = Visibility.Hidden;
+            StatusText.Visibility = Visibility.Visible;
+            StatusTextDesc.Visibility = Visibility.Hidden;
+            CheckButton.IsEnabled = false;
+            PlayButton.IsEnabled = false;
+
+            TorrentMgr.Instance.Subscribe<OnTorrentChangeState>(DoTorrentDownload);
+            TorrentMgr.Instance.Subscribe<OnDownloadStopped>(DoDownloadStopped);
+
+            if (await TorrentMgr.Instance.DownloadAsync(GameSettings.GetFolder(ServerId)))
+            {
+                StatusText.Visibility = Visibility.Hidden;
+                StatusTextDesc.Visibility = Visibility.Visible;
+                StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_Ready");
+
+                PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
+
+                PlayButton.IsEnabled = true;
+                CheckButton.IsEnabled = true;
+
+            }
+            else
+            {
+                StatusText.Text = LanguageMgr.Instance.ValueOf("StatusText_FilesDamaged_One");
+                StatusTextDesc.Visibility = Visibility.Visible;
+
+                PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
+
+                PlayButton.IsEnabled = false;
+                CheckButton.IsEnabled = true;
+
+                MessageBoxMgr.Instance.ShowCriticalError(LanguageMgr.Instance.ValueOf("MainWindow_DownloadStop_Error_Title"), LanguageMgr.Instance.ValueOf("MainWindow_DownloadStop_Error_Desc"));
+            }
+
+            ProgressBar.Visibility = Visibility.Hidden;
+            ProgressBar.Value = 0;
+            PercentStatus.Text = $"0%";
+            PercentStatus.Visibility = Visibility.Hidden;
+
+            TorrentMgr.Instance.Unsubscribe<OnTorrentChangeState>(DoTorrentDownload);
+        }
+
+
         private void DoFileCheck(string filename, int percentage)
         {
             System.Windows.Application.Current.Dispatcher.BeginInvoke((Action)delegate
@@ -330,6 +376,59 @@ namespace Ignite.Design.Controls
                 PercentStatus.Text = $"{percentage}%";
                 ProgressBar.Visibility = Visibility.Visible;
                 ProgressBar.Value = percentage;
+            });
+        }
+        private void DoDownloadStopped()
+        {
+            TorrentMgr.Instance.Subscribe<OnDownloadStopped>(DoDownloadStopped);
+
+            System.Windows.Application.Current.Dispatcher.BeginInvoke((Action)delegate
+            {
+                StatusText.Visibility = Visibility.Hidden;
+                StatusTextDesc.Visibility = Visibility.Visible;
+                StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_Ready");
+
+                PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
+
+                PlayButton.IsEnabled = true;
+                CheckButton.IsEnabled = true;
+
+                PercentStatus.Visibility = Visibility.Hidden;
+                ProgressBar.Visibility = Visibility.Hidden;
+                ProgressBar.Value = 0;
+
+                MessageBoxMgr.Instance.ShowSuccess(LanguageMgr.Instance.ValueOf("MainWindow_DownloadStop_Success_Title"), LanguageMgr.Instance.ValueOf("MainWindow_DownloadStop_Success_Desc"));
+            });
+        }
+        private void DoTorrentDownload(TorrentData info)
+        {
+            System.Windows.Application.Current.Dispatcher.BeginInvoke((Action)delegate
+            {
+                PlayButton.IsEnabled = false;
+                CheckButton.IsEnabled = false;
+
+                StatusText.Visibility = Visibility.Visible;
+                StatusText.Text = LanguageMgr.Instance.ValueOf("StatusText_Download");
+
+                if (info.DownloadSpeed.Split(' ')[0] != "0")
+                {
+                    StatusTextDesc.Text = $"{string.Format(LanguageMgr.Instance.ValueOf("Download_Speed_Title"), info.DownloadSpeed)}";
+                    StatusTextDesc.Text += $" {string.Format(LanguageMgr.Instance.ValueOf("Download_Speed_Downloaded"), info.TotalRead)}";
+                    PercentStatus.Text = $"{info.Progress}%";
+                }
+                else
+                {
+                    StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_GamePrepare");
+                }
+
+                PercentStatus.Visibility = Visibility.Visible;
+                ProgressBar.Visibility = Visibility.Visible;
+                ProgressBar.Value = info.Progress;
+
+                WindowMgr.Instance.Run<MainWindow>((window) =>
+                {
+                    window.SwitchMenuButtons(false);
+                });
             });
         }
         private void DoFileDownload(string info, int percentage)
@@ -400,31 +499,22 @@ namespace Ignite.Design.Controls
 
             StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_GamePrepare");
 
-            await LaunchMgr.Instance.Launch(GameSettings.GetFolder(ServerId));
-
-            var list = Process.GetProcessesByName("Wow");
-
             try
             {
-                if (list.Count() > 0)
+                if (!await LaunchMgr.Instance.Launch(GameSettings.GetFolder(ServerId)))
                 {
-                    var prc = list[0];
+                    var prc = Process.Start(GameSettings.GetFolder(ServerId) + "\\Wow.exe");
 
                     StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_GameStarted");
 
                     prc.EnableRaisingEvents = true;
                     prc.Exited += Prc_Exited;
                 }
-                else
-                {
-                    StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_GameStarted_Error");
-
-                    PlayButton.IsEnabled = true;
-                    CheckButton.IsEnabled = true;
-                }
             }
-            catch(Exception)
+            catch(Exception ex)
             {
+                ex.ToLog(LogLevel.Error);
+
                 StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_GameStarted_Error");
 
                 PlayButton.IsEnabled = true;

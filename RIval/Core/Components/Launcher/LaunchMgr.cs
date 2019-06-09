@@ -13,13 +13,13 @@ namespace Ignite.Core.Components.Launcher
     {
         public static Dictionary<string, Tuple<long, byte[]>> PatchList = new Dictionary<string, Tuple<long, byte[]>>();
 
-        public async Task Launch(string path)
+        public async Task<bool> Launch(string path)
         {
-            await Task.Run(() =>
+            return await Task.Run(() =>
             {
                 Store.Boot();
 
-                Start(Prepare(path + "\\Wow.exe", path));
+                return Start(Prepare(path + "\\Wow.exe", path));
             });
         }
 
@@ -53,7 +53,7 @@ namespace Ignite.Core.Components.Launcher
 
             return appPath;
         }
-        private void Start(string appPath)
+        private bool Start(string appPath)
         {
             var startupInfo = new StartupInfo();
             var processInfo = new ProcessInformation();
@@ -133,6 +133,8 @@ namespace Ignite.Core.Components.Launcher
                             Logger.Instance.WriteLine($"Executeable successfully patched!", LogLevel.Debug);
 
                             binary = null;
+
+                            return true;
                         }
                         else
                         {
@@ -141,6 +143,8 @@ namespace Ignite.Core.Components.Launcher
                             Logger.Instance.WriteLine("Error while launching the client.", LogLevel.Error);
 
                             NativeWindows.TerminateProcess(processInfo.ProcessHandle, 0);
+
+                            return false;
                         }
                     }
                 }
@@ -148,12 +152,13 @@ namespace Ignite.Core.Components.Launcher
             catch (Exception ex)
             {
                 Logger.Instance.WriteLine(ex.ToString(), LogLevel.Error);
-                //ex.ToLog(LogLevel.Error);
 
                 NativeWindows.TerminateProcess(processInfo.ProcessHandle, 0);
 
-                Task.Delay(2000);
+                return false;
             }
+
+            return false;
         }
     }
 }

@@ -58,6 +58,9 @@
     <Reference Include="MHRebeller">
       <HintPath>..\..\IX.Manager\IX.Manager\bin\Debug\MHRebeller.dll</HintPath>
     </Reference>
+    <Reference Include="MonoTorrent">
+      <HintPath>C:\Users\Алексей\Desktop\monotorrent-master\src\SampleClient\bin\Debug\net472\MonoTorrent.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -105,6 +108,12 @@
     <Compile Include="Core\Components\FileSystem\FileMgr.cs" />
     <Compile Include="Core\Components\FileSystem\FileUtils.cs" />
     <Compile Include="Core\Components\FileSystem\Hashinger.cs" />
+    <Compile Include="Core\Components\FileSystem\TorrentMgr.cs" />
+    <Compile Include="Core\Components\FileSystem\Torrent\Top10Listener.cs" />
+    <Compile Include="Core\Components\FileSystem\Torrent\TorrentData.cs" />
+    <Compile Include="Core\Components\FileSystem\Torrent\TorrentDownloader.cs" />
+    <Compile Include="Core\Components\FileSystem\Torrent\TorrentDownloaderSettings.cs" />
+    <Compile Include="Core\Components\FileSystem\Torrent\TorrentExternal.cs" />
     <Compile Include="Core\Components\FileSystem\Types\FileObj.cs" />
     <Compile Include="Core\Components\FileSystem\Types\FileObjectsCollection.cs" />
     <Compile Include="Core\Components\Game\GameCfg.cs" />

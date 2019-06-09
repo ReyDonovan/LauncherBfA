@@ -44,7 +44,7 @@ namespace Ignite.Core.Components.FileSystem.Additions
             }
             catch (NullReferenceException)
             {
-                OnDownload += handler;
+                
             }
         }
 
