@@ -138,7 +138,7 @@ namespace Ignite.Core.Language
                 new Phrase("Tooltip_NewsLinkHelp", "Right-click to view the full content"),
 
                 //Launch --phrases
-                new Phrase("StatusText_GamePrepare", "Preparing the game"),
+                new Phrase("StatusText_GamePrepare", "Restoring data"),
                 new Phrase("StatusText_GameStarted_Error", "Initialization error"),
 
                 //MainWindow --runas
@@ -279,7 +279,7 @@ namespace Ignite.Core.Language
                 new Phrase("Tooltip_NewsLinkHelp", "Для просмотра полного содержимого нажмите правой кнопкой мыши"),
 
                 //Launch --phrases
-                new Phrase("StatusText_GamePrepare", "Подготовка к запуску"),
+                new Phrase("StatusText_GamePrepare", "Восстановление данных"),
                 new Phrase("StatusText_GameStarted_Error", "Ошибка запуска"),
 
                 //MainWindow --runas
