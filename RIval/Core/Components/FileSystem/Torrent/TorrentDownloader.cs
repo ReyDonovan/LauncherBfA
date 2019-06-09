@@ -200,8 +200,11 @@ namespace Ignite.Core.Components.FileSystem.Torrent
 
         private string DownloadTorrentFile(int serverId)
         {
+            if (Directory.Exists("cache\\fs_tr"))
+                Directory.CreateDirectory("cache\\fs_tr");
+
             WebClient client = new WebClient();
-            client.DownloadFile(new Uri($"http://wowignite.ru/public/cdn/{serverId}/{serverId}.torrent"), Settings.CachePath + $"\\{serverId}.torrent");
+            client.DownloadFile(new Uri($"http://wowignite.ru/public/cdn/full/{serverId}/{serverId}.torrent"), Settings.CachePath + $"\\{serverId}.torrent");
 
             return Settings.CachePath + $"\\{serverId}.torrent";
         }

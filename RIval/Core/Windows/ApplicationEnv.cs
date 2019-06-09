@@ -30,7 +30,7 @@ namespace Ignite.Core
 
         public ApplicationEnv()
         {
-            AppVersion = new Version("1.3.4.4334");
+            AppVersion = new Version("1.3.4.4963");
             CurrentHardware = GetCoreComponent<Hardware>();
             Status = ApplicationStatus.Loading;
 
@@ -91,8 +91,8 @@ namespace Ignite.Core
                 isAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
             }
             //Is not admin
-            catch (UnauthorizedAccessException ex) { }
-            catch (Exception ex) { }
+            catch (UnauthorizedAccessException) { }
+            catch (Exception) { }
 
             return isAdmin;
         }

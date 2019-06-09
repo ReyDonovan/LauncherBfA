@@ -30,6 +30,23 @@ namespace Ignite.Core.Language
                     SaveFile(def);
                     ReadFile(lang);
                 }
+                else
+                {
+                    List<Phrase> tphrases = new List<Phrase>();
+                    var tmp = File.ReadAllLines($"{DEFAULT_LANGUAGE_DIR}\\{lang.ToString().ToLower()}.{DEFAULT_LANGUAGE_EXT}");
+                    foreach (var line in tmp)
+                    {
+                        var splitted = line.Split('=');
+                        tphrases.Add(new Phrase(splitted[0], splitted[1]));
+                    }
+
+                    if(Dictionaries.CreateByLanguage(lang).Phrases.Count > tphrases.Count)
+                    {
+                        File.Delete($"{DEFAULT_LANGUAGE_DIR}\\{lang.ToString().ToLower()}.{DEFAULT_LANGUAGE_EXT}");
+
+                        ReadFile(lang);
+                    }
+                }
 
                 var lng = new LanguagePhrases();
 
