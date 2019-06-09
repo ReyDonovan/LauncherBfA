@@ -12,6 +12,7 @@ using MonoTorrent.Client.Tracker;
 using System.IO;
 using System.Diagnostics;
 using System.Threading;
+using System.Net;
 
 namespace Ignite.Core.Components.FileSystem.Torrent
 {
@@ -128,7 +129,7 @@ namespace Ignite.Core.Components.FileSystem.Torrent
 
         public bool Download()
         {
-            string torrent = DownloadTorrentFile();
+            string torrent = DownloadTorrentFile(Settings.ServerId);
 
             if (torrent != null)
             {
@@ -197,9 +198,12 @@ namespace Ignite.Core.Components.FileSystem.Torrent
             OnPeerAdd?.Invoke(sender, e);
         }
 
-        private string DownloadTorrentFile()
+        private string DownloadTorrentFile(int serverId)
         {
-            return Settings.CachePath + "\\karamel.torrent";
+            WebClient client = new WebClient();
+            client.DownloadFile(new Uri($"http://wowignite.ru/public/cdn/{serverId}/{serverId}.torrent"), Settings.CachePath + $"\\{serverId}.torrent");
+
+            return Settings.CachePath + $"\\{serverId}.torrent";
         }
 
         public void Stop()

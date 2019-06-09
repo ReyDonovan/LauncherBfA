@@ -331,7 +331,7 @@ namespace Ignite.Design.Controls
             TorrentMgr.Instance.Subscribe<OnTorrentChangeState>(DoTorrentDownload);
             TorrentMgr.Instance.Subscribe<OnDownloadStopped>(DoDownloadStopped);
 
-            if (await TorrentMgr.Instance.DownloadAsync(GameSettings.GetFolder(ServerId)))
+            if (await TorrentMgr.Instance.DownloadAsync(GameSettings.GetFolder(ServerId), ServerId))
             {
                 StatusText.Visibility = Visibility.Hidden;
                 StatusTextDesc.Visibility = Visibility.Visible;

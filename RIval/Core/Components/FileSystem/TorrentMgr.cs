@@ -12,24 +12,26 @@ namespace Ignite.Core.Components.FileSystem
             Downloader = new TorrentDownloader();
         }
 
-        public bool Download(string gamePath)
+        public bool Download(string gamePath, int serverId)
         {
-            Downloader.Boot(new TorrentDownloaderSettings().Rebase(
+            Downloader.Boot(TorrentDownloaderSettings.Build(
                 gamePath, 
                 "cache\\fs_tr", 
                 "cd436cc6804df0ef6bc6d138435b8331f83f0934d1a96f6900f660f54680bcea.data", 
+                serverId,
                 0, 
                 0));
 
             return Downloader.Download();
         }
 
-        public async Task<bool> DownloadAsync(string gamePath)
+        public async Task<bool> DownloadAsync(string gamePath, int serverId)
         {
-            Downloader.Boot(new Torrent.TorrentDownloaderSettings().Rebase(
+            Downloader.Boot(TorrentDownloaderSettings.Build(
                 gamePath, 
                 "cache\\fs_tr", 
                 "cd436cc6804df0ef6bc6d138435b8331f83f0934d1a96f6900f660f54680bcea.data", 
+                serverId,
                 0, 
                 0));
 

@@ -13,19 +13,21 @@ namespace Ignite.Core.Components.FileSystem.Torrent
         public string FastResumeFile { get; private set; }
         public int MaxDownloadSpeed  { get; private set; }
         public int MaxUploadSpeed    { get; private set; }
+        public int ServerId          { get; private set; }
 
-        public static TorrentDownloaderSettings Build(string download, string cache, string frFile, int dspeed = 0, int uspeed = 0)
+        public static TorrentDownloaderSettings Build(string download, string cache, string frFile, int serverId, int dspeed = 0, int uspeed = 0)
         {
-            return new TorrentDownloaderSettings().Rebase(download, cache, frFile, dspeed, uspeed);
+            return new TorrentDownloaderSettings().Rebase(download, cache, frFile, serverId, dspeed, uspeed);
         }
 
-        public TorrentDownloaderSettings Rebase(string download, string cache, string frFile, int dspeed = 0, int uspeed = 0)
+        public TorrentDownloaderSettings Rebase(string download, string cache, string frFile, int serverId, int dspeed = 0, int uspeed = 0)
         {
             DownloadPath = download;
             CachePath = cache;
             FastResumeFile = frFile;
             MaxDownloadSpeed = dspeed;
             MaxUploadSpeed = uspeed;
+            ServerId = serverId;
 
             return this;
         }
