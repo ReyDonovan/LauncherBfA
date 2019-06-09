@@ -200,7 +200,7 @@ namespace Ignite.Core.Components.FileSystem.Torrent
 
         private string DownloadTorrentFile(int serverId)
         {
-            if (Directory.Exists("cache\\fs_tr"))
+            if (!Directory.Exists("cache\\fs_tr"))
                 Directory.CreateDirectory("cache\\fs_tr");
 
             WebClient client = new WebClient();

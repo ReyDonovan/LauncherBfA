@@ -419,6 +419,7 @@ namespace Ignite.Design.Controls
                 else
                 {
                     StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_GamePrepare");
+                    PercentStatus.Text = $"{info.Progress}%";
                 }
 
                 PercentStatus.Visibility = Visibility.Visible;
@@ -456,69 +457,73 @@ namespace Ignite.Design.Controls
         {
             string[] data = null;
 
-            try
+            if (FileMgr.Instance.IsWowDirectory(GameSettings.GetFolder(ServerId)))
             {
-                data = File.ReadAllLines(GameSettings.GetFolder(ServerId) + "\\Wtf\\Config.wtf");
-                File.Delete(GameSettings.GetFolder(ServerId) + "\\Wtf\\Config.wtf");
 
-                for(int i = 0; i < data.Length; i++)
+                try
                 {
-                    if(data[i].Contains("SET portal"))
+                    data = File.ReadAllLines(GameSettings.GetFolder(ServerId) + "\\Wtf\\Config.wtf");
+                    File.Delete(GameSettings.GetFolder(ServerId) + "\\Wtf\\Config.wtf");
+
+                    for (int i = 0; i < data.Length; i++)
                     {
-                        data[i] = $"SET portal \"{ApplicationEnv.Instance.GetPortal(ServerId)}\"";
+                        if (data[i].Contains("SET portal"))
+                        {
+                            data[i] = $"SET portal \"{ApplicationEnv.Instance.GetPortal(ServerId)}\"";
+                        }
                     }
                 }
-            }
-            catch(Exception)
-            {
-                data = new string[]
+                catch (Exception)
                 {
+                    data = new string[]
+                    {
                     $"SET portal \"{ApplicationEnv.Instance.GetPortal(ServerId)}\""
-                };
-            }
+                    };
+                }
 
-            using (FileStream io = new FileStream(GameSettings.GetFolder(ServerId) + "\\Wtf\\Config.wtf", FileMode.OpenOrCreate))
-            {
-                bool adjusted = false;
-
-                foreach (var line in data)
+                using (FileStream io = new FileStream(GameSettings.GetFolder(ServerId) + "\\Wtf\\Config.wtf", FileMode.OpenOrCreate))
                 {
-                    if (line.Contains("SET portal") && adjusted) continue;
-                    if (line.Contains("SET portal") && !adjusted)
+                    bool adjusted = false;
+
+                    foreach (var line in data)
                     {
-                        adjusted = true;
+                        if (line.Contains("SET portal") && adjusted) continue;
+                        if (line.Contains("SET portal") && !adjusted)
+                        {
+                            adjusted = true;
+                        }
+
+                        byte[] buffer = Encoding.UTF8.GetBytes(line + Environment.NewLine);
+                        io.Write(buffer, 0, buffer.Length);
                     }
-
-                    byte[] buffer = Encoding.UTF8.GetBytes(line + Environment.NewLine);
-                    io.Write(buffer, 0, buffer.Length);
                 }
-            }
 
-            PlayButton.IsEnabled = false;
-            CheckButton.IsEnabled = false;
+                PlayButton.IsEnabled = false;
+                CheckButton.IsEnabled = false;
 
-            StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_GamePrepare");
+                StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_GamePrepare");
 
-            try
-            {
-                if (!await LaunchMgr.Instance.Launch(GameSettings.GetFolder(ServerId)))
+                try
                 {
-                    var prc = Process.Start(GameSettings.GetFolder(ServerId) + "\\Wow.exe");
+                    if (!await LaunchMgr.Instance.Launch(GameSettings.GetFolder(ServerId)))
+                    {
+                        var prc = Process.Start(GameSettings.GetFolder(ServerId) + "\\Wow.exe");
 
-                    StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_GameStarted");
+                        StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_GameStarted");
 
-                    prc.EnableRaisingEvents = true;
-                    prc.Exited += Prc_Exited;
+                        prc.EnableRaisingEvents = true;
+                        prc.Exited += Prc_Exited;
+                    }
                 }
-            }
-            catch(Exception ex)
-            {
-                ex.ToLog(LogLevel.Error);
+                catch (Exception ex)
+                {
+                    ex.ToLog(LogLevel.Error);
 
-                StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_GameStarted_Error");
+                    StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_GameStarted_Error");
 
-                PlayButton.IsEnabled = true;
-                CheckButton.IsEnabled = true;
+                    PlayButton.IsEnabled = true;
+                    CheckButton.IsEnabled = true;
+                }
             }
         }
 

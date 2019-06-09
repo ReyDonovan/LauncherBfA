@@ -1,4 +1,5 @@
 ﻿using Ignite.Core.Components.FileSystem.Torrent;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Ignite.Core.Components.FileSystem
@@ -10,6 +11,9 @@ namespace Ignite.Core.Components.FileSystem
         public TorrentMgr()
         {
             Downloader = new TorrentDownloader();
+
+            if (!Directory.Exists("cache\\fs_tr"))
+                 Directory.CreateDirectory("cache\\fs_tr");
         }
 
         public bool Download(string gamePath, int serverId)
