@@ -258,11 +258,21 @@ namespace Ignite.Design.Controls
                 }
                 else
                 {
+                    StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("MainWindow_DownloadStop_Error_Title");
+
+                    CheckButton.IsEnabled = true;
+                    PlayButton.IsEnabled = false;
+
                     MessageBoxMgr.Instance.ShowCriticalError(LanguageMgr.Instance.ValueOf("MainWindow_DownloadStop_Error_Title"), LanguageMgr.Instance.ValueOf("MainWindow_DownloadStop_Error_Desc"));
                 }
             }
             else
             {
+                StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("MainWindow_EnoughSpace_Title");
+
+                CheckButton.IsEnabled = true;
+                PlayButton.IsEnabled = false;
+
                 MessageBoxMgr.Instance.ShowCriticalError(LanguageMgr.Instance.ValueOf("MainWindow_EnoughSpace_Title"), LanguageMgr.Instance.ValueOf("MainWindow_EnoughSpace_Desc"));
             }
 
@@ -513,6 +523,19 @@ namespace Ignite.Design.Controls
 
                         prc.EnableRaisingEvents = true;
                         prc.Exited += Prc_Exited;
+                    }
+                    else
+                    {
+                        var prcList = Process.GetProcessesByName("Wow");
+                        if(prcList.Length > 0)
+                        {
+                            var prc = prcList[0];
+
+                            StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_GameStarted");
+
+                            prc.EnableRaisingEvents = true;
+                            prc.Exited += Prc_Exited;
+                        }
                     }
                 }
                 catch (Exception ex)

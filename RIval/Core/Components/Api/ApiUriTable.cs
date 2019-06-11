@@ -10,11 +10,11 @@ namespace Ignite.Core.Components.Api
         private Dictionary<string, string> UrisTable = new Dictionary<string, string>()
         {
             ["api-news-get"] = "/api/articles",
-            ["api-update-check"] = "/loader/update/check",
-            ["api-update-get"] = "/loader/update/get",
-            ["api-update-util"] = "/loader/update/utility",
-            ["api-get-clientfiles-mini"] = "/loader/client/mini/list",
-            ["api-get-clientfiles-full"] = "/loader/client/full/list",
+            ["api-update-check"] = "/api/update/check",
+            ["api-update-get"] = "/api/update/get",
+            ["api-update-util"] = "/api/update/utility",
+            ["api-get-clientfiles-mini"] = "/api/client/mini/list",
+            ["api-get-clientfiles-full"] = "/api/client/full/list",
             ["shop-link"] = "/shop/family/world-of-warcraft",
             ["acp-link"] = "/account/management",
             ["forum-link"] = "/forums",

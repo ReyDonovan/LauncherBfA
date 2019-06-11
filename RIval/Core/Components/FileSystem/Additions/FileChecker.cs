@@ -49,7 +49,13 @@ namespace Ignite.Core.Components.FileSystem.Additions
                 foreach (var item in files)
                 {
                     current = item.NiceFileName;
-                    OnProcess(item.NiceFileName, ((currentFileChecked * 100) / files.Count));
+
+                    if (item.NiceFileName.Length > 35)
+                    {
+                        current = current.Remove(35) + "...";
+                    }
+
+                    OnProcess(current, ((currentFileChecked * 100) / files.Count));
 
                     if (!File.Exists(item.FileName))
                     {

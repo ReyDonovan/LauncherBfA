@@ -392,7 +392,6 @@
     <Resource Include="Resources\Images\Minis\logo_gavno.png" />
     <Resource Include="Resources\Images\Bg\bfa.jpeg" />
     <Resource Include="Resources\Images\Bg\auth_bg.jpg" />
-    <Resource Include="Image1.png" />
     <Resource Include="Resources\Icons\icon-exit.png" />
     <Resource Include="Resources\Icons\lang-icon.png" />
     <Resource Include="Resources\Icons\profile-icon.png" />

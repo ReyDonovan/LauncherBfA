@@ -32,7 +32,7 @@ namespace Ignite.Core.Components.Launcher
 
             // Check wow version.
             // Also allow 0 as workaround for the mac binary.
-            if (Helpers.GetVersionValueFromClient(appPath, 0) != 28153 && Helpers.GetVersionValueFromClient(appPath, 0) != 0)
+            if (Helpers.GetVersionValueFromClient(appPath, 0) != 30706 && Helpers.GetVersionValueFromClient(appPath, 0) != 0)
             {
                 Logger.Instance.WriteLine($"Your client version {Helpers.GetVersionValueFromClient(appPath, 0)} is not supported.", LogLevel.Error);
             }

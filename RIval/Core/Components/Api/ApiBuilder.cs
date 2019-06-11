@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
-using System.Windows;
 using Newtonsoft.Json;
 using System.Net.Http;
 using Headers = System.Collections.Generic.Dictionary<string, string>;
-using System.Net.Http.Headers;
 
 namespace Ignite.Core.Components.Api
 {
