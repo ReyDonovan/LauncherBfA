@@ -39,8 +39,8 @@ namespace Ignite.Core
 
         private void BootIps()
         {
-            Servers.Add(1, "77.82.86.211");
-            Servers.Add(2, "77.82.86.211");
+            Servers.Add(1, "logon.wowignite.ru");
+            Servers.Add(2, "logon.wowignite.ru");
         }
         public string GetPortal(int serverId)
         {
@@ -90,7 +90,7 @@ namespace Ignite.Core
                 WindowsPrincipal principal = new WindowsPrincipal(user);
                 isAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
             }
-            //Is not admin
+            
             catch (UnauthorizedAccessException) { }
             catch (Exception) { }
 
