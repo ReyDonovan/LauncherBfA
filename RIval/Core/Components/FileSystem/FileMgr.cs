@@ -135,5 +135,18 @@ namespace Ignite.Core.Components
                 }
             });
         }
+
+        public Task<string> CacheImage(string path, string url)
+        {
+            return Task.Run(() =>
+            {
+                System.Net.WebClient client = new System.Net.WebClient();
+
+                var localname = url.Split('/').Last();
+                client.DownloadFile(url, $"{path}\\{localname}");
+
+                return path + localname;
+            });
+        }
     }
 }

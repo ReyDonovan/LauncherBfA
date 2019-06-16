@@ -11,6 +11,7 @@ namespace Ignite.Core.Components.Auth.Types
         public string UserName { get; set; }
         public string Email { get; set; }
         public string Token { get; set; }
+        public string AvatarRemote { get; set; }
 
         public static string GetToken(string cryptoString)
         {

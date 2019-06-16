@@ -1,4 +1,6 @@
 ﻿using Ignite.Core.Components.Auth.Types;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Ignite.Core.Components.Auth
@@ -58,6 +60,33 @@ namespace Ignite.Core.Components.Auth
         public void SaveUser(string token)
         {
             Auth.Save(token);
+        }
+
+        public async Task<string> GetUserAvatar()
+        {
+            var user = GetUser();
+            if (!string.IsNullOrEmpty(user.AvatarRemote))
+            {
+                var avatar = user.AvatarRemote.Split('/').Last();
+                if (!string.IsNullOrEmpty(avatar))
+                {
+                    if (!File.Exists("cache\\auth\\" + avatar))
+                    {
+                        return await FileMgr.Instance.CacheImage("cache\\auth", user.AvatarRemote);
+                    }
+                    else
+                    {
+                        return await Task.Run(() =>
+                        {
+                            return "cache\\auth\\" + avatar;
+                        });
+                    }
+                }
+                else
+                    return null;
+            }
+            else
+                return null;
         }
 
         public T GetFacadeAccessor<T>() where T : Facade

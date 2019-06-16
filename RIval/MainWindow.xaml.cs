@@ -64,9 +64,10 @@ namespace Ignite
             Ataldazar_Button_Click(Ataldazar_Button, null);
         }
 
-        public void AppendUser(string user)
+        public async void AppendUser(string user)
         {
             UserProfileButton.Text = user.ToUpper();
+            AvatarBrush.ImageSource = new BitmapImage(new Uri(await AuthMgr.Instance.GetUserAvatar()));
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

@@ -25,7 +25,7 @@
                     HorizontalAlignment="Stretch"
                     Height="530"
                     BlurContainer="{Binding ElementName=InnerBlurContainer}"
-                    Magnification="0.75" Background="#FF191919" BlurRadius="20" Margin="0,54,267,0" BorderBrush="#FFB2AFAF" BorderThickness="0,0,1,0" Grid.ColumnSpan="3" Opacity="0.65"/>
+                    Magnification="0.75" Background="#FF151515" BlurRadius="20" Margin="0,54,267,0" BorderBrush="#FFB2AFAF" BorderThickness="0,0,1,0" Grid.ColumnSpan="3" Opacity="0.65"/>
                 <TextBlock x:Name="ServersLabel" Grid.Column="2" HorizontalAlignment="Left" Margin="10,66,0,0" TextWrapping="Wrap" Text="СЕРВЕРА" VerticalAlignment="Top">
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
@@ -155,7 +155,7 @@
                     </Image>
                     <Ellipse Width="45" Height="45" Margin="703,21,83,9">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="Resources/Images/Minis/wow_logo.png" Stretch="UniformToFill"/>
+                            <ImageBrush x:Name="AvatarBrush" ImageSource="Resources/Images/Minis/wow_logo.png" Stretch="UniformToFill"/>
                         </Ellipse.Fill>
                     </Ellipse>
                     <Border x:Name="SettingsBlock" BorderBrush="#FF939393" BorderThickness="0,1,1,1" HorizontalAlignment="Left" Height="32" Margin="72,27,0,0" VerticalAlignment="Top" Width="37" Opacity="0.3" Grid.Column="1" Background="#FF1F1F1F" MouseEnter="UsernameBlock_MouseEnter" MouseLeave="UsernameBlock_MouseLeave"/>

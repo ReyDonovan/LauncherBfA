@@ -98,19 +98,11 @@ namespace Ignite.Core.Components.News
             LastUpdate = DateTime.MinValue;
         }
 
-        private Task<string> LoadImageToLocal(string remote)
+        public async Task<string> LoadImageToLocal(string remote)
         {
-            return Task.Run(() =>
-            {
-                System.Net.WebClient client = new System.Net.WebClient();
-
-                var localname = remote.Split('/').Last();
-                client.DownloadFile(remote, $"{CACHE_STORAGE_PATH}\\{localname}");
-
-                return CACHE_STORAGE_PATH + localname;
-            });
+            return await FileMgr.Instance.CacheImage(CACHE_STORAGE_PATH, remote);
         }
-        private bool IsImageFinded(string local)
+        public bool IsImageFinded(string local)
         {
             return File.Exists(CACHE_STORAGE_PATH + "\\" + local);
         }
