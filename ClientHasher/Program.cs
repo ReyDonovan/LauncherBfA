@@ -67,7 +67,7 @@ namespace ClientHasher
                 foreach(var file in files)
                 {
                     if (file.Contains("ClientHasher")) continue;
-                    if (file.Contains($"{prefix}_patch.rem")) continue;
+                    if (file.Contains($"_patch.rem")) continue;
 
                     Console.WriteLine($"Founded: {file}.");
                     Console.Write(" -- Hashing ...");
@@ -82,7 +82,7 @@ namespace ClientHasher
             }
 
             Console.WriteLine($"Hashing stop!");
-            Console.WriteLine($"All elapsed time: {ElapsedTime.TotalSeconds} sec.");
+            Console.WriteLine($"Has been time elapsed: {ElapsedTime.TotalSeconds} sec.");
         }
 
         private static string GetHash(string fullPath)
@@ -96,7 +96,7 @@ namespace ClientHasher
             }
         }
 
-        private static String GetHash<T>(Stream stream) where T : HashAlgorithm
+        private static string GetHash<T>(Stream stream) where T : HashAlgorithm
         {
             Stopwatch watcher = new Stopwatch();
             watcher.Start();
@@ -113,7 +113,7 @@ namespace ClientHasher
                 }
             }
             watcher.Stop();
-            Console.WriteLine($" OK! Elapsed: {watcher.Elapsed.TotalSeconds} sec.");
+            Console.WriteLine($" OK! Elapsed: {watcher.Elapsed.TotalSeconds} sec(-s)");
             ElapsedTime += watcher.Elapsed;
 
             return sb.ToString();
