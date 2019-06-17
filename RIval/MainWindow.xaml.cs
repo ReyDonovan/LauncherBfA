@@ -22,6 +22,8 @@ namespace Ignite
     /// </summary>
     public partial class MainWindow : Window, IWindowDispatcher
     {
+        private WindowState PrevState { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -364,6 +366,20 @@ namespace Ignite
         {
             SettingsWindow settings = new SettingsWindow();
             settings.ShowDialog();
+        }
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            if (WindowState == WindowState.Minimized)
+                Hide();
+            else
+                PrevState = WindowState;
+        }
+
+        private void TaskbarIcon_TrayLeftMouseDown(object sender, RoutedEventArgs e)
+        {
+            Show();
+            WindowState = PrevState;
         }
     }
 }

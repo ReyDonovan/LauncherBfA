@@ -49,6 +49,9 @@
     <Reference Include="BlurryControls.resources">
       <HintPath>..\..\..\..\Downloads\BlurryControls-master\BlurryControls-master\BlurryControls\bin\Debug\de\BlurryControls.resources.dll</HintPath>
     </Reference>
+    <Reference Include="Hardcodet.Wpf.TaskbarNotification, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.8\lib\net451\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
+    </Reference>
     <Reference Include="IX.Spider">
       <HintPath>..\..\IX.Manager\IX.Manager\bin\Debug\IX.Spider.dll</HintPath>
     </Reference>

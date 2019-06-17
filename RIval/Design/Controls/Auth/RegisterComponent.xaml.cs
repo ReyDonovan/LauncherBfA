@@ -32,7 +32,6 @@ namespace Ignite.Design.Controls.Auth
 
         private void Localize()
         {
-            PrivacyLink.Content = LanguageMgr.Instance.ValueOf("Auth_PrivacyLink");
             AccountNameHelpText.Content = LanguageMgr.Instance.ValueOf("Auth_RegisterComponent_AccountNameHelpText");
             PasswordNameHelpText.Content = LanguageMgr.Instance.ValueOf("Auth_RegisterComponent_PasswordNameHelpText");
             QuestionNameHelpText.Content = LanguageMgr.Instance.ValueOf("Auth_RegisterComponent_QuestionNameHelpText");

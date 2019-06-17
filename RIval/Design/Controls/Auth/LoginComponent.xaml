@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ignite.Design.Controls.Auth"
              xmlns:gif="http://wpfanimatedgif.codeplex.com" x:Class="Ignite.Design.Controls.Auth.LoginComponent"
-             mc:Ignorable="d" Width="376" Height="474">
+             mc:Ignorable="d" Width="376" Height="474" MouseDown="UserControl_MouseDown">
     <UserControl.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FF171723" Offset="0"/>
@@ -14,10 +14,8 @@
     </UserControl.Background>
     <Grid Margin="0">
         <TextBox x:Name="EmailBox" HorizontalAlignment="Left" Height="29" Margin="22,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" FontSize="16" Background="#FF151723" Opacity="0.85" Foreground="#FFEAE7E7" BorderBrush="#FF818181" SelectionBrush="White"/>
-        <Button x:Name="LoginButton" Content="Войти" HorizontalAlignment="Left" Margin="22,301,0,0" VerticalAlignment="Top" Width="333" Height="36" FontSize="16" Background="#FF0E0E13" Cursor="Hand" Foreground="White" Click="LoginButton_Click"/>
-        <Button x:Name="RegisterButton" Content="Создать учетную запись" HorizontalAlignment="Left" Margin="22,345,0,0" VerticalAlignment="Top" Width="333" Height="35" Background="#FF288BDE" FontSize="16" Cursor="Hand" Foreground="#FFFFFCFC" Click="Button_Click"/>
-        <Label x:Name="RecoveryPasswordLink" Content="Восстановление доступа" HorizontalAlignment="Left" Margin="22,433,0,0" VerticalAlignment="Top" Width="208" Foreground="#FF178BEC" FontSize="16" Cursor="Hand" FontStyle="Italic"/>
-        <Rectangle Fill="#FFB4B2B2" HorizontalAlignment="Left" Height="1" Margin="22,287,0,0" Stroke="#FFB0B0B0" VerticalAlignment="Top" Width="333" Opacity="0.5"/>
+        <Button x:Name="LoginButton" Content="Войти" HorizontalAlignment="Left" Margin="22,322,0,0" VerticalAlignment="Top" Width="333" Height="36" FontSize="16" Background="#FF171723" Cursor="Hand" Foreground="White" Click="LoginButton_Click"/>
+        <Button x:Name="RegisterButton" Content="Создать учетную запись" HorizontalAlignment="Left" Margin="22,366,0,0" VerticalAlignment="Top" Width="333" Height="35" Background="#FF288BDE" FontSize="16" Cursor="Hand" Foreground="#FFFFFCFC" Click="Button_Click"/>
         <Image HorizontalAlignment="Left" Height="60" Margin="118,74,0,0" VerticalAlignment="Top" Width="133" Source="/Ignite;component/Resources/Images/Minis/bez_wow.png"/>
         <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="22,243,0,0" VerticalAlignment="Top" Width="333" Height="29" Background="#FF151723" BorderBrush="#FF818181" Foreground="#FFEAE7E7" SelectionBrush="White" Opacity="0.85" FontSize="16"/>
         <Image x:Name="LangSwitcher" HorizontalAlignment="Left" Height="33" Margin="336,433,0,0" VerticalAlignment="Top" Width="30" Source="/Ignite;component/Resources/Icons/lang-icon.png" MouseDown="Image_MouseDown">

@@ -41,7 +41,6 @@ namespace Ignite.Design.Controls.Auth
             PasswordHelpText.Content = LanguageMgr.Instance.ValueOf("Auth_LoginComponent_PasswordHelpText");
             LoginButton.Content = LanguageMgr.Instance.ValueOf("Auth_LoginComponent_LoginButton");
             RegisterButton.Content = LanguageMgr.Instance.ValueOf("Auth_LoginComponent_RegisterButton");
-            RecoveryPasswordLink.Content = LanguageMgr.Instance.ValueOf("Auth_LoginComponent_RecoveryPasswordLink");
         }
 
         public void SetLoadingState(bool loading)
@@ -123,6 +122,11 @@ namespace Ignite.Design.Controls.Auth
         private void MenuItem_LangSwitch_Russian_Click(object sender, RoutedEventArgs e)
         {
             LanguageMgr.Instance.SetLang(Languages.Russian);
+        }
+
+        private void UserControl_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            
         }
     }
 }
