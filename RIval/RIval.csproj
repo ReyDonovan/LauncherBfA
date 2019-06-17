@@ -40,7 +40,7 @@
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>111111.ico</ApplicationIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BlurryControls">
@@ -371,21 +371,16 @@
     <Resource Include="Resources\Icons\HeaderMenu\support.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="111111.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\Minis\bug_min.png" />
     <Resource Include="Resources\Images\Minis\discord_min.png" />
     <Resource Include="Resources\Images\Minis\forum_min.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Minis\wow_logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Minis\legion_min.png" />
     <Resource Include="Resources\Images\Minis\bfa_min.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Images\Minis\wow_logo.png" />
     <Resource Include="Resources\Images\Bg\magazine_bg.png" />
     <Resource Include="Resources\Loaders\loader.gif" />
     <Resource Include="Resources\Images\Bg\bfa_bg_1.jpg" />
@@ -401,7 +396,7 @@
     <Resource Include="Resources\Icons\profile-icon.png" />
     <Resource Include="Resources\Icons\settings-hm-icon.png" />
     <Resource Include="Resources\Icons\logout-icon.png" />
-    <Content Include="Resources\Icons\loader.svg" />
+    <Resource Include="icon.ico" />
     <Resource Include="Resources\Icons\MessageBox\mb-icon-error.png" />
     <Resource Include="Resources\Icons\MessageBox\mb-icon-warning.png" />
     <Resource Include="Resources\Icons\MessageBox\mb-icon-success.png" />

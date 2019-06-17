@@ -19,7 +19,7 @@
                     <ColumnDefinition Width="97*"/>
                 </Grid.ColumnDefinitions>
                 <tb:TaskbarIcon Visibility="Visible"
-                ToolTipText="Ignite" IconSource="111111.ico" TrayLeftMouseDown="TaskbarIcon_TrayLeftMouseDown"/>
+                ToolTipText="Ignite" IconSource="icon.ico" TrayLeftMouseDown="TaskbarIcon_TrayLeftMouseDown"/>
 
                 <Image x:Name="PartiallyBluredDoge"
                        Stretch="UniformToFill"
