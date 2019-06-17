@@ -97,7 +97,7 @@ namespace Ignite.Design.Controls
                             StatusTextDesc.Visibility = Visibility.Visible;
                             StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_FilesDamaged");
 
-                            PlayButton.Content = LanguageMgr.Instance.ValueOf("ButtonChooseGame");
+                            PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
 
                             PlayButton.IsEnabled = false;
                             CheckButton.IsEnabled = true;
