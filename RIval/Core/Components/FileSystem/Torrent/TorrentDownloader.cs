@@ -129,65 +129,74 @@ namespace Ignite.Core.Components.FileSystem.Torrent
 
         public bool Download()
         {
-            string torrent = DownloadTorrentFile(Settings.ServerId);
-
-            if (torrent != null)
+            try
             {
-                MonoTorrent.Common.Torrent decoded = null;
+                string torrent = DownloadTorrentFile(Settings.ServerId);
 
-                try
+                if (torrent != null)
                 {
-                    decoded = MonoTorrent.Common.Torrent.Load(torrent);
-                }
-                catch (Exception decEx)
-                {
-                    decEx.ToLog(LogLevel.Error);
+                    MonoTorrent.Common.Torrent decoded = null;
 
-                    Stop();
-
-                    return false;
-                }
-
-                External.AppendManager(decoded, Settings.DownloadPath, new TorrentSettings(5, 100, Settings.MaxDownloadSpeed, Settings.MaxUploadSpeed));
-                if (External.TryGetFastResume(Settings.GetResumeFile()))
-                {
-                    if (External.FastResume.ContainsKey(decoded.InfoHash.ToHex()))
+                    try
                     {
-                        External.Manager.LoadFastResume(new FastResume((BEncodedDictionary)External.FastResume[decoded.InfoHash.ToHex()]));
+                        decoded = MonoTorrent.Common.Torrent.Load(torrent);
                     }
-                }
-
-                External.Engine.Register(External.Manager);
-                External.Manager.PeersFound += OnPeersFounded;
-
-                External.Manager.StartAsync().Wait();
-
-                var thread = new Thread(() =>
-                {
-                    while (External.Manager.State != TorrentState.Stopped)
+                    catch (Exception decEx)
                     {
+                        decEx.ToLog(LogLevel.Error);
 
-                        var data = new TorrentData();
-                        data.Build(
-                            FileUtils.FormatByte(External.Engine.TotalDownloadSpeed),
-                            FileUtils.FormatByte(External.Engine.DiskManager.TotalRead),
-                            FileUtils.FormatByte(External.Engine.DiskManager.TotalWritten),
-                            FileUtils.FormatByte(External.Engine.DiskManager.WriteRate),
-                            (int)External.Manager.Progress);
+                        Stop();
 
-                        OnChangeState?.Invoke(data);
-
-                        if (data.Progress == 100) break;
-
-                        Thread.Sleep(500);
+                        return false;
                     }
 
-                    DownloadStopped();
-                });
+                    External.AppendManager(decoded, Settings.DownloadPath, new TorrentSettings(5, 100, Settings.MaxDownloadSpeed, Settings.MaxUploadSpeed));
+                    if (External.TryGetFastResume(Settings.GetResumeFile()))
+                    {
+                        if (External.FastResume.ContainsKey(decoded.InfoHash.ToHex()))
+                        {
+                            External.Manager.LoadFastResume(new FastResume((BEncodedDictionary)External.FastResume[decoded.InfoHash.ToHex()]));
+                        }
+                    }
 
-                thread.Start();
+                    External.Engine.Register(External.Manager);
+                    External.Manager.PeersFound += OnPeersFounded;
 
-                return true;
+                    External.Manager.StartAsync().Wait();
+
+                    var thread = new Thread(() =>
+                    {
+                        while (External.Manager.State != TorrentState.Stopped)
+                        {
+
+                            var data = new TorrentData();
+                            data.Build(
+                                FileUtils.FormatByte(External.Engine.TotalDownloadSpeed),
+                                FileUtils.FormatByte(External.Engine.DiskManager.TotalRead),
+                                FileUtils.FormatByte(External.Engine.DiskManager.TotalWritten),
+                                FileUtils.FormatByte(External.Engine.DiskManager.WriteRate),
+                                (int)External.Manager.Progress);
+
+                            OnChangeState?.Invoke(data);
+
+                            if (data.Progress == 100) break;
+
+                            Thread.Sleep(500);
+                        }
+
+                        DownloadStopped();
+                    });
+
+                    thread.Start();
+
+                    return true;
+                }
+            }
+            catch(Exception ex)
+            {
+                ex.ToLog(LogLevel.Error);
+
+                return false;
             }
 
             return false;
@@ -211,13 +220,20 @@ namespace Ignite.Core.Components.FileSystem.Torrent
 
         public void Stop()
         {
-            BEncodedDictionary fastResume = new BEncodedDictionary();
+            try
+            {
+                BEncodedDictionary fastResume = new BEncodedDictionary();
 
-            External.Manager.StopAsync();
-            fastResume.Add(External.Manager.Torrent.InfoHash.ToHex(), External.Manager.SaveFastResume().Encode());
+                External.Manager.StopAsync();
+                fastResume.Add(External.Manager.Torrent.InfoHash.ToHex(), External.Manager.SaveFastResume().Encode());
 
-            File.WriteAllBytes(Settings.GetResumeFile(), fastResume.Encode());
-            External.Engine.Dispose();
+                File.WriteAllBytes(Settings.GetResumeFile(), fastResume.Encode());
+                External.Engine.Dispose();
+            }
+            catch(Exception ex)
+            {
+                ex.ToLog(LogLevel.Error);
+            }
         }
     }
 }
