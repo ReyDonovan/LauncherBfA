@@ -386,6 +386,7 @@
     <Resource Include="Resources\Images\Minis\bfa_min.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Images\Bg\magazine_bg.png" />
     <Resource Include="Resources\Loaders\loader.gif" />
     <Resource Include="Resources\Images\Bg\bfa_bg_1.jpg" />
     <Resource Include="Resources\Images\Minis\bez_wow.png" />

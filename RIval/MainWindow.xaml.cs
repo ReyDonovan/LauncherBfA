@@ -176,13 +176,17 @@ namespace Ignite
         {
             SetActive((FrameworkElement)sender);
 
-            Process.Start(ApiFacade.Instance.GetUri("shop-link"));
+            //Process.Start(ApiFacade.Instance.GetUri("shop-link"));
+
+            SetBackgroundImage("magazine_bg.png");
         }
         private void MagazineButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
             SetActive((FrameworkElement)sender);
 
-            Process.Start(ApiFacade.Instance.GetUri("acp-link"));
+            //Process.Start(ApiFacade.Instance.GetUri("acp-link"));
+
+            SetDefaultBackground();
         }
 
         private void ForumButton_MouseDown(object sender, MouseButtonEventArgs e)
@@ -380,6 +384,16 @@ namespace Ignite
         {
             Show();
             WindowState = PrevState;
+        }
+
+        public void SetBackgroundImage(string resourcePath)
+        {
+            PartiallyBluredDoge.Source = new BitmapImage(new Uri($"pack://application:,,,/Resources/Images/Bg/{resourcePath}"));
+        }
+
+        public void SetDefaultBackground()
+        {
+            SetBackgroundImage("bfa_bg_1.jpg");
         }
     }
 }

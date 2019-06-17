@@ -8,7 +8,7 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         xmlns:controls="clr-namespace:BlurryControls.Controls;assembly=BlurryControls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="605.368" Width="991.891" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown" StateChanged="Window_StateChanged">
+        Title="MainWindow" Height="605.368" Width="991.891" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown" StateChanged="Window_StateChanged" Background="#FF002650">
     <Grid>
         <Grid x:Name="OuterBlurContainer" Margin="-10,0,0,0">
             <Grid x:Name="InnerBlurContainer" Margin="10,21,0,0">
@@ -20,7 +20,7 @@
                 </Grid.ColumnDefinitions>
                 <tb:TaskbarIcon Visibility="Visible"
                 ToolTipText="Ignite" IconSource="111111.ico" TrayLeftMouseDown="TaskbarIcon_TrayLeftMouseDown"/>
-                
+
                 <Image x:Name="PartiallyBluredDoge"
                        Stretch="UniformToFill"
                        Source="Resources/Images/Bg/bfa_bg_1.jpg" Height="620" VerticalAlignment="Bottom" Grid.ColumnSpan="4" Margin="0,-32,0,-4">
