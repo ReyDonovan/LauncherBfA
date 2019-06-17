@@ -89,6 +89,20 @@ namespace Ignite.Design.Controls
                             CheckButton.IsEnabled = true;
                         });
                     }
+                    else
+                    {
+                        System.Windows.Application.Current.Dispatcher.BeginInvoke((Action)delegate
+                        {
+                            StatusText.Visibility = Visibility.Hidden;
+                            StatusTextDesc.Visibility = Visibility.Visible;
+                            StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_FilesDamaged");
+
+                            PlayButton.Content = LanguageMgr.Instance.ValueOf("ButtonChooseGame");
+
+                            PlayButton.IsEnabled = false;
+                            CheckButton.IsEnabled = true;
+                        });
+                    }
                 }
                 else
                 {
@@ -355,13 +369,16 @@ namespace Ignite.Design.Controls
             }
             else
             {
-                StatusText.Text = LanguageMgr.Instance.ValueOf("StatusText_FilesDamaged_One");
+                StatusTextDesc.Text = LanguageMgr.Instance.ValueOf("StatusText_FilesDamaged");
                 StatusTextDesc.Visibility = Visibility.Visible;
 
                 PlayButton.Content = LanguageMgr.Instance.ValueOf("PlayButton");
 
                 PlayButton.IsEnabled = false;
                 CheckButton.IsEnabled = true;
+
+                PercentStatus.Text = $"0%";
+                PercentStatus.Visibility = Visibility.Hidden;
 
                 MessageBoxMgr.Instance.ShowCriticalError(LanguageMgr.Instance.ValueOf("MainWindow_DownloadStop_Error_Title"), LanguageMgr.Instance.ValueOf("MainWindow_DownloadStop_Error_Desc"));
             }
