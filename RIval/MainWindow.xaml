@@ -135,7 +135,20 @@
                             </ContextMenu>
                         </TextBlock.ContextMenu>
                     </TextBlock>
-                    <Border x:Name="UsernameBlock" BorderBrush="#FF939393" BorderThickness="1" Height="32" Margin="740,27,90,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Opacity="0.3" Cursor="Hand" Background="#FF1F1F1F" MouseEnter="UsernameBlock_MouseEnter" MouseLeave="UsernameBlock_MouseLeave"/>
+                    <Border x:Name="UsernameBlock" BorderBrush="#FF939393" BorderThickness="1" Height="32" Margin="740,27,90,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Opacity="0.3" Cursor="Hand" Background="#FF1F1F1F" MouseEnter="UsernameBlock_MouseEnter" MouseLeave="UsernameBlock_MouseLeave">
+                        <Border.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem x:Name="EmailHelp" Header="user@ignite.ru">
+                                </MenuItem>
+                                <MenuItem x:Name="LogoutMenuItem" Header="Сменить пользователя" Click="MenuItem_Click">
+                                    <MenuItem.Icon>
+                                        <Image Height="17" Width="17" Source="Resources/Icons/logout-icon.png"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </Border.ContextMenu>
+                    </Border>
+
                     <Border x:Name="LangBlock" BorderBrush="#FF939393" BorderThickness="0,1,1,1" HorizontalAlignment="Left" Height="32" Margin="109,27,0,0" VerticalAlignment="Top" Width="37" Opacity="0.3" Grid.Column="1" Background="#FF1F1F1F" MouseLeave="UsernameBlock_MouseLeave" MouseEnter="UsernameBlock_MouseEnter"/>
                     <Image HorizontalAlignment="Left" Height="22" Margin="116,32,0,0" VerticalAlignment="Top" Width="22" Grid.Column="1" Source="Resources/Icons/lang-icon.png" Cursor="Hand" MouseEnter="Image_MouseEnter_1" MouseLeave="Image_MouseLeave_1">
                         <Image.ContextMenu>
@@ -160,21 +173,6 @@
                     </Ellipse>
                     <Border x:Name="SettingsBlock" BorderBrush="#FF939393" BorderThickness="0,1,1,1" HorizontalAlignment="Left" Height="32" Margin="72,27,0,0" VerticalAlignment="Top" Width="37" Opacity="0.3" Grid.Column="1" Background="#FF1F1F1F" MouseEnter="UsernameBlock_MouseEnter" MouseLeave="UsernameBlock_MouseLeave"/>
                     <Image x:Name="SettingsButtons" HorizontalAlignment="Left" Height="22" Margin="79,32,0,0" VerticalAlignment="Top" Width="22" Grid.Column="1" Source="Resources/Icons/settings-icon.png" Cursor="Hand" MouseDown="SettingsButtons_MouseDown" MouseEnter="SettingsButtons_MouseEnter" MouseLeave="SettingsButtons_MouseLeave">
-                        <Image.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem x:Name="SettingsMenuItem" Header="Параметры" Click="SettingsMenuItem_Click">
-                                    <MenuItem.Icon>
-                                        <Image Height="17" Width="17" Source="Resources/Icons/settings-hm-icon.png"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <Separator></Separator>
-                                <MenuItem x:Name="LogoutMenuItem" Header="Сменить пользователя" Click="MenuItem_Click">
-                                    <MenuItem.Icon>
-                                        <Image Height="17" Width="17" Source="Resources/Icons/logout-icon.png"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                            </ContextMenu>
-                        </Image.ContextMenu>
                     </Image>
                 </Grid>
             </controls:BlurryUserControl>

@@ -37,6 +37,8 @@ namespace Ignite.Design.Controls.Auth
         private void Localize()
         {
             AuthLoginTitle.Content = LanguageMgr.Instance.ValueOf("Auth_LoginComponent_Title");
+            EmailHelpText.Content = LanguageMgr.Instance.ValueOf("Auth_LoginComponent_EmailHelpText");
+            PasswordHelpText.Content = LanguageMgr.Instance.ValueOf("Auth_LoginComponent_PasswordHelpText");
             LoginButton.Content = LanguageMgr.Instance.ValueOf("Auth_LoginComponent_LoginButton");
             RegisterButton.Content = LanguageMgr.Instance.ValueOf("Auth_LoginComponent_RegisterButton");
             RecoveryPasswordLink.Content = LanguageMgr.Instance.ValueOf("Auth_LoginComponent_RecoveryPasswordLink");
@@ -101,10 +103,6 @@ namespace Ignite.Design.Controls.Auth
 
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            lock (new object())
-            {
-                LangSwitcher.ContextMenu.IsOpen = !LangSwitcher.ContextMenu.IsOpen;
-            }
         }
 
         private void MenuItem_LangSwitch_English_MouseDown(object sender, MouseButtonEventArgs e)

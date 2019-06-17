@@ -5,7 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ignite.Design.Controls.Auth"
              xmlns:gif="http://wpfanimatedgif.codeplex.com"
-             mc:Ignorable="d" Width="338.964" Height="408.311">
+             mc:Ignorable="d" Width="376" Height="474">
+    <UserControl.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF171723" Offset="0"/>
+            <GradientStop Color="#FF0E0E13" Offset="1"/>
+        </LinearGradientBrush>
+    </UserControl.Background>
     <UserControl.Resources>
         <Style x:Key="ComboBoxTest2" TargetType="{x:Type ComboBox}">
             <Setter Property="Template">
@@ -56,25 +62,25 @@
 
     <!-- Start control code -->
     <Grid Margin="0">
-        <Image HorizontalAlignment="Left" Height="409" VerticalAlignment="Top" Width="339" Source="/Ignite;component/Resources/Images/Bg/bg.jpg" Stretch="UniformToFill"/>
-        <TextBox x:Name="EmailBox" HorizontalAlignment="Left" Height="29" Margin="32,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" FontSize="16" Background="#FF151723" Opacity="0.85" Foreground="#FFEAE7E7" BorderBrush="#FF818181" SelectionBrush="White" Text="Enter EMail"/>
-        <Button x:Name="CreateAccount" Content="Создать учетную запись" HorizontalAlignment="Left" Margin="32,276,0,0" VerticalAlignment="Top" Width="274" Height="36" FontSize="16" Background="#99000000" Cursor="Hand" Foreground="White" Click="CreateAccount_Click"/>
-        <Button x:Name="AlreadyExistsAccountButton" Content="У меня уже есть аккаунт" HorizontalAlignment="Left" Margin="32,318,0,0" VerticalAlignment="Top" Width="274" Height="35" Background="#FF178BEC" FontSize="16" Cursor="Hand" Foreground="#FFFFFCFC" Click="Button_Click" BorderThickness="5" BorderBrush="#FF1774C1"/>
-        <Label x:Name="PrivacyLink" Content="Политика конфиденциальности" HorizontalAlignment="Left" Margin="32,368,0,0" VerticalAlignment="Top" Width="274" Foreground="#FF3B74EE" FontSize="16" Cursor="Hand" FontStyle="Italic"/>
-        <Rectangle Fill="#FFAAAAAA" HorizontalAlignment="Left" Height="1" Margin="32,263,0,0" Stroke="#FFB0B0B0" VerticalAlignment="Top" Width="274"/>
-        <Rectangle Fill="#FF0E0E0E" HorizontalAlignment="Left" Height="36" Stroke="Black" VerticalAlignment="Top" Width="339" Opacity="0.7" Margin="0,-1,0,0"/>
-        <Image HorizontalAlignment="Left" Height="35" Margin="5,0,0,0" VerticalAlignment="Top" Width="78" Source="/Ignite;component/Resources/Images/Minis/bez_wow.png"/>
-        <Image x:Name="CloseButton" HorizontalAlignment="Left" Height="31" Margin="312,0,0,0" VerticalAlignment="Top" Width="27" Source="/Ignite;component/Resources/Icons/Window/window_close.png" MouseDown="CloseButton_MouseDown" Cursor="Hand">
+        <Button x:Name="CreateAccount" Content="Создать учетную запись" HorizontalAlignment="Left" Margin="35,335,0,0" VerticalAlignment="Top" Width="307" Height="36" FontSize="16" Background="#FF0E0E13" Cursor="Hand" Foreground="White" Click="CreateAccount_Click" Opacity="0.7"/>
+        <Button x:Name="AlreadyExistsAccountButton" Content="У меня уже есть аккаунт" HorizontalAlignment="Left" Margin="35,378,0,0" VerticalAlignment="Top" Width="307" Height="35" Background="#FF178BEC" FontSize="16" Cursor="Hand" Foreground="#FFFFFCFC" Click="Button_Click" BorderThickness="5" BorderBrush="#FF1774C1"/>
+        <Label x:Name="PrivacyLink" Content="Политика конфиденциальности" HorizontalAlignment="Left" Margin="58,433,0,0" VerticalAlignment="Top" Width="274" Foreground="#FF3B74EE" FontSize="16" Cursor="Hand" FontStyle="Italic"/>
+        <TextBox x:Name="QuestionAnswer" HorizontalAlignment="Left" Height="29" Margin="35,296,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="307" FontSize="16" Background="#FF151723" Opacity="0.85" Foreground="#FFEAE7E7" BorderBrush="#FF818181" SelectionBrush="White"/>
+        <ComboBox x:Name="QuestionsSelector" Style="{StaticResource ComboBoxTest2}" HorizontalAlignment="Left" Margin="35,236,0,0" VerticalAlignment="Top" Width="307" Height="29" BorderBrush="#FF818181" Foreground="#FF178BEC" FontSize="16" ScrollViewer.CanContentScroll="False" UseLayoutRounding="True" Background="#FF151723" Opacity="0.85" OverridesDefaultStyle="True" ContextMenuClosing="QuestionsSelector_ContextMenuClosing"/>
+        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="35,167,0,0" VerticalAlignment="Top" Width="307" Height="29" Background="#FF151723" BorderBrush="#FF818181" Foreground="#FFEAE7E7" SelectionBrush="White" Opacity="0.85" FontSize="16"/>
+        <TextBox x:Name="LoginBox" HorizontalAlignment="Left" Height="29" Margin="35,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="307" FontSize="16" Background="#FF151723" Opacity="0.85" Foreground="#FFEAE7E7" BorderBrush="#FF818181" SelectionBrush="White"/>
+        <Label x:Name="AnswerNameHelpText" Content="Answer:" HorizontalAlignment="Left" Margin="35,265,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
+        <Label x:Name="QuestionNameHelpText" Content="Choose question:" HorizontalAlignment="Left" Margin="35,201,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
+        <Label x:Name="PasswordNameHelpText" Content="Password:" HorizontalAlignment="Left" Margin="35,136,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
+        <Label x:Name="AccountNameHelpText" Content="Account name:" HorizontalAlignment="Left" Margin="35,66,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
+        <Border BorderBrush="#FFB4B4B4" BorderThickness="1" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="376" Background="#FF727272" Opacity="0.25"/>
+        <Image x:Name="CloseButton" HorizontalAlignment="Left" Height="35" Margin="339,4,0,0" VerticalAlignment="Top" Width="32" Source="/Ignite;component/Resources/Icons/Window/window_close.png" MouseDown="CloseButton_MouseDown" Cursor="Hand">
             <Image.ToolTip>
                 <ToolTip x:Name="CloseTooltip" Content="Выйти из программы"/>
             </Image.ToolTip>
         </Image>
-        <TextBox x:Name="QuestionAnswer" HorizontalAlignment="Left" Height="29" Margin="32,226,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" FontSize="16" Background="#FF151723" Opacity="0.85" Foreground="#FFEAE7E7" BorderBrush="#FF818181" SelectionBrush="White" Text="Enter Answer"/>
-        <ComboBox x:Name="QuestionsSelector" Style="{StaticResource ComboBoxTest2}" HorizontalAlignment="Left" Margin="32,189,0,0" VerticalAlignment="Top" Width="274" Height="29" BorderBrush="#FF818181" Foreground="#FF178BEC" FontSize="16" ScrollViewer.CanContentScroll="False" UseLayoutRounding="True" Background="#FF151723" Opacity="0.85" OverridesDefaultStyle="True" ContextMenuClosing="QuestionsSelector_ContextMenuClosing"/>
-        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="32,152,0,0" VerticalAlignment="Top" Width="274" Height="29" Background="#FF151723" BorderBrush="#FF818181" Foreground="#FFEAE7E7" SelectionBrush="White" Opacity="0.85" FontSize="16" Password="password"/>
-        <TextBox x:Name="LoginBox" HorizontalAlignment="Left" Height="29" Margin="32,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" FontSize="16" Background="#FF151723" Opacity="0.85" Foreground="#FFEAE7E7" BorderBrush="#FF818181" SelectionBrush="White" Text="Enter user name"/>
-        <Rectangle x:Name="CurtainElement" HorizontalAlignment="Left" Height="408" Stroke="Black" VerticalAlignment="Top" Width="339" Opacity="0.9" Fill="Black" Visibility="Hidden"/>
-        <Image x:Name="Preloader" gif:ImageBehavior.AnimatedSource="/Ignite;component/Resources/Loaders/loader.gif" HorizontalAlignment="Left" Height="35" Margin="156,190,0,0" VerticalAlignment="Top" Width="35" Stretch="Fill" Visibility="Hidden"/>
-        <Label x:Name="AuthLoginTitle" Content="РЕГИСТРАЦИЯ" HorizontalAlignment="Left" Margin="32,41,0,0" VerticalAlignment="Top" Width="274" FontWeight="Bold"/>
+        <Label x:Name="RegisterWindowTitle" Content="Register" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" FontSize="18" Foreground="White"/>
+        <Rectangle x:Name="CurtainElement" HorizontalAlignment="Left" Height="474" Stroke="Black" VerticalAlignment="Top" Width="376" Opacity="0.9" Fill="Black" Visibility="Hidden"/>
+        <Image x:Name="Preloader" gif:ImageBehavior.AnimatedSource="/Ignite;component/Resources/Loaders/loader.gif" HorizontalAlignment="Left" Height="35" Margin="172,207,0,0" VerticalAlignment="Top" Width="35" Stretch="Fill" Visibility="Hidden"/>
     </Grid>
 </UserControl>

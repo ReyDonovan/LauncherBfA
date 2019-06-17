@@ -60,6 +60,13 @@ namespace Ignite.Core.Language
 
                 //Auth --mesagebox phrases
                 new Phrase("Auth_MessageBox_Title_Error", "Authorize Error"),
+                new Phrase("Auth_LoginComponent_EmailHelpText", "E-Mail: "),
+                new Phrase("Auth_LoginComponent_PasswordHelpText", "Password: "),
+                new Phrase("Auth_RegisterComponent_AccountNameHelpText", "Account name:"),
+                new Phrase("Auth_RegisterComponent_PasswordNameHelpText", "Password:"),
+                new Phrase("Auth_RegisterComponent_QuestionNameHelpText", "Choose question:"),
+                new Phrase("Auth_RegisterComponent_AnswerNameHelpText", "Answer:"),
+                new Phrase("Auth_RegisterComponent_RegisterWindowTitle", "REGISTRATION"),
 
                 //Auth --windows phrases
                 new Phrase("Auth_LoginComponent_Title", "AUTHORIZE"),
@@ -201,6 +208,13 @@ namespace Ignite.Core.Language
 
                 //Auth --mesagebox phrases
                 new Phrase("Auth_MessageBox_Title_Error", "Ошибка Авторизации"),
+                new Phrase("Auth_LoginComponent_EmailHelpText", "E-Mail: "),
+                new Phrase("Auth_LoginComponent_PasswordHelpText", "Пароль: "),
+                new Phrase("Auth_RegisterComponent_AccountNameHelpText", "Имя аккаунта:"),
+                new Phrase("Auth_RegisterComponent_PasswordNameHelpText", "Пароль:"),
+                new Phrase("Auth_RegisterComponent_QuestionNameHelpText", "Выберите вопрос:"),
+                new Phrase("Auth_RegisterComponent_AnswerNameHelpText", "Ваш ответ:"),
+                new Phrase("Auth_RegisterComponent_RegisterWindowTitle", "РЕГИСТРАЦИЯ"),
 
                 //Auth --windows phrases
                 new Phrase("Auth_LoginComponent_Title", "АВТОРИЗАЦИЯ"),

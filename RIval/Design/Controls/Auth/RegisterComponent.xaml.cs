@@ -33,11 +33,13 @@ namespace Ignite.Design.Controls.Auth
         private void Localize()
         {
             PrivacyLink.Content = LanguageMgr.Instance.ValueOf("Auth_PrivacyLink");
-            EmailBox.Text = LanguageMgr.Instance.ValueOf("Auth_RegisterComponent_EmailBoxHelpText");
-            QuestionAnswer.Text = LanguageMgr.Instance.ValueOf("Auth_RegisterComponent_QuestionsAnswerHelpText");
+            AccountNameHelpText.Content = LanguageMgr.Instance.ValueOf("Auth_RegisterComponent_AccountNameHelpText");
+            PasswordNameHelpText.Content = LanguageMgr.Instance.ValueOf("Auth_RegisterComponent_PasswordNameHelpText");
+            QuestionNameHelpText.Content = LanguageMgr.Instance.ValueOf("Auth_RegisterComponent_QuestionNameHelpText");
+            AnswerNameHelpText.Content = LanguageMgr.Instance.ValueOf("Auth_RegisterComponent_AnswerNameHelpText");
+            RegisterWindowTitle.Content = LanguageMgr.Instance.ValueOf("Auth_RegisterComponent_RegisterWindowTitle");
             CreateAccount.Content = LanguageMgr.Instance.ValueOf("Auth_RegisterComponent_CreateAccount");
             AlreadyExistsAccountButton.Content = LanguageMgr.Instance.ValueOf("Auth_RegisterComponent_AlreadyExistsAccountButton");
-            LoginBox.Text = LanguageMgr.Instance.ValueOf("Auth_RegisterComponent_LoginBoxHelpText");
         }
 
         private void CloseButton_MouseDown(object sender, MouseButtonEventArgs e)
@@ -49,7 +51,6 @@ namespace Ignite.Design.Controls.Auth
         {
             if(enabled)
             {
-                EmailBox.IsEnabled = false;
                 PasswordBox.IsEnabled = false;
                 QuestionsSelector.IsEnabled = false;
                 QuestionAnswer.IsEnabled = false;
@@ -61,7 +62,6 @@ namespace Ignite.Design.Controls.Auth
             }
             else
             {
-                EmailBox.IsEnabled = true;
                 PasswordBox.IsEnabled = true;
                 QuestionsSelector.IsEnabled = true;
                 QuestionAnswer.IsEnabled = true;
@@ -92,7 +92,6 @@ namespace Ignite.Design.Controls.Auth
         private void DropErrors()
         {
             var defbrush = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 129, 129, 129));
-            EmailBox.BorderBrush = defbrush;
             LoginBox.BorderBrush = defbrush;
             PasswordBox.BorderBrush = defbrush;
             QuestionsSelector.BorderBrush = defbrush;
@@ -113,10 +112,10 @@ namespace Ignite.Design.Controls.Auth
             }
             else
             {
-                var result = await AuthMgr.Instance.RegisterAsync(LoginBox.Text, EmailBox.Text, PasswordBox.Password, QuestionsSelector.SelectedIndex.ToString(), QuestionAnswer.Text);
+                var result = await AuthMgr.Instance.RegisterAsync(LoginBox.Text, $"{LoginBox.Text}@ignite.ru", PasswordBox.Password, QuestionsSelector.SelectedIndex.ToString(), QuestionAnswer.Text);
                 if (result.Code == Core.Components.Auth.Types.AuthResultEnum.Ok)
                 {
-                    result = await AuthMgr.Instance.LoginAsync(EmailBox.Text, PasswordBox.Password);
+                    result = await AuthMgr.Instance.LoginAsync($"{LoginBox.Text}@ignite.ru", PasswordBox.Password);
                     if (result.Code == Core.Components.Auth.Types.AuthResultEnum.Ok)
                     {
                         AuthMgr.Instance.SaveUser(result.Token);

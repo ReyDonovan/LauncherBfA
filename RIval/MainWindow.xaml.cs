@@ -24,13 +24,6 @@ namespace Ignite
     {
         public MainWindow()
         {
-            //if(!ApplicationEnv.Instance.IsUserAdministrator())
-            //{
-            //    MessageBoxMgr.Instance.ShowCriticalError(LanguageMgr.Instance.ValueOf("MainWindow_Init_RunAs_Header"), LanguageMgr.Instance.ValueOf("MainWindow_Init_RunAs_Desc"));
-
-            //    Environment.Exit(0);
-            //}
-
             InitializeComponent();
 
             Logger.Instance.WriteLine($"Application booted in: {DateTime.Now.ToFileTimeUtc()}", LogLevel.Info);
@@ -67,7 +60,10 @@ namespace Ignite
         public async void AppendUser(string user)
         {
             UserProfileButton.Text = user.ToUpper();
-            AvatarBrush.ImageSource = new BitmapImage(new Uri(await AuthMgr.Instance.GetUserAvatar()));
+            AvatarBrush.ImageSource = new BitmapImage(new Uri(await AuthMgr.Instance.GetUserAvatar() 
+                ?? "pack://application:,,,/Resources/Images/Minis/wow_logo.png"));
+
+            EmailHelp.Header = AuthMgr.Instance.GetUser().Email;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -298,7 +294,6 @@ namespace Ignite
             Bugreport_Button.Content  = langMgr.ValueOf(Bugreport_Button.Name);
             CloseTooltip.Content      = langMgr.ValueOf("Tooltip_CloseApp");
             MinimizeTooltip.Content   = langMgr.ValueOf("Tooltip_Minimise");
-            SettingsMenuItem.Header   = langMgr.ValueOf("Tooltip_Settigs");
             LogoutMenuItem.Header     = langMgr.ValueOf("Tooltip_Logout");
         }
 
@@ -329,8 +324,8 @@ namespace Ignite
 
         private void SettingsButtons_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if(e.LeftButton == MouseButtonState.Pressed)
-                SettingsButtons.ContextMenu.IsOpen = !SettingsButtons.ContextMenu.IsOpen;
+            SettingsWindow settings = new SettingsWindow();
+            settings.ShowDialog();
         }
 
         private void UsernameBlock_MouseEnter(object sender, MouseEventArgs e)

@@ -5,25 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ignite.Design.Controls.Auth"
              xmlns:gif="http://wpfanimatedgif.codeplex.com" x:Class="Ignite.Design.Controls.Auth.LoginComponent"
-             mc:Ignorable="d" Width="338.964" Height="408.311">
+             mc:Ignorable="d" Width="376" Height="474">
+    <UserControl.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF171723" Offset="0"/>
+            <GradientStop Color="#FF0E0E13" Offset="1"/>
+        </LinearGradientBrush>
+    </UserControl.Background>
     <Grid Margin="0">
-
-        <Image HorizontalAlignment="Left" Height="409" VerticalAlignment="Top" Width="339" Source="/Ignite;component/Resources/Images/Bg/bg.jpg" Stretch="UniformToFill" Margin="0,-1,0,0"/>
-        <TextBox x:Name="EmailBox" HorizontalAlignment="Left" Height="29" Margin="32,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" FontSize="16" Background="#FF151723" Opacity="0.85" Foreground="#FFEAE7E7" BorderBrush="#FF818181" SelectionBrush="White"/>
-        <Button x:Name="LoginButton" Content="Войти" HorizontalAlignment="Left" Margin="32,214,0,0" VerticalAlignment="Top" Width="274" Height="36" FontSize="16" Background="#99000000" Cursor="Hand" Foreground="White" Click="LoginButton_Click"/>
-        <Button x:Name="RegisterButton" Content="Создать учетную запись" HorizontalAlignment="Left" Margin="32,257,0,0" VerticalAlignment="Top" Width="274" Height="35" Background="#FF288BDE" FontSize="16" Cursor="Hand" Foreground="#FFFFFCFC" Click="Button_Click"/>
-        <Label x:Name="RecoveryPasswordLink" Content="Восстановление доступа" HorizontalAlignment="Left" Margin="29,368,0,0" VerticalAlignment="Top" Width="208" Foreground="#FF178BEC" FontSize="16" Cursor="Hand" FontStyle="Italic"/>
-        <Rectangle Fill="#FFAAAAAA" HorizontalAlignment="Left" Height="1" Margin="32,200,0,0" Stroke="#FFB0B0B0" VerticalAlignment="Top" Width="274"/>
-        <Label x:Name="AuthLoginTitle" Content="АВТОРИЗАЦИЯ" HorizontalAlignment="Left" Margin="32,59,0,0" VerticalAlignment="Top" Width="274" FontSize="16"/>
-        <Rectangle Fill="#FF0E0E0E" HorizontalAlignment="Left" Height="36" Stroke="Black" VerticalAlignment="Top" Width="339" Opacity="0.7" Margin="0,-1,0,0"/>
-        <Image HorizontalAlignment="Left" Height="35" Margin="5,1,0,0" VerticalAlignment="Top" Width="78" Source="/Ignite;component/Resources/Images/Minis/bez_wow.png"/>
-        <Image x:Name="CloseButton" HorizontalAlignment="Left" Height="31" Margin="312,0,0,0" VerticalAlignment="Top" Width="27" Source="/Ignite;component/Resources/Icons/Window/window_close.png" MouseDown="CloseButton_MouseDown" Cursor="Hand">
-            <Image.ToolTip>
-                <ToolTip x:Name="CloseTooltip" Content="Выйти из программы"/>
-            </Image.ToolTip>
-        </Image>
-        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="32,157,0,0" VerticalAlignment="Top" Width="274" Height="29" Background="#FF151723" BorderBrush="#FF818181" Foreground="#FFEAE7E7" SelectionBrush="White" Opacity="0.85" FontSize="16"/>
-        <Image x:Name="LangSwitcher" HorizontalAlignment="Left" Height="33" Margin="298,367,0,0" VerticalAlignment="Top" Width="30" Source="/Ignite;component/Resources/Icons/lang-icon.png" MouseDown="Image_MouseDown">
+        <TextBox x:Name="EmailBox" HorizontalAlignment="Left" Height="29" Margin="22,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" FontSize="16" Background="#FF151723" Opacity="0.85" Foreground="#FFEAE7E7" BorderBrush="#FF818181" SelectionBrush="White"/>
+        <Button x:Name="LoginButton" Content="Войти" HorizontalAlignment="Left" Margin="22,301,0,0" VerticalAlignment="Top" Width="333" Height="36" FontSize="16" Background="#FF0E0E13" Cursor="Hand" Foreground="White" Click="LoginButton_Click"/>
+        <Button x:Name="RegisterButton" Content="Создать учетную запись" HorizontalAlignment="Left" Margin="22,345,0,0" VerticalAlignment="Top" Width="333" Height="35" Background="#FF288BDE" FontSize="16" Cursor="Hand" Foreground="#FFFFFCFC" Click="Button_Click"/>
+        <Label x:Name="RecoveryPasswordLink" Content="Восстановление доступа" HorizontalAlignment="Left" Margin="22,433,0,0" VerticalAlignment="Top" Width="208" Foreground="#FF178BEC" FontSize="16" Cursor="Hand" FontStyle="Italic"/>
+        <Rectangle Fill="#FFB4B2B2" HorizontalAlignment="Left" Height="1" Margin="22,287,0,0" Stroke="#FFB0B0B0" VerticalAlignment="Top" Width="333" Opacity="0.5"/>
+        <Image HorizontalAlignment="Left" Height="60" Margin="118,74,0,0" VerticalAlignment="Top" Width="133" Source="/Ignite;component/Resources/Images/Minis/bez_wow.png"/>
+        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="22,243,0,0" VerticalAlignment="Top" Width="333" Height="29" Background="#FF151723" BorderBrush="#FF818181" Foreground="#FFEAE7E7" SelectionBrush="White" Opacity="0.85" FontSize="16"/>
+        <Image x:Name="LangSwitcher" HorizontalAlignment="Left" Height="33" Margin="336,433,0,0" VerticalAlignment="Top" Width="30" Source="/Ignite;component/Resources/Icons/lang-icon.png" MouseDown="Image_MouseDown">
             <Image.ContextMenu>
                 <ContextMenu>
                     <MenuItem x:Name="MenuItem_LangSwitch_English" Header="English" Click="MenuItem_LangSwitch_English_Click">
@@ -39,7 +36,16 @@
                 </ContextMenu>
             </Image.ContextMenu>
         </Image>
-        <Rectangle x:Name="CurtainElement" HorizontalAlignment="Left" Height="408" Stroke="Black" VerticalAlignment="Top" Width="339" Opacity="0.9" Fill="Black" Visibility="Hidden"/>
-        <Image x:Name="Preloader" gif:ImageBehavior.AnimatedSource="/Ignite;component/Resources/Loaders/loader.gif" HorizontalAlignment="Left" Height="35" Margin="156,190,0,0" VerticalAlignment="Top" Width="35" Stretch="Fill" Visibility="Hidden"/>
+        <Label x:Name="PasswordHelpText" Content="Password:" HorizontalAlignment="Left" Margin="22,212,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
+        <Label x:Name="EmailHelpText" Content="E-Mail:" HorizontalAlignment="Left" Margin="22,149,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
+        <Border BorderBrush="#FFB4B4B4" BorderThickness="1" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="376" Background="#FF727272" Opacity="0.25"/>
+        <Image x:Name="CloseButton" HorizontalAlignment="Left" Height="28" Margin="346,3,0,0" VerticalAlignment="Top" Width="27" Source="/Ignite;component/Resources/Icons/Window/window_close.png" MouseDown="CloseButton_MouseDown" Cursor="Hand">
+            <Image.ToolTip>
+                <ToolTip x:Name="CloseTooltip" Content="Выйти из программы"/>
+            </Image.ToolTip>
+        </Image>
+        <Label x:Name="AuthLoginTitle" Content="Login" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" FontSize="18" Foreground="White"/>
+        <Rectangle x:Name="CurtainElement" HorizontalAlignment="Left" Height="474" Stroke="Black" VerticalAlignment="Top" Width="376" Opacity="0.9" Fill="Black" Visibility="Hidden"/>
+        <Image x:Name="Preloader" gif:ImageBehavior.AnimatedSource="/Ignite;component/Resources/Loaders/loader.gif" HorizontalAlignment="Left" Height="35" Margin="171,237,0,0" VerticalAlignment="Top" Width="35" Stretch="Fill" Visibility="Hidden"/>
     </Grid>
 </UserControl>
