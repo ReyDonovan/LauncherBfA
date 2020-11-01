@@ -1,7 +1,9 @@
 # IgniteLoader
 
-Реализация лаунчера для проекта WOW IGNITE.
+* Реализация лаунчера для проекта WOW IGNITE.
+* battlenet bypass code Fabian <https://gitlab.com/Arctium>
 
+https://gitlab.com/Arctium
 Возможности:
 * Патчинг памяти клиента для запуска
 * Исправление многочисленных ошибок
